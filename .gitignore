@@ -15,6 +15,7 @@
 # Visual Studio generated files.
 .vs
 *.sdf
+clac.VC.db
 Debug
 Release
 
