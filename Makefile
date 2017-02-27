@@ -13,7 +13,7 @@ SOURCES=clac.cpp              \
 	StackWindow.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=clac
-LIBSPICA=../Spica/libSpicaCpp.a
+LIBSPICA=../Spica/Cpp/libSpicaCpp.a
 LIBSCR=../Scr/libScr.a
 LIBENTITY=ClacEntity/libClacEntity.a
 LIBENGINE=ClacEngine/libClacEngine.a
