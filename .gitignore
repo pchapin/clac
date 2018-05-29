@@ -18,6 +18,7 @@
 clac.VC.db
 Debug
 Release
+clac.vcxproj.user
 
 # Code::Blocks generated files.
 *.layout
