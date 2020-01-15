@@ -93,7 +93,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>ClacEntity;ClacEngine;..\Scr</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ClacEntity;ClacEngine</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SCR_DIRECT;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,7 +116,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>ClacEntity;ClacEngine;..\Scr</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ClacEntity;ClacEngine</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SCR_DIRECT;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -136,7 +136,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>ClacEntity;ClacEngine;..\Scr</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ClacEntity;ClacEngine</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -157,7 +157,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>ClacEntity;ClacEngine;..\Scr</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ClacEntity;ClacEngine</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -178,22 +178,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="clac.cpp" />
-    <ClCompile Include="ClacCommandWindow.cpp" />
-    <ClCompile Include="DirectoryWindow.cpp" />
     <ClCompile Include="record_f.cpp" />
-    <ClCompile Include="StackWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClacCommandWindow.hpp" />
-    <ClInclude Include="DirectoryWindow.hpp" />
     <ClInclude Include="record_f.h" />
-    <ClInclude Include="StackWindow.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Scr\scr.vcxproj">
-      <Project>{e8020c9e-d7f0-4156-b4d9-0230053c70b6}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

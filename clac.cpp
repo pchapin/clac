@@ -51,36 +51,10 @@ using namespace std;
 #include "global.hpp"
 #include "words.hpp"
 
-// scr library.
-#include "debug.hpp"
-#include "MessageWindow.hpp"
-#include "scr.hpp"
-
-// Application specific.
-#include "ClacCommandWindow.hpp"
-#include "DirectoryWindow.hpp"
-#include "StackWindow.hpp"
 
 //=====================================
 //           Message Handling
 //=====================================
-
-static scr::MessageWindowDescriptor message_descriptors[] = {
-    // For scr::MESSAGE_WINDOW_MESSAGE
-    { scr::WHITE, scr::SINGLE_LINE, scr::WHITE, NULL, scr::WHITE, scr::MESSAGE_WINDOW_ANY },
-
-    // For scr::MESSAGE_WINDOW_PROMPT
-    { scr::WHITE, scr::SINGLE_LINE, scr::WHITE, NULL, scr::WHITE, scr::MESSAGE_WINDOW_ANY },
-
-    // For scr::MESSAGE_WINDOW_WARNING
-    { scr::WHITE, scr::SINGLE_LINE, scr::WHITE, NULL, scr::WHITE, scr::MESSAGE_WINDOW_ANY },
-
-    // For scr::MESSAGE_WINDOW_ERROR
-    { scr::WHITE, scr::SINGLE_LINE, scr::WHITE, NULL, scr::WHITE, scr::MESSAGE_WINDOW_ANY },
-
-    // For scr::MESSAGE_WINDOW_INT_ERROR
-    { scr::WHITE, scr::SINGLE_LINE, scr::WHITE, NULL, scr::WHITE, scr::MESSAGE_WINDOW_ANY }
-};
 
 //! Displays an error message.
 /*!
@@ -125,8 +99,7 @@ void error_message( const char *message, ... )
     strcat( message_buffer, insults[index] );
     strcat( message_buffer, ")" );
 
-    // What happens to the message buffer anyway? It appears to go nowhere.
-    scr::MessageWindow error_window( message_buffer, scr::MESSAGE_WINDOW_ERROR );
+    std::cout << message_buffer << endl;
 }
 
 //===========================================
@@ -181,12 +154,16 @@ private:
 
 SetUp::SetUp( bool use_debugger ) : debugging_on( false )
 {
-    scr::initialize( );
-    scr::refresh_on_key( true );
-    scr::MessageWindow::set_descriptors( message_descriptors );
+    // TODO: Print a banner and do other useful program-wide initializations.
+    cout << "CLAC Version 0.00a  Compiled: " << AdjDate( __DATE__ ) << '\n'
+         << "(C) Copyright 2020 by Peter Chapin and Peter Nikolaidis" << endl;
+  
+    // The value of 'use_debugger' is intended to select if the runtime debugging
+    // environment is active. The Scr library had such a facility that used Scr.
+    // It might be a nice project to build a similar facility that is 100% command
+    // line.
 
     if( use_debugger ) {
-        scr::initialize_debugging( DBG_TOP );
         debugging_on = true;
     }
     // TODO: Reload the calculator state (if there's a saved one to be found).
@@ -195,13 +172,11 @@ SetUp::SetUp( bool use_debugger ) : debugging_on( false )
 
 SetUp::~SetUp( )
 {
-    // Save the calculator state.
+    // TODO: Save the calculator state.
     if( debugging_on ) {
-        scr::terminate_debugging( );
+        // Do something?
     }
-    scr::terminate( );
-    cout << "CLAC Version 0.00a  Compiled: " << AdjDate( __DATE__ ) << '\n'
-         << "(C) Copyright 2013 by Peter Chapin and Peter Nikolaidis" << endl;
+    // TODO: Program-wide clean-up actions.
 }
 
 //=================================================
@@ -428,8 +403,6 @@ static bool process_action( Stack &the_stack, const std::string &word_buffer )
  */
 bool process_words( )
 {
-    scr::Tracer( "process_words", 1 );
-
     while (1) {
         try {
             std::string new_word( global::word_source( ).next_word( ) );
@@ -479,29 +452,29 @@ int Main( int argc, char **argv )
         if( strcmp( argv[i], "-d" ) == 0 ) use_debugger = true;
     }
 
-    SetUp the_program( use_debugger );
-    const int screen_rows = scr::number_of_rows( );
-    const int screen_cols = scr::number_of_columns( );
-    const int half_width  = screen_cols / 2;
+    SetUp  the_program( use_debugger );
+    string command_text;
 
-    scr::Manager window_manager;
+    while( 1 ) {
+        cout << "=> ";
+        getline( cin, command_text );
 
-    // Create windows.
-    StackWindow stack_view(
-        window_manager,  2,  2, half_width - 2, screen_rows - 5 );
+        // Push the command text onto the master stream as a string of Clac command words.
+        StringStream *words = new StringStream( command_text );
+        global::word_source( ).push( words );
+        if( process_words( ) == false ) {
+            cout << "process_words( ) returned false. What happens now?" << endl;
+            return 1;
+        }
+        Entity *stack_0 = global::the_stack( ).get( 0 );
+        if( stack_0 == nullptr ) {
+            cout << "parameter stack emtpy" << endl;
+        }
+        else {
+            cout << stack_0->display( ) << endl;
+        }
 
-    DirectoryWindow directory_view(
-        window_manager,  2, half_width + 2, half_width - 2, screen_rows - 5 );
-
-    ClacCommandWindow command_view(
-        &window_manager, screen_rows - 1,  2, screen_cols - 2,  1 );
-
-    // Initialize windows.
-    stack_view.associate( &global::the_stack( ) );
-    command_view.set_prompt( "=> " );
-
-    // Interact with the user.
-    window_manager.input_loop( );
+    }
 
     return 0;
 }
