@@ -1,6 +1,6 @@
 /*! \file    clac.cpp
  *  \brief   Clac main program.
- *  \author  Peter C. Chapin <PChapin@vtc.vsc.edu> and Peter Nikolaidis
+ *  \author  Peter C. Chapin <pchapin@vtc.edu> and Peter Nikolaidis
  *
  * LICENSE
  *
@@ -22,7 +22,7 @@
  *      c/o Computer Information Systems Department
  *      Vermont Technical College
  *      Williston, VT 05495
- *      PChapin@vtc.vsc.edu
+ *      pchapin@vtc.edu
  */
 
 #include <cstdarg>
@@ -64,41 +64,11 @@ using namespace std;
  */
 void error_message( const char *message, ... )
 {
-    static const char *insults[] = {
-        "you blockhead",
-        "you bozo",
-        "you dimwit",
-        "you dumb jerk",
-        "you foolish human",
-        "you idiot",
-        "you ignorant fool",
-        "you moron",
-        "you moronic idiot",
-        "you nimrod",
-        "you stupid fool",
-        0
-    };
-    const unsigned int insult_count = sizeof( insults ) / sizeof( char * );
-
     va_list ap;
-    static bool do_seed = true;
-
-    if( do_seed ) {
-        time_t raw = time( 0 );
-        srand( static_cast< unsigned int >( raw ) );
-        do_seed = false;
-    }
 
     va_start( ap, message );
     char message_buffer[128+1];
     vsprintf( message_buffer, message, ap );
-
-    // Generate a random insult and append it to the error message.
-    unsigned index = rand( ) % insult_count;
-    strcat( message_buffer, " (" );
-    strcat( message_buffer, insults[index] );
-    strcat( message_buffer, ")" );
-
     std::cout << message_buffer << endl;
 }
 
@@ -154,14 +124,14 @@ private:
 
 SetUp::SetUp( bool use_debugger ) : debugging_on( false )
 {
-    // TODO: Print a banner and do other useful program-wide initializations.
+    // TODO: Make the banner dependent on a command line option.
     cout << "CLAC Version 0.00a  Compiled: " << AdjDate( __DATE__ ) << '\n'
          << "(C) Copyright 2020 by Peter Chapin and Peter Nikolaidis" << endl;
+    // TODO: Do other program-wide initializations as required.
   
-    // The value of 'use_debugger' is intended to select if the runtime debugging
-    // environment is active. The Scr library had such a facility that used Scr.
-    // It might be a nice project to build a similar facility that is 100% command
-    // line.
+    // The value of 'use_debugger' is intended to select if the runtime debugging environment is
+    // active. The Scr library had such a facility that used Scr. It might be a nice project to
+    // build a similar facility that is 100% command line.
 
     if( use_debugger ) {
         debugging_on = true;
@@ -455,7 +425,8 @@ int Main( int argc, char **argv )
     SetUp  the_program( use_debugger );
     string command_text;
 
-    while( 1 ) {
+    bool done = false;
+    while( !done ) {
         cout << "=> ";
         getline( cin, command_text );
 
@@ -463,17 +434,18 @@ int Main( int argc, char **argv )
         StringStream *words = new StringStream( command_text );
         global::word_source( ).push( words );
         if( process_words( ) == false ) {
-            cout << "process_words( ) returned false. What happens now?" << endl;
-            return 1;
-        }
-        Entity *stack_0 = global::the_stack( ).get( 0 );
-        if( stack_0 == nullptr ) {
-            cout << "parameter stack emtpy" << endl;
+            done = true;
         }
         else {
-            cout << stack_0->display( ) << endl;
+            // Display the top item on the stack after each line of command text is processed.
+            Entity *stack_0 = global::the_stack( ).get( 0 );
+            if( stack_0 == nullptr ) {
+                cout << "parameter stack emtpy" << endl;
+            }
+            else {
+                cout << stack_0->display( ) << endl;
+            }
         }
-
     }
 
     return 0;
