@@ -3,14 +3,13 @@
 #
 
 CXX=g++
-CXXFLAGS=-std=c++11 -c -O -I../Spica -I../Scr -IClacEntity -IClacEngine
+CXXFLAGS=-std=c++11 -c -O -IClacEntity -IClacEngine
 LINK=g++
 LINKFLAGS=-lncurses
 SOURCES=clac.cpp              \
 	record_f.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=clac
-LIBSPICA=../Spica/Cpp/libSpicaCpp.a
 LIBENTITY=ClacEntity/libClacEntity.a
 LIBENGINE=ClacEngine/libClacEngine.a
 
@@ -18,7 +17,7 @@ LIBENGINE=ClacEngine/libClacEngine.a
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 $(EXECUTABLE):	$(OBJECTS)
-	$(CXX) $(OBJECTS) $(LIBSPICA) $(LIBENGINE) $(LIBENTITY) $(LINKFLAGS) -o $@
+	$(CXX) $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LINKFLAGS) -o $@
 
 
 # File Dependencies

@@ -22,4 +22,4 @@ Makefiles) on Unix. It is also possible that some or all of Clac may be buildabl
 Watcom.
 
 Peter C. Chapin  
-PChapin@vtc.vsc.edu
+chapinp@acm.org  
