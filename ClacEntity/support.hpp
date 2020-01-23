@@ -7,9 +7,11 @@
 #ifndef SUPPORT_HPP
 #define SUPPORT_HPP
 
+#include <string>
 #include "Entity.hpp"
 
 void    error_message( const char *, ... );
+void    info_message( const std::string &message );
 void    underflow( );
 Entity *type_mismatch( Entity * );
 Entity *type_mismatch( Entity *, Entity * );

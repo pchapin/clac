@@ -1,8 +1,7 @@
 /*! \file    actions.hpp
-    \brief   This file contains prototypes of functions that implement the action words.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
-
-*/
+ *  \brief   This file contains prototypes of functions that implement the action words.
+ *  \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+ */
 
 #ifndef ACTIONS_HPP
 #define ACTIONS_HPP
@@ -22,6 +21,7 @@ extern void do_eng         ( Stack & );
 extern void do_eval        ( Stack & );
 extern void do_grad        ( Stack & );
 extern void do_hex         ( Stack & );
+extern void do_info        ( Stack & );
 extern void do_oct         ( Stack & );
 extern void do_polar       ( Stack & );
 extern void do_purge       ( Stack & );

@@ -69,49 +69,26 @@ void error_message( const char *message, ... )
     va_start( ap, message );
     char message_buffer[128+1];
     vsprintf( message_buffer, message, ap );
-    std::cout << message_buffer << endl;
+    cout << message_buffer << endl;
+}
+
+/*!
+ * This function is used to print information messages to the UI. Unlike the error message function,
+ * it assumes the caller constructs the entire message. This choice was made on the assumption that
+ * informational messages wouldn't normally need to print data values. That assumption may need to
+ * be revisted at some point.
+ *
+ * As with error_message, any code that makes use of Clac entities must provide an implementation of
+ * this function that is application specific.
+ */
+void info_message( const string &message )
+{
+    cout << message << endl;
 }
 
 //===========================================
 //           Program Initialization
 //===========================================
-
-/*!
- * Adjusts the format of __DATE__. Puts a comma after the day of the month and purge leading
- * zeros or spaces from the day of the month.
- *
- * \param ANSI_Date The date in the format given by the __DATE__ macros.
- * \return A pointer to a statically allocated buffer (of size 13) holding the cleaned up date.
- */
-static char *AdjDate(const char *ANSI_Date)
-{
-    static char  buffer[13];
-           char *buffer_pointer;
-
-    // Make a working copy of the date as from the ANSI __DATE__ macro.
-    strcpy( buffer, ANSI_Date );
-
-    // Open up space for the comma.
-    for( buffer_pointer  = strchr( buffer, '\0' );
-         buffer_pointer >= &buffer[6];
-         buffer_pointer-- ) {
-        *(buffer_pointer+1) = *buffer_pointer;
-    }
-
-    // Put the comma in.
-    buffer[6] = ',';
-
-    // If this is a date from 1 to 9, close up the extra space.
-    if( buffer[4] == '0' || buffer[4] == ' ' ) {
-        for( buffer_pointer = &buffer[4]; *buffer_pointer; buffer_pointer++ ) {
-            *buffer_pointer = *( buffer_pointer + 1 );
-        }
-    }
-
-    // Return are result.
-    return buffer;
-}
-
 
 class SetUp {
 public:
@@ -124,9 +101,6 @@ private:
 
 SetUp::SetUp( bool use_debugger ) : debugging_on( false )
 {
-    // TODO: Make the banner dependent on a command line option.
-    cout << "CLAC Version 0.00a  Compiled: " << AdjDate( __DATE__ ) << '\n'
-         << "(C) Copyright 2020 by Peter Chapin and Peter Nikolaidis" << endl;
     // TODO: Do other program-wide initializations as required.
   
     // The value of 'use_debugger' is intended to select if the runtime debugging environment is
@@ -278,6 +252,7 @@ static BuiltinAction action_words[] = {
     { "fix",    do_fix      },
     { "grad",   do_grad     },
     { "hex",    do_hex      },
+    { "info",   do_info     },
     { "oct",    do_oct      },
     { "polar",  do_polar    },
     { "purge",  do_purge    },
@@ -311,7 +286,7 @@ static BuiltinAction action_words[] = {
     { NULL, NULL }
 };
 
-static bool process_binary( Stack &the_stack, const std::string &word_buffer )
+static bool process_binary( Stack &the_stack, const string &word_buffer )
 {
     // Scan the list of builtin binary words.
     BuiltinBinary *bin_op = binary_words;
@@ -328,7 +303,7 @@ static bool process_binary( Stack &the_stack, const std::string &word_buffer )
     return false;
 }
 
-static bool process_unary( Stack &the_stack, const std::string &word_buffer )
+static bool process_unary( Stack &the_stack, const string &word_buffer )
 {
     // Scan the list of built in unary words.
     BuiltinUnary *unary_op = unary_words;
@@ -345,7 +320,7 @@ static bool process_unary( Stack &the_stack, const std::string &word_buffer )
     return false;
 }
 
-static bool process_action( Stack &the_stack, const std::string &word_buffer )
+static bool process_action( Stack &the_stack, const string &word_buffer )
 {
     // Scan the list of builtin action words.
     BuiltinAction *action_op = action_words;
@@ -375,7 +350,7 @@ bool process_words( )
 {
     while (1) {
         try {
-            std::string new_word( global::word_source( ).next_word( ) );
+            string new_word( global::word_source( ).next_word( ) );
         
             // The master stream is exhausted.
             if( new_word.length( ) == 0 ) return true;
@@ -402,7 +377,7 @@ bool process_words( )
         catch( const char *the_message ) {
             error_message( "Exception: %s", the_message );
         }
-        catch( const std::exception &e ) {
+        catch( const exception &e ) {
             error_message( "Exception: %s", e.what( ) );
         }
     }

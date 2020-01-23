@@ -29,6 +29,44 @@ using namespace std;
 #include "support.hpp"
 #include "WordStream.hpp"
 
+
+/*!
+ * Adjusts the format of __DATE__. Puts a comma after the day of the month and purge leading
+ * zeros or spaces from the day of the month.
+ *
+ * \param ANSI_Date The date in the format given by the __DATE__ macros.
+ * \return A pointer to a statically allocated buffer (of size 13) holding the cleaned up date.
+ */
+static char *AdjDate(const char *ANSI_Date)
+{
+    static char  buffer[13];
+           char *buffer_pointer;
+
+    // Make a working copy of the date as from the ANSI __DATE__ macro.
+    strcpy( buffer, ANSI_Date );
+
+    // Open up space for the comma.
+    for( buffer_pointer  = strchr( buffer, '\0' );
+         buffer_pointer >= &buffer[6];
+         buffer_pointer-- ) {
+        *(buffer_pointer+1) = *buffer_pointer;
+    }
+
+    // Put the comma in.
+    buffer[6] = ',';
+
+    // If this is a date from 1 to 9, close up the extra space.
+    if( buffer[4] == '0' || buffer[4] == ' ' ) {
+        for( buffer_pointer = &buffer[4]; *buffer_pointer; buffer_pointer++ ) {
+            *buffer_pointer = *( buffer_pointer + 1 );
+        }
+    }
+
+    // Return are result.
+    return buffer;
+}
+
+
 static VeryLong pop_int( Stack &the_stack )
 {
     VeryLong return_value;
@@ -156,6 +194,14 @@ void do_grad( Stack & )
 void do_hex( Stack & )
 {
     global::set_base( global::HEX );
+}
+
+void do_info( Stack & )
+{
+    info_message(
+      string("CLAC Version 0.00a  Compiled: ") + AdjDate( __DATE__ ) + '\n' +
+             "(C) Copyright 2020 by Peter Chapin and Peter Nikolaidis" );
+
 }
 
 void do_oct( Stack & )
