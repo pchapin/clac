@@ -3,7 +3,7 @@
 #
 
 CXX=g++
-CXXFLAGS=-std=c++11 -c -O -I../ClacEntity
+CXXFLAGS=-std=c++11 -c -g -I../ClacEntity
 LINK=ar
 LINKFLAGS=rc
 SOURCES=actions.cpp    \

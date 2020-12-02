@@ -3,7 +3,7 @@
 #
 
 CXX=g++
-CXXFLAGS=-std=c++11 -c -O -IClacEntity -IClacEngine
+CXXFLAGS=-std=c++11 -c -g -IClacEntity -IClacEngine
 LINK=g++
 LINKFLAGS=-lncurses
 SOURCES=clac.cpp              \

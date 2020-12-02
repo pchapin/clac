@@ -1,6 +1,6 @@
 /*! \file    ComplexEntity.hpp
     \brief   Interface to the clac numeric type ComplexEntity.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 

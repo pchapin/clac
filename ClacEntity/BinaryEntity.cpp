@@ -1,6 +1,6 @@
 /*! \file    BinaryEntity.cpp
  *  \brief   Implementation of the clac numeric type BinaryEntity.
- *  \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+ *  \author  Peter C. Chapin <chapinp@acm.org>
  *
  * Objects of this class are unsigned integers which can be manipulated on a bitwise bases. The
  * current implementation allows for a maximum of 32 bits. The actual number of bits being used

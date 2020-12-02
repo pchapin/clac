@@ -1,6 +1,6 @@
 /*! \file    Entity.hpp
     \brief   Interface to the abstract base class Entity.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 There are 12 entity types all derived from the class defined here. They are binary, complex,
 directory, float, integer, labeled, list, matrix, program, rational, string, and vector.

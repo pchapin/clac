@@ -1,6 +1,6 @@
 /*! \file    cstack.cpp
     \brief   This file contains...
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 

@@ -1,6 +1,6 @@
 /*! \file    Rational.hpp
     \brief   Rational number template.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 Rational is a template that uses any signed integral type to implement rational numbers
 (fractions).

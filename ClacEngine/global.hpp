@@ -1,6 +1,6 @@
 /*! \file    global.hpp
     \brief   This file contains the interface to clac's global state.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 

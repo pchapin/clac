@@ -1,6 +1,6 @@
 /*! \file    overview.hpp
     \brief   Overview documentation of Clac's internal design.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 

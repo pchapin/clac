@@ -15,4 +15,4 @@ use the same Common folder but have its own UI folder.
 The versions of Clac here use IntelliJ IDE as their build environment.
 
 Peter C. Chapin  
-PChapin@vtc.vsc.edu
+chapinp@acm.org

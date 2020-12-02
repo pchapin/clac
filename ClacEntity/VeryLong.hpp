@@ -1,6 +1,6 @@
 /*! \file    VeryLong.hpp
  *  \brief   Arbitrary precision integer class.
- *  \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+ *  \author  Peter C. Chapin <chapinp@acm.org>
  */
 
 #ifndef VERYLONG_HPP

@@ -1,8 +1,7 @@
 /*! \file    words.hpp
-    \brief   This file contains functions that recognize numeric literals.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
-
-*/
+ *  \brief   This file contains functions that recognize numeric literals.
+ *  \author  Peter C. Chapin <chapinp@acm.org>
+ */
 
 #ifndef WORDS_HPP
 #define WORDS_HPP

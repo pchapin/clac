@@ -1,6 +1,6 @@
 /*! \file    WordStream.hpp
  *  \brief   This file contains the interface to the various word stream classes.
- *  \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+ *  \author  Peter C. Chapin <chapinp@acm.org>
  *
  * A word stream is a source of words. Other parts of the program interpret these words. Here we
  * are just concerned with extracting words from various sources in a uniform way.

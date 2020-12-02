@@ -1,6 +1,6 @@
 /*! \file    convert.cpp
  *  \brief   Type conversion functions.
- *  \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+ *  \author  Peter C. Chapin <chapinp@acm.org>
  */
 
 #include <cmath>

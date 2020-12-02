@@ -1,6 +1,6 @@
 /*! \file    DisplayState.hpp
     \brief   Interface to clac's display state variables.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 Class DisplayState is a wrapper around all of clac's display state variables. Such variables
 specify how certain objects are to be displayed. Having all the display state variables in one

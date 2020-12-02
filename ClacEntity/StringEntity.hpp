@@ -1,6 +1,6 @@
 /*! \file    StringEntity.hpp
     \brief   Interface to the clac numeric type StringEntity.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 

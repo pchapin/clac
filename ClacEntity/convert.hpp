@@ -1,6 +1,6 @@
 /*! \file    convert.hpp
     \brief   Interface to the entity conversion table.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 

@@ -1,6 +1,6 @@
 /*! \file    name.cpp
     \brief   This file contains the interface to class Stack.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 

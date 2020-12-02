@@ -1,6 +1,6 @@
 /*! \file    VectorEntity.hpp
     \brief   Interface to the clac numeric type VectorEntity.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 

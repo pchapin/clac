@@ -1,6 +1,6 @@
 /*! \file    StringEntity.cpp
  *  \brief   Implementation of the clac numeric type StringEntity.
- *  \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+ *  \author  Peter C. Chapin <chapinp@acm.org>
  */
 
 #include "Entities.hpp"

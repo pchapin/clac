@@ -1,6 +1,6 @@
 /*! \file    actions.hpp
  *  \brief   This file contains prototypes of functions that implement the action words.
- *  \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+ *  \author  Peter C. Chapin <chapinp@acm.org>
  */
 
 #ifndef ACTIONS_HPP

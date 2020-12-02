@@ -1,6 +1,6 @@
 /*! \file    get.hpp
     \brief   This file contains the declaration of a function that reads entites from the input.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 

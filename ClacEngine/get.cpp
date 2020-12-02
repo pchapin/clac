@@ -1,6 +1,6 @@
 /*! \file    get.cpp
  *  \brief   This file contains the implementation of the general Get functions.
- *  \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+ *  \author  Peter C. Chapin <chapinp@acm.org>
  */
 
 #include <cctype>

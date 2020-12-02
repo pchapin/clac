@@ -7,7 +7,7 @@ import java.util.Scanner;
  * primarily a demonstration application for Vermont Technical College's Java Programming
  * course (CIS-2271).
  * 
- * @author Peter C. Chapin &lt;PChapin@vtc.vsc.edu&gt;
+ * @author Peter C. Chapin &lt;chapinp@acm.org&gt;
  *
  */
 public class Clacky {

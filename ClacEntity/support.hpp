@@ -1,6 +1,6 @@
 /*! \file    support.hpp
     \brief   Declarations of various support functions.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
+    \author  Peter C. Chapin <chapinp@acm.org>
 
 */
 
