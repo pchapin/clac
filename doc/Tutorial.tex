@@ -1,0 +1,47 @@
+% ===========================================================================
+% FILE    : clac_tutorial.tex
+% SUBJECT : This is the tutorial for the CLAC program.
+% AUTHOR  : Peter C. Chapin
+%
+% This is the tutorial for the CLAC program. It attempts to teach the user about most of CLAC's
+% more interesting features.
+% ===========================================================================
+
+% ++++++++++++++++++++++++++++++++
+% Preamble and global declarations
+% ++++++++++++++++++++++++++++++++
+\documentclass{report}
+\pagestyle{headings}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1.75ex plus0.5ex minus0.5ex}
+
+\input{macros}
+
+% +++++++++++++++++++
+% The document itself
+% +++++++++++++++++++
+\begin{document}
+
+% ----------------------
+% Title page information
+% ----------------------
+\title{\CLAC\ Tutorial}
+\author{Peter Chapin\thanks{chapinp@acm.org}\\
+        Peter Nikolaidis\thanks{peter@paradigmcc.com}}
+\date{\today}
+\maketitle
+
+% ------------------------
+% Make a table of contents
+% ------------------------
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\input{Tutorial-Introduction}
+\input{Tutorial-Stack}
+\input{Tutorial-Types}
+\input{Tutorial-Programming}
+
+\end{document}

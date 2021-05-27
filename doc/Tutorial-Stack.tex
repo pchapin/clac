@@ -1,103 +1,8 @@
-% ===========================================================================
-% FILE         : clac_tutorial.tex
-% SUBJECT      : This is the tutorial for the CLAC program.
-% LAST REVISED : 2007-11-30
-% AUTHOR       : Peter C. Chapin
-%
-% This is the tutorial for the CLAC program. It attempts to teach the user about most of CLAC's
-% more interesting features.
-% ===========================================================================
 
-% ++++++++++++++++++++++++++++++++
-% Preamble and global declarations
-% ++++++++++++++++++++++++++++++++
-\documentclass{report}
-\pagestyle{headings}
-\setlength{\parindent}{0em}
-\setlength{\parskip}{1.75ex plus0.5ex minus0.5ex}
-
-\input{macros}
-
-% +++++++++++++++++++
-% The document itself
-% +++++++++++++++++++
-\begin{document}
-
-% ----------------------
-% Title page information
-% ----------------------
-\title{\CLAC\ Tutorial}
-\author{Peter Chapin\thanks{chapinp@acm.org}\\
-        Peter Nikolaidis\thanks{peter@paradigmcc.com}}
-\date{June 22, 2002}
-\maketitle
-
-% ------------------------
-% Make a table of contents
-% ------------------------
-\pagenumbering{roman}
-\tableofcontents
-\newpage
-\pagenumbering{arabic}
-
-% -------------
-% Chapter Break
-% -------------
-\chapter{Introduction}
-
-\CLAC\ is a general purpose scientific calculator program. \CLAC\ also has features that would
-be of interest to programmers and computer scientists. \CLAC\ offers the following significant
-features:
-
-\begin{enumerate}
-  
-\item \CLAC\ has a stack oriented design that makes it easy to evaluate complex expressions.
-  
-\item \CLAC\ supports all the basic scientific functions.
-  
-\item \CLAC\ allows you to use several different data types in your calculations. For example,
-  \CLAC\ allows you to manipulate complex numbers, matricies, fractions, and huge integers as
-  easily as floating point numbers.
-  
-\item \CLAC\ offers a tree structed directory for storing the results of calculations.
-  
-\item \CLAC\ is fully dynamic. It has few arbitrary limits. \CLAC\ is only limited by the size
-  of available memory.
-  
-\item \CLAC\ is fully programmable. Using a language very similar to Forth, \CLAC\ supports
-  conditional branching, loops, subprograms, arrays, pointers, structures, and more.
-
-\end{enumerate}
-
-We intend for \CLAC\ to be used primarily interactively. Although highly programmable, \CLAC\
-programs tend to be slow and hard to read. Furthermore some operations are awkward to program.
-We expect that you will use \CLAC\ programs to streamline your interaction with \CLAC. If you
-want to do serious numerical work, you might use \CLAC\ as a prototyping tool prior to writing a
-program in another language.
-
-\CLAC\ does not support certain features commonly found on today's high end calculators. In
-particular, \CLAC\ does not do symbolic manipulation or graphing. We may implement these
-features in future versions of \CLAC.
-
-In addition, \CLAC\ does not directly support a number of functions that are built into many
-calculators. For example, \CLAC\ does offer any statistical or financial functions. You can
-implement many of these functions yourself using \CLAC's programming language. This tutorial
-demonstrates several possibilities.
-
-This document is a complete tutorial on using \CLAC. First, we discuss the basics of calculating
-on a stack machine. Next we discuss the data types and built-in operations that \CLAC\ supports
-and what you can do with them. Finally, we discuss how to program \CLAC.
-
-Remember that this document is only a tutorial. We do not describe \CLAC\ completely in this
-document. See the reference manual for more detailed information.
-
-% -------------
-% Chapter Break
-% -------------
 \chapter{\CLAC\ as a Stack Machine}
 
-To get the most out of this tutorial, you should print out this document and read it as you play
-with \CLAC. There is nothing quite like trying things out as you go along.
+To get the most out of this tutorial, you should play with \CLAC as you work through this
+document. There is nothing quite like trying things out as you go along.
 
 \CLAC\ does all of its calculations (or ``claculations'' as we like to say) on a stack. Think of
 a stack of books. The top book is on stack level one. The book right below it is on stack level
@@ -107,13 +12,13 @@ level one becomes stack level two.
 In \CLAC\ the items on the stack are numbers, not books. When you do a calculation, you must
 first put numbers on the stack, and then operate on them.
 
-\CLAC\ displays its stack in the stack window at the upper left of the screen. Stack level one
-is always displayed at the bottom. As you put more numbers on the stack, the old numbers are
-shifted up. This arrangement allows stack level one to always be at the same spot on the
-display. In contrast with a stack of books the top book gets farther and farther from the table
-as the stack grows. As you can probably guess, most of the action is at stack level one.
+\CLAC\ displays the item in stack level one just before it prints its prompt. It is possible to
+ask \CLAC\ to print additional stack levels \pet{Show how this is done.}, however stack level
+one (the "top" level) is always displayed at the bottom. This may seem counter-intuitive, but as
+you will see it makes it easier to understand how \CLAC\ performs its operations.
 
-For example, when you start \CLAC, the stack looks like
+For example, when you start \CLAC, the stack contains (although only the top of the stack, i.
+e., the value at the bottom of the list below, is displayed)
 
 \begin{tabular}{|r|} \hline
  0 \\ \hline
@@ -122,7 +27,7 @@ For example, when you start \CLAC, the stack looks like
  0 \\ \hline
 \end{tabular}
 
-After you put the numer 1234 onto the stack, it looks like
+After you put the numer 1234 onto the stack, it looks like (1234 is displayed)
 
 \begin{tabular}{|r|} \hline
     0 \\ \hline
@@ -131,7 +36,7 @@ After you put the numer 1234 onto the stack, it looks like
  1234 \\ \hline
 \end{tabular}
 
-If you then put 3.14 onto the stack, it will become
+If you then put 3.14 onto the stack, it will become (3.14 is displayed)
 
 \begin{tabular}{|r|} \hline
     0 \\ \hline
@@ -141,22 +46,22 @@ If you then put 3.14 onto the stack, it will become
 \end{tabular}
 
 
-\CLAC\ only shows the first eight stack levels. However, \CLAC\'s stack is as large as it needs
-to be until \CLAC\ runs out of memory. For example, if a number is shifted to stack level nine,
-it will move back to stack level eight if the stack shrinks.
+This example shows only four stack levels. However, \CLAC\'s stack is as large as it needs to be
+until \CLAC\ runs out of memory.
 
 Suppose you wanted to add 2.17 and 3.14. To do this, you must first put the two numbers on the
-stack. Since this is addition, the order doesn't really matter. At the \CLAC\ command prompt (in
-the bottom window), type ``2.17'' (no quotes) and strike the return key. We say that you've
-pushed 2.17 onto the stack. Next push 3.14 onto the stack by typing ``3.14'' and striking the
-return key.
+stack. Since this is addition, the order doesn't really matter. At the \CLAC\ command prompt,
+type ``2.17'' (no quotes) and strike the return key. We say that you've pushed 2.17 onto the
+stack. Next push 3.14 onto the stack by typing ``3.14'' and striking the return key.
 
 Now that the numbers of interest are on the stack, type ``+'' (again, no quotes) and strike the
 return key. The + operation adds whatever numbers it finds on the top of the stack and replaces
-stack levels one and two with the sum: 5.31. Notice that two items have been ``popped'' from the
-stack and that one item has been pushed back on.
+stack levels one and two with the sum: 5.31. Since it leaves the result on stack level one, that
+result is displayed. Notice that two items have been ``popped'' from the stack and that one item
+has been pushed back on.
 
-As it happens, \CLAC\ allows you to type the entire calculation on one command line. For example
+As it happens, \CLAC\ allows you to type the entire calculation on one command line. For
+example:
 
 \begin{verbatim}
      => 7.23 .41 +
@@ -188,6 +93,8 @@ Of course, the ``clear'' at the end will cause \CLAC\ to erase the result before
 chance to look at it!
 
 \section{Some Words on the \CLAC\ Command Line}
+
+\pet{The behavior in this section is no longer supported since \CLAC\ currently is now a pure terminal-mode program.}
 
 If you've been following along with \CLAC, you have probably noticed that \CLAC\ does not erase
 your last command on the command line. This allows you to easily repeat your last command. For
@@ -240,10 +147,10 @@ Here are the commands you must use to get \CLAC\ to do the four basic operations
 \end{tabbing}
 
 All of these operations remove the original values from the stack and replace them with the
-single result. Notice that the order \CLAC\ uses for subtraction and division resembles the way
-you might write the operations on paper (if, that is, you draw your stacks the way we do). For
-example if want to calculate $1234 - 34$ the stack will look like this just before you do the
-operation:
+single result in stack level one. Notice that the order \CLAC\ uses for subtraction and division
+resembles the way you might write the operations on paper (if, that is, you draw your stacks the
+way we do). For example if want to calculate $1234 - 34$ the stack will look like this just
+before you do the operation:
 
 \begin{tabular}{|r|} \hline
     0 \\ \hline
@@ -257,7 +164,7 @@ surprising, the stack oriented nature of \CLAC\ makes parenthesis totally unnece
 the following calculation.
 
 \begin{displaymath}
-     \frac { 2.34 + 5.67 }{ 6.78 - 8.98 }
+     \frac{ 2.34 + 5.67 }{ 6.78 - 8.98 }
 \end{displaymath}
 
 First, calculate the numerator.
@@ -284,7 +191,7 @@ Of course, you could have done the whole thing in one gulp:
      => 2.34 5.67 + 6.78 8.98 - /
 \end{verbatim}
 
-From now on we will calculate all our examples using on \CLAC\ command line. This will save
+From now on we will calculate all our examples using one \CLAC\ command line. This will save
 space in this tutorial. Remember: you can always break a command down into smaller steps. You
 can enter each word one at a time.
 
@@ -339,9 +246,6 @@ This can be calculated using
      => 9.87 2.33 - 4.45 6.77 + swap /
 \end{verbatim}
 
-Of course, with command line editing, you could have just gone back and fixed the mistake. But,
-what if you had already committed to the calculation of the denominator?
-
 Suppose you calculate a number into stack level one which is wrong. You want to forget it. The
 ``drop'' operation pops stack level one and throws it away.
 
@@ -367,7 +271,7 @@ The ``dup'' command duplicates the item in stack level one so that both stack le
 are identical. All other items are shifted up one level. This command is useful to avoid typing
 in a number more than once should it appear more than once in a calculation.
 
-textsl{Talk about roll, rolld, rot}
+\pet{Talk about roll, rolld, rot}
 
 \section{Scientific Functions}
 
@@ -388,7 +292,6 @@ common functions:
 \>             ln, log\>                  Natural log and base 10 log.\\
 \>             exp, exp10\>               $e^{x}$ and $10^{x}$.\\
 \>             sqrt, sq\>                 Square root and square.\\
-
 \end{tabbing}
 
 For example, suppose you wanted to calculate the distance between the two points $(4.556,
@@ -431,111 +334,9 @@ twice (see if you can do it without entering the angles twice).
      => 22.3 37.8 + 2 / tan 22.3 37.8 - 2 / tan /
 \end{verbatim}
 
-Now the stuff in stack level one and the stuff in stack level two should be the same.
-
-% -------------
-% Chapter Break
-% -------------
-\chapter{Programming}
-
-\CLAC\ is fully programmable. The language we designed for \CLAC\ was inspired by the Forth
-computer language and the language used by the Hewlett-Packard HP-48SX calculator. If you are
-used to a language such as C or Perl, you will find \CLAC\ programs to be very strange looking.
-However, the syntax used by \CLAC\ is a natural consequence of its stack oriented nature. If you
-think in terms of the stack, programming \CLAC\ becomes very straightforward.
-
-\CLAC\ can take its input from three sources.
-
-\begin{description}
-  
-\item[Interactively.] The command line at the bottom of the screen is \CLAC's source of
-  interactive words. You can use all of \CLAC's programmable features on the command line. This
-  is very useful for writing short loops.
-  
-\item[From .cpg files.] You can direct \CLAC\ to start reading words from a program file
-  (default extension = .cpg) with the ``run'' command. For example
+Now the stuff in stack level one and the stuff in stack level two should be the same which means
+their difference should be (close to) zero.
 
 \begin{verbatim}
-          => "myprog" run
+     => -
 \end{verbatim}
-  
-  will execute the program in the file ``myprog.cpg'' Notice that the quotes around ``myprog''
-  are not really necessary due to the way \CLAC\ defaults all words to type String that it does
-  not recognize.
-  
-  The text in a \CLAC\ program file can contain any sequence of words understood by \CLAC.
-  
-\item[From strings.] You can direct \CLAC\ to read words out of a string with the ``eval"
-  command. For example
-
-\begin{verbatim}
-          => "pi *" eval
-\end{verbatim}
-
-     will execute the program contained in the string ``pi *''
-
-\end{description}
-
-These features, coupled with the basic control structures, and \CLAC's associative directory,
-make \CLAC\ into a powerful and complete programming language.
-
-\section{Control Structures}
-
-Suppose you wanted to calculate the sum of the first 100 integers. You would use a loop, of
-course.
-
-\begin{verbatim}
-     => 0 1 100 for I + next
-\end{verbatim}
-
-The first zero is the accumulator. The next two numbers represent the loop's range. In this
-case, the range is from 1 to 100. The ``for'' word starts the loop. It pops the range values
-from the stack thus leaving the zero in stack level 1.
-
-Inside the loop, the word ``I'' means the current loop counter. The first time through the loop
-I will be 1. The ``next'' word advances the value of I and loops back to the word just after
-``for.'' If it's time for the loop to exit, ``next'' does not loop back, of course, but just
-continues on.
-
-The ``next'' does not have to be on the same line as the ``for.'' In fact, you could enter as
-many lines as you wanted between a for and its next. You can do arbitrarily complicated
-calculations between a for and its next, including other loops.
-
-Suppose you wanted to calculate
-
-\begin{displaymath}
-     \frac{1}{2} + \frac{2}{3} + \frac{3}{4} + \frac{4}{5} + \cdots +
-       \frac{99}{100}
-\end{displaymath}
-
-No problem.
-
-\begin{verbatim}
-     => fraction 0 1 99 for I I 1 + / + next
-\end{verbatim}
-
-It looks strange. But it works.
-
-Suppose you wanted to calculate the above series often, but with different bounds. One way is to
-put the meaty part of the program into a string.
-
-\begin{verbatim}
-     => "for I I + / + next" Series sto
-\end{verbatim}
-
-Now you can evaluate for various bounds like this
-
-\begin{verbatim}
-     => 0 1 99 Series eval
-\end{verbatim}
-
-When \CLAC\ sees the word ``Series'' it calls up the string you defined from the directory. The
-``eval'' word causes the text of that string to be interpreted as a program. Since the first
-word in that program is ``for'', the 1 and 99 on stack levels one and two are taken to be the
-limits of the for loop. Notice that it's still necessary to put an initial zero on the stack
-outside of the evaluated string. All the eval effectively does is expand the string so that the
-sequence of words \CLAC\ sees includes the words in that string.
-
-You can thus use strings for storing quick and dirty programs.
-
-\end{document}

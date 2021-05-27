@@ -5,5 +5,25 @@
 %
 % ===========================================================================
 
-\newcommand{\CLAC}{Clac}
+\newcommand{\CLAC}{Clac}               % Formatting the name of the program.
+\newcommand{\newterm}[1]{\emph{#1}}    % For newly introduced terms.
+\newcommand{\code}[1]{\texttt{#1}}     % Used for bits of inline code.
+\newcommand{\filename}[1]{\texttt{#1}} % For file names.
+\newcommand{\todo}[1]{\textit{#1}}     % For quick, general to do items.
 
+% The \note macros are useful for creating easy to see notes.
+
+% Peter Chapin
+\long\def\pet#1{\marginpar{PET}{\small \ \ $\langle\langle\langle$\
+{#1}\
+    $\rangle\rangle\rangle$\ \ }} 
+
+%% The following are settings for the listings package. See the listings package documentation
+%% for more information.
+%%
+%\lstset{language=C,
+%        basicstyle=\small,
+%        stringstyle=\ttfamily,
+%        commentstyle=\ttfamily,
+%        xleftmargin=0.25in,
+%        showstringspaces=false}

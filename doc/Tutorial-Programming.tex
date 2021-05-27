@@ -1,0 +1,103 @@
+
+\chapter{Programming}
+
+\pet{Much work needs to be done on this chapter.}
+
+\CLAC\ is fully programmable. The language we designed for \CLAC\ was inspired by the Forth
+computer language and the language used by the Hewlett-Packard HP-48SX calculator. If you are
+used to a language such as C or Python, you will find \CLAC\ programs to be very strange
+looking. However, the syntax used by \CLAC\ is a natural consequence of its stack oriented
+nature. If you think in terms of the stack, programming \CLAC\ becomes very straightforward.
+
+\CLAC\ can take its input from three sources.
+
+\begin{description}
+  
+\item[Interactively.] The command line is \CLAC's source of interactive words. You can use all
+  of \CLAC's programmable features on the command line. This is very useful for writing short
+  loops.
+  
+\item[From .cpg files.] You can direct \CLAC\ to start reading words from a program file
+  (default extension = .cpg) with the ``run'' command. For example
+
+\begin{verbatim}
+          => "myprog" run
+\end{verbatim}
+  
+  will execute the program in the file ``myprog.cpg'' Notice that the quotes around ``myprog''
+  are not really necessary due to the way \CLAC\ defaults all words to type String that it does
+  not recognize.
+  
+  The text in a \CLAC\ program file can contain any sequence of words understood by \CLAC.
+  
+\item[From strings.] You can direct \CLAC\ to read words out of a string with the ``eval"
+  command. For example
+
+\begin{verbatim}
+          => "pi *" eval
+\end{verbatim}
+
+     will execute the program contained in the string ``pi *''
+
+\end{description}
+
+These features, coupled with the basic control structures, and \CLAC's associative directory,
+make \CLAC\ into a powerful and complete programming language.
+
+\section{Control Structures}
+
+Suppose you wanted to calculate the sum of the first 100 integers. You would use a loop, of
+course.
+
+\begin{verbatim}
+     => 0 1 100 for I + next
+\end{verbatim}
+
+The first zero is the accumulator. The next two numbers represent the loop's range. In this
+case, the range is from 1 to 100. The ``for'' word starts the loop. It pops the range values
+from the stack thus leaving the zero in stack level 1.
+
+Inside the loop, the word ``I'' means the current loop counter. The first time through the loop
+I will be 1. The ``next'' word advances the value of I and loops back to the word just after
+``for.'' If it's time for the loop to exit, ``next'' does not loop back, of course, but just
+continues on.
+
+The ``next'' does not have to be on the same line as the ``for.'' In fact, you could enter as
+many lines as you wanted between a for and its next. You can do arbitrarily complicated
+calculations between a for and its next, including other loops.
+
+Suppose you wanted to calculate
+
+\begin{displaymath}
+     \frac{1}{2} + \frac{2}{3} + \frac{3}{4} + \frac{4}{5} + \cdots + \frac{99}{100}
+\end{displaymath}
+
+No problem.
+
+\begin{verbatim}
+     => fraction 0 1 99 for I I 1 + / + next
+\end{verbatim}
+
+It looks strange. But it works.
+
+Suppose you wanted to calculate the above series often, but with different bounds. One way is to
+put the meaty part of the program into a string.
+
+\begin{verbatim}
+     => "for I I + / + next" Series sto
+\end{verbatim}
+
+Now you can evaluate for various bounds like this
+
+\begin{verbatim}
+     => 0 1 99 Series eval
+\end{verbatim}
+
+When \CLAC\ sees the word ``Series'' it calls up the string you defined from the directory. The
+``eval'' word causes the text of that string to be interpreted as a program. Since the first
+word in that program is ``for'', the 1 and 99 on stack levels one and two are taken to be the
+limits of the for loop. Notice that it's still necessary to put an initial zero on the stack
+outside of the evaluated string. All the eval effectively does is expand the string so that the
+sequence of words \CLAC\ sees includes the words in that string.
+
+You can thus use strings for storing quick and dirty programs.

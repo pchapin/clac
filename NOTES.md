@@ -16,7 +16,7 @@ Clac is intended to have three parts
 + The user interface. This gives a nice, generic interface to the execution engine.
 
 Right now the entity library source is in clac_entity and the execution engine is in
-clac_engine. The files related to the UI are in the top leve directory. Documentation is in the
+clac_engine. The files related to the UI are in the top level directory. Documentation is in the
 doc directory.
 
 Notes, Bugs
@@ -24,7 +24,9 @@ Notes, Bugs
 
 + There are "To Do" lists for each source file in the comment header of that file. If you are
   looking for something useful to do, just review the various source files until you find
-  something that looks interesting to you!
+  something that looks interesting to you! Broadly speaking some reasonable tests should be
+  added (currently there are essentially none), the documentation needs to be overhauled and
+  updated, and the basic entity types need to be completed and checked.
 
 + Here is a list of additional operations and features that probably should be supported
   someday. Many of these items are taken directly from the HP-48 documentation.

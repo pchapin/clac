@@ -40,9 +40,6 @@ obj
 internal
 api
 
-# PC-Lint generated files.
-_LINT.TMP
-
 # Executables
 clac
 
