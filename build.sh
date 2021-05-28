@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This script builds clac by first running 'make' in the two subprojects. Why can't this be done
+# This script builds Clac by first running 'make' in the two subprojects. Why can't this be done
 # with the make utility itself? In general use of recursive make has issues and should probably
 # be avoided. See http://miller.emu.id.au/pmiller/books/rmch/.
 #
@@ -11,4 +11,5 @@
 
 (cd ClacEntity; make)
 (cd ClacEngine; make)
+(cd check; make)
 make

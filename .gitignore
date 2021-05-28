@@ -42,6 +42,7 @@ api
 
 # Executables
 clac
+u_tests
 
 # IntelliJ generated files.
 workspace.xml
