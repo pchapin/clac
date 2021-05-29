@@ -2,21 +2,16 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
 		<Project filename="clac.cbp" active="1">
-			<Depends filename="clac_entity/clac_entity.cbp" />
-			<Depends filename="clac_engine/clac_engine.cbp" />
-			<Depends filename="../Scr/scr.cbp" />
-			<Depends filename="../Spica/Cpp/SpicaCpp.cbp" />
+			<Depends filename="ClacEntity/ClacEntity.cbp" />
+			<Depends filename="ClacEngine/ClacEngine.cbp" />
 		</Project>
-		<Project filename="clac_entity/clac_entity.cbp">
-			<Depends filename="../Spica/Cpp/SpicaCpp.cbp" />
+		<Project filename="ClacEntity/ClacEntity.cbp" />
+		<Project filename="ClacEngine/ClacEngine.cbp">
+			<Depends filename="ClacEntity/ClacEntity.cbp" />
 		</Project>
-		<Project filename="clac_engine/clac_engine.cbp">
-			<Depends filename="clac_entity/clac_entity.cbp" />
-			<Depends filename="../Spica/Cpp/SpicaCpp.cbp" />
+		<Project filename="check/u_tests.cbp">
+		    <Depends filename="ClacEntity/ClacEntity.cbp" />
+			<Depends filename="ClacEngine/ClacEngine.cbp" />
 		</Project>
-		<Project filename="../Scr/scr.cbp">
-			<Depends filename="../Spica/Cpp/SpicaCpp.cbp" />
-		</Project>
-		<Project filename="../Spica/Cpp/SpicaCpp.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
