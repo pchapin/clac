@@ -5,7 +5,7 @@
 CXX=g++
 CXXFLAGS=-std=c++11 -c -g -I../ClacEntity
 LINK=ar
-LINKFLAGS=rc
+LINKFLAGS=-r -c
 SOURCES=actions.cpp    \
 	cstack.cpp     \
 	get.cpp        \
@@ -19,7 +19,7 @@ LIBRARY=libClacEngine.a
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 $(LIBRARY):	$(OBJECTS)
-	$(LINK) $(LINKFLAGS) -o $@ $(OBJECTS)
+	$(LINK) $(LINKFLAGS) $@ $(OBJECTS)
 
 # File Dependencies
 ###################

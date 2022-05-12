@@ -5,7 +5,7 @@
 CXX=g++
 CXXFLAGS=-std=c++11 -c -g
 LINK=ar
-LINKFLAGS=rc
+LINKFLAGS=-r -c
 SOURCES=BinaryEntity.cpp    \
 	ComplexEntity.cpp   \
 	convert.cpp         \
@@ -30,7 +30,7 @@ LIBRARY=libClacEntity.a
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 $(LIBRARY):	$(OBJECTS)
-	$(LINK) $(LINKFLAGS) -o $@ $(OBJECTS)
+	$(LINK) $(LINKFLAGS) $@ $(OBJECTS)
 
 # File Dependencies
 ###################
