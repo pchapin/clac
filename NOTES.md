@@ -15,9 +15,9 @@ Clac is intended to have three parts
 
 + The user interface. This gives a nice, generic interface to the execution engine.
 
-Right now the entity library source is in clac_entity and the execution engine is in
-clac_engine. The files related to the UI are in the top level directory. Documentation is in the
-doc directory.
+Right now the entity library source is in ClacEntity and the execution engine is inClacEngine.
+The files related to the UI are in the top level directory. Documentation is in the doc
+directory.
 
 Notes, Bugs
 ===========
@@ -54,7 +54,7 @@ Notes, Bugs
      move screen stuff into separate file.
      pick level
      programming capability
-     random (0 to 1) <working on it in actions.cpp>
+     random (0 to 1)
      relational tests (==, !=, <=, etc.)
      relocate purge & sto
      shifts + rotates

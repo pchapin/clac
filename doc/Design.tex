@@ -26,7 +26,7 @@
 % Title page information
 % ----------------------
 \title{The Design of CLAC}
-\author{Peter Chapin\thanks{chapinp@acm.org}\\
+\author{Peter Chapin\thanks{peter@pchapin.org}\\
         Peter Nikolaidis\thanks{peter@paradigmcc.com}}
 \date{December 1, 2007}
 \maketitle
@@ -60,7 +60,7 @@ such a machine offered and have features that would not be easily implemented on
 calculator. The HP-48 was the inspiration for \CLAC, but it never defined the requirements for
 \CLAC.
 
-As \CLAC\ developed a number of HP-48 features were abandoned, at least temporarily, in the
+As \CLAC\ developed, a number of HP-48 features were abandoned, at least temporarily, in the
 interests of keeping \CLAC\ manageable. However, \CLAC\ also evolved toward greater flexibility
 and integration with other software than any kind of ``mere'' calculator simulation could have
 provided. While many interesting features of the HP-48 are still missing from its design, we
@@ -79,9 +79,10 @@ language while using the entity library to perform the actual computations. By a
 simple user interface to the execution engine, \CLAC\ could be made into a specialized numeric
 scripting language.
 
-The third part of \CLAC\ is the high level user interface (UI). The UI is a graphical front end
-to the execution engine that allows users to visualize \CLAC's internal state more easily and to
-interact with \CLAC\ in a natural way.
+The third part of \CLAC\ is the high level user interface (UI). The current UI is a simple,
+line-oriented interface that accepts a line of \CLAC\ command words and outputs information
+about the top of \CLAC's stack. More complex user interfaces with graphical front ends could
+easily be imagined and potentially added to \CLAC\ later.
 
 The entity library and the execution engine are both highly portable. As much as possible they
 only use features of Standard C++. In contrast the user interface is highly system dependent.

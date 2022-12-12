@@ -12,7 +12,10 @@ the jClac and aClac folders contain user interface code for their respective pla
 Additional versions of Clac, for example an applet for a web browser, would hopefully be able to
 use the same Common folder but have its own UI folder.
 
+*NOTE* The Java version(s) of Clac are immature and not maintained. They were never more than
+skeletons. They are being retained in the hope that they may be developed more in the future.
+
 The versions of Clac here use IntelliJ IDE as their build environment.
 
 Peter C. Chapin  
-chapinp@acm.org
+peter@pchapin.org  
