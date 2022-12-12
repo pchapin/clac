@@ -1,11 +1,10 @@
 #
-# Makefile for the clac project.
+# Makefile for the Clac project.
 #
 
 CXX=g++
-CXXFLAGS=-std=c++11 -c -g -IClacEntity -IClacEngine
+CXXFLAGS=-std=c++17 -c -g -IClacEntity -IClacEngine
 LINK=g++
-LINKFLAGS=-lncurses
 SOURCES=clac.cpp              \
 	record_f.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
@@ -13,10 +12,30 @@ EXECUTABLE=clac
 LIBENTITY=ClacEntity/libClacEntity.a
 LIBENGINE=ClacEngine/libClacEngine.a
 
+.PHONY:	all
+all:	$(EXECUTABLE)
+
+# Recursive Build
+# See: https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
+# Also, see: https://accu.org/journals/overload/14/71/miller_2004/ for a discussion about why
+# recursive make is supposedly bad. Note that Miller's example is a crazy way of organizing
+# a multi-module project, and so we regard Miller's article as something of a straw man. 
+#################
+COMPONENTS = ClacEntity ClacEngine
+
+.PHONY:	components $(COMPONENTS)
+components:	$(COMPONENTS)
+
+$(COMPONENTS):
+	$(MAKE) -C $@
+
+# Top-Level Rules and Dependencies
+###################################
+
 %.o:	%.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-$(EXECUTABLE):	$(OBJECTS)
+$(EXECUTABLE):	components $(OBJECTS)
 	$(CXX) $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LINKFLAGS) -o $@
 
 
@@ -36,5 +55,8 @@ record_f.o:	record_f.cpp record_f.h
 
 # Additional Rules
 ##################
+.PHONY:	clean
 clean:
+	$(MAKE) -C ClacEngine clean
+	$(MAKE) -C ClacEntity clean
 	rm -f *.bc *.bc1 *.bc2 *.o $(EXECUTABLE) *.s *.ll *~
