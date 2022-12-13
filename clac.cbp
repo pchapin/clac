@@ -35,15 +35,12 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add option="-std=c++17" />
 			<Add option="-fexceptions" />
 			<Add directory="ClacEntity" />
 			<Add directory="ClacEngine" />
 		</Compiler>
-		<Linker>
-			<Add library="ncurses" />
-		</Linker>
 		<Unit filename="clac.cpp" />
 		<Unit filename="record_f.cpp" />
 		<Unit filename="record_f.h" />

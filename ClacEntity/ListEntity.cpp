@@ -43,7 +43,7 @@ Entity *ListEntity::duplicate( ) const
 
         // If (*p)->duplicate() throws, new_value will be destroyed but the already duplicated
         // objects won't be. This must be fixed eventually.
-        // 
+        //
         new_value.push_back( ( *p )->duplicate( ) );
     }
 
@@ -59,7 +59,7 @@ Entity *ListEntity::plus( const Entity *R ) const
     const ListEntity *right = dynamic_cast< const ListEntity * >( R );
     std::list< Entity * >::const_iterator p;
 
-    std::auto_ptr< ListEntity > new_list( new ListEntity( value ) );
+    std::unique_ptr< ListEntity > new_list( new ListEntity( value ) );
     for( p = right->value.begin( ); p != right->value.end( ); ++p ) {
         new_list->value.push_back( *p );
     }

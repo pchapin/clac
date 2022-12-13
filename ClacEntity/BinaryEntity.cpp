@@ -14,7 +14,7 @@
 #include "DisplayState.hpp"
 #include "support.hpp"
 
-using std::auto_ptr;
+using std::unique_ptr;
 
 // Number of decimal digits required to display the binaries with bit counts from 1 to 32. This
 // is used in the display method. (currently not used)
@@ -171,19 +171,19 @@ Entity *BinaryEntity::abs( ) const
 
 Entity *BinaryEntity::acos( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->acos( );
 }
 
 Entity *BinaryEntity::asin( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->asin( );
 }
 
 Entity *BinaryEntity::atan( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->atan( );
 }
 
@@ -194,19 +194,19 @@ Entity *BinaryEntity::complex_conjugate( ) const
 
 Entity *BinaryEntity::cos( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->cos( );
 }
 
 Entity *BinaryEntity::exp( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->exp( );
 }
 
 Entity *BinaryEntity::exp10( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->exp10( );
 }
 
@@ -227,19 +227,19 @@ Entity *BinaryEntity::integer_part( ) const
 
 Entity *BinaryEntity::inv( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->inv( );
 }
 
 Entity *BinaryEntity::ln( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->ln( );
 }
 
 Entity *BinaryEntity::log( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->log( );
 }
 

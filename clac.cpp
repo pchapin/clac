@@ -102,7 +102,7 @@ private:
 SetUp::SetUp( bool use_debugger ) : debugging_on( false )
 {
     // TODO: Do other program-wide initializations as required.
-  
+
     // The value of 'use_debugger' is intended to select if the runtime debugging environment is
     // active. The Scr library had such a facility that used Scr. It might be a nice project to
     // build a similar facility that is 100% command line.
@@ -157,8 +157,8 @@ static void do_binary( Stack &the_stack, Entity *(Entity::*binary_operation)( co
             return;
         }
 
-        auto_ptr<Entity> new_left( (left->*conversion)( ) );
-        auto_ptr<Entity> new_right( (right->*conversion)( ) );
+        unique_ptr<Entity> new_left( (left->*conversion)( ) );
+        unique_ptr<Entity> new_right( (right->*conversion)( ) );
 
         Entity *T1 = new_left.get( );
         Entity *T2 = new_right.get( );
@@ -351,7 +351,7 @@ bool process_words( )
     while (1) {
         try {
             string new_word( global::word_source( ).next_word( ) );
-        
+
             // The master stream is exhausted.
             if( new_word.length( ) == 0 ) return true;
 

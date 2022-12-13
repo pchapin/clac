@@ -3,7 +3,7 @@
 #
 
 CXX=g++
-CXXFLAGS=-std=c++17 -c -g -IClacEntity -IClacEngine
+CXXFLAGS=-c -g -std=c++17 -Wall -IClacEntity -IClacEngine
 LINK=g++
 SOURCES=clac.cpp              \
 	record_f.cpp

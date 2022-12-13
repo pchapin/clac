@@ -392,7 +392,6 @@ MatrixEntity *get_matrix( const string &word )
     string workspace( word );
     string word_buffer;
     long   row_count    = 0;
-    long   column_count = 0;
     bool   in_row       = false;
 
     MatrixEntity *new_object =  new MatrixEntity;
@@ -413,7 +412,6 @@ MatrixEntity *get_matrix( const string &word )
         else if( word_buffer[0] == ']' ) {
             if( in_row ) {
                 row_count++;
-                column_count = 0;
                 in_row = false;
             }
             else break;

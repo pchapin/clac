@@ -83,9 +83,9 @@ void Stack::drop( )           // Discard level 1 of the stack.
 }
 
 
-long Stack::height( )  // Depth of the stack.
+size_t Stack::height( )  // Depth of the stack.
 {
-    long C = 0;
+    size_t C = 0;
     for( size_t i = 0; i < STACK_SIZE-1; i++ ) {
         if( data[i] != NULL )
             C++;
@@ -96,13 +96,13 @@ long Stack::height( )  // Depth of the stack.
 
 void Stack::roll_down( const VeryLong &C )
 {
-    long count = C.to_long( );
-    if( count <= 0 ) count = 1;
+    size_t count = static_cast<size_t>( C.to_long( ) );
+    if( count == 0 ) count = 1;
     if( count > height( ) )
         error_message( "Stack not high enough to roll" );
     else {
         Entity *temp  = data[0];
-        for( size_t i = 0; i < count-1; i++ ) {
+        for( size_t i = 0; i < count - 1; i++ ) {
             data[i] = data[i+1];
         }
         data[count-1] = temp;
@@ -112,8 +112,8 @@ void Stack::roll_down( const VeryLong &C )
 
 void Stack::roll_up( const VeryLong &C )
 {
-    long count = C.to_long( );
-    if( count <= 0 ) count = 1;
+    size_t count = static_cast<size_t>( C.to_long( ) );
+    if( count == 0 ) count = 1;
     if( count > height( ) )
         error_message( "Stack not high enough to roll" );
     else {

@@ -9,7 +9,7 @@
 
 #include "Entities.hpp"
 
-using std::auto_ptr;
+using std::unique_ptr;
 
 //
 // The constructor allows a rational entity to be initialized with a Rational object.
@@ -75,21 +75,21 @@ Entity *RationalEntity::abs( ) const
 
 Entity *RationalEntity::acos( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->acos( );
 }
 
 
 Entity *RationalEntity::asin( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return  converted->asin( );
 }
 
 
 Entity *RationalEntity::atan( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->atan( );
 }
 
@@ -102,21 +102,21 @@ Entity *RationalEntity::complex_conjugate( ) const
 
 Entity *RationalEntity::cos( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->cos( );
 }
 
 
 Entity *RationalEntity::exp() const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->exp( );
 }
 
 
 Entity *RationalEntity::exp10( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->exp10( );
 }
 
@@ -140,14 +140,14 @@ Entity *RationalEntity::inv( ) const
 
 Entity *RationalEntity::ln( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->ln( );
 }
 
 
 Entity *RationalEntity::log( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->log( );
 }
 
@@ -180,7 +180,7 @@ Entity *RationalEntity::sign( ) const
 
 Entity *RationalEntity::sin( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->sin( );
 }
 
@@ -200,14 +200,14 @@ Entity *RationalEntity::sq( ) const
 
 Entity *RationalEntity::sqrt( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->sqrt( );
 }
 
 
 Entity *RationalEntity::tan( ) const
 {
-    auto_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
     return converted->tan( );
 }
 

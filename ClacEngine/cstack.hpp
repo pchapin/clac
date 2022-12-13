@@ -33,14 +33,14 @@ public:
     void put( Entity *new_object );
 
     // Stack operations.
-    void clear( );           // Drop everything off of the stack.
-    void drop( );            // Delete level 0 of stack.
-    bool dup( const VeryLong &level = 0 ); // Make a copy of 'level'. Return ERROR on failure.
-    long height( );          // Depth of the stack.
-    void roll_down( const VeryLong & );   // Roll stack down.
-    void roll_up( const VeryLong & );     // Roll stack up.
-    void rotate( );          // Exchange level 0 and 2.
-    void swap( );            // Exchange level 0 and 1.
+    void   clear( );           // Drop everything off of the stack.
+    void   drop( );            // Delete level 0 of stack.
+    bool   dup( const VeryLong &level = 0 ); // Make a copy of 'level'. Return ERROR on failure.
+    size_t height( );          // Depth of the stack.
+    void   roll_down( const VeryLong & );   // Roll stack down.
+    void   roll_up( const VeryLong & );     // Roll stack up.
+    void   rotate( );          // Exchange level 0 and 2.
+    void   swap( );            // Exchange level 0 and 1.
   };
 
 #endif

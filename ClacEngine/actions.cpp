@@ -250,7 +250,7 @@ static unsigned long read_header( ifstream &in_file )
     unsigned long lulv;  // lulv = local unsigned long variable
 
     if( fread( &lulv, sizeof( lulv ), 1, in_file ) != 1 )
-        return -1;
+        return static_cast<unsigned long>( -1 );
     else
         return lulv;
 #endif
@@ -292,7 +292,7 @@ void do_read( Stack &the_stack )
         delete file_name;
         return;
     }
-    if( ( read_signature( in_file ) == false ) || ( read_header( in_file ) == -1 ) ) {
+    if( ( read_signature( in_file ) == false ) || ( read_header( in_file ) == static_cast<unsigned long>( -1 ) ) ) {
         error_message( "Bad file format" );
         delete file_name;
         return;

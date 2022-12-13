@@ -51,21 +51,21 @@ Entity *IntegerEntity::abs( ) const
 
 Entity *IntegerEntity::acos() const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->acos( );
 }
 
 
 Entity *IntegerEntity::asin( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->asin( );
 }
 
 
 Entity *IntegerEntity::atan( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->atan( );
 }
 
@@ -78,21 +78,21 @@ Entity *IntegerEntity::complex_conjugate( ) const
 
 Entity *IntegerEntity::cos( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr< Entity > converted( to_float( ) );
     return converted->cos( );
 }
 
 
 Entity *IntegerEntity::exp( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr< Entity > converted( to_float( ) );
     return converted->exp( );
 }
 
 
 Entity *IntegerEntity::exp10( ) const
 {
-    auto_ptr< IntegerEntity > base( new IntegerEntity( VeryLong::ten ) );
+    unique_ptr<IntegerEntity> base( new IntegerEntity( VeryLong::ten ) );
     return base->power( this );
 }
 
@@ -123,21 +123,21 @@ Entity *IntegerEntity::integer_part( ) const
 //
 Entity *IntegerEntity::inv( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->inv( );
 }
 
 
 Entity *IntegerEntity::ln( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->ln( );
 }
 
 
 Entity *IntegerEntity::log( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->log( );
 }
 
@@ -173,14 +173,14 @@ Entity *IntegerEntity::sign( ) const
 
 Entity *IntegerEntity::sin( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->sin( );
 }
 
 
 Entity *IntegerEntity::sq( ) const
 {
-    auto_ptr< IntegerEntity > temp( static_cast< IntegerEntity * >( duplicate( ) ) );
+    unique_ptr<IntegerEntity> temp( static_cast< IntegerEntity * >( duplicate( ) ) );
     temp->value *= value;
     return temp.release( );
 }
@@ -188,14 +188,14 @@ Entity *IntegerEntity::sq( ) const
 
 Entity *IntegerEntity::sqrt( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->sqrt( );
 }
 
 
 Entity *IntegerEntity::tan( ) const
 {
-    auto_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->tan( );
 }
 
@@ -207,7 +207,7 @@ Entity *IntegerEntity::tan( ) const
 Entity *IntegerEntity::divide( const Entity *R ) const
 {
     const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    auto_ptr< IntegerEntity > copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    unique_ptr<IntegerEntity> copy( static_cast< IntegerEntity * >( duplicate( ) ) );
     copy->value /= right->value;
     return copy.release( );
 }
@@ -216,7 +216,7 @@ Entity *IntegerEntity::divide( const Entity *R ) const
 Entity *IntegerEntity::minus( const Entity *R ) const
 {
     const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    auto_ptr< IntegerEntity > copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    unique_ptr<IntegerEntity> copy( static_cast< IntegerEntity * >( duplicate( ) ) );
     copy->value -= right->value;
     return copy.release( );
 }
@@ -225,7 +225,7 @@ Entity *IntegerEntity::minus( const Entity *R ) const
 Entity *IntegerEntity::modulo( const Entity *R ) const
 {
     const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    auto_ptr< IntegerEntity > copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    unique_ptr<IntegerEntity> copy( static_cast< IntegerEntity * >( duplicate( ) ) );
     copy->value %= right->value;
     return copy.release( );
 }
@@ -234,7 +234,7 @@ Entity *IntegerEntity::modulo( const Entity *R ) const
 Entity *IntegerEntity::multiply( const Entity *R ) const
 {
     const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    auto_ptr< IntegerEntity > copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    unique_ptr< IntegerEntity > copy( static_cast< IntegerEntity * >( duplicate( ) ) );
     copy->value *= right->value;
     return copy.release( );
 }
@@ -243,7 +243,7 @@ Entity *IntegerEntity::multiply( const Entity *R ) const
 Entity *IntegerEntity::plus( const Entity *R ) const
 {
     const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    auto_ptr< IntegerEntity > copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    unique_ptr< IntegerEntity > copy( static_cast< IntegerEntity * >( duplicate( ) ) );
     copy->value += right->value;
     return copy.release( );
 }
@@ -254,11 +254,11 @@ Entity *IntegerEntity::plus( const Entity *R ) const
 // This method is O(N) where N is the size of the exponent. The faster method is O(log(N)).
 // Since VeryLongs can be large, I should probably change this function someday to use the more
 // efficient method. It might make a difference for some applications.
-// 
+//
 Entity *IntegerEntity::power( const Entity *R ) const
 {
   const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-  auto_ptr< IntegerEntity > result( new IntegerEntity( VeryLong::one ) );
+  unique_ptr< IntegerEntity > result( new IntegerEntity( VeryLong::one ) );
   VeryLong exponent( right->value );
 
   // If we are using a negative exponent, compute the appropriate power and then invert it. Note
