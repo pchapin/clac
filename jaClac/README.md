@@ -17,5 +17,5 @@ skeletons. They are being retained in the hope that they may be developed more i
 
 The versions of Clac here use IntelliJ IDE as their build environment.
 
-Peter C. Chapin  
-peter@pchapin.org  
+Peter Chapin  
+chapinp@proton.me  
