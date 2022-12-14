@@ -50,3 +50,4 @@ build
 
 # Android generated files.
 gen
+*.user

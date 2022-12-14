@@ -14,12 +14,12 @@
     <ClCompile Include="clac.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="record_f.cpp">
+    <ClCompile Include="RecordFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="record_f.h">
+    <ClInclude Include="RecordFile.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
