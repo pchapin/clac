@@ -19,17 +19,6 @@ Finally, there is a lightweight version of Clac written in Java in the Clacky fo
 version is independent of both the C++ version and of jaClac. It is suitable for study by novice
 programming students using Java.
 
-The C++ version of Clac can be built with Visual Studio on Windows and g++ (via Code::Blocks or
-Makefiles) on Unix-like systems (Linux, macOS, Cygwin). Not all build control files are fully up
-to date. At the time of this writing (Dec 2022) Clac development is being done primarly on Linux
-using g++ and Makefiles with Visual Studio Code as the development environment. Thus the
-Code::Blocks and Visual Studio build control files may need adjusting, as they are only
-infrequently checked.
-
-API documentation for Clac is built using the Doxygen tool. The User Manual, Reference Manual,
-and Tutorial are built using LaTeX. These tools are only needed if the documentation is to be
-built.
-
 Building
 --------
 
