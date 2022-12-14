@@ -41,9 +41,9 @@
 			<Add directory="ClacEntity" />
 			<Add directory="ClacEngine" />
 		</Compiler>
+		<Unit filename="RecordFile.cpp" />
+		<Unit filename="RecordFile.hpp" />
 		<Unit filename="clac.cpp" />
-		<Unit filename="record_f.cpp" />
-		<Unit filename="record_f.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

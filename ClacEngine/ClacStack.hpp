@@ -1,23 +1,23 @@
-/*! \file    cstack.cpp
- *  \brief   This file contains the interface to class Stack.
+/*! \file    ClacStack.cpp
+ *  \brief   This file contains the interface to class ClacStack.
  *  \author  Peter Chapin <chapinp@proton.me>
  */
 
-#ifndef CSTACK_H
-#define CSTACK_H
+#ifndef CLACSTACK_HPP
+#define CLACSTACK_HPP
 
 #include "Entity.hpp"
 #include "VeryLong.hpp"
 
-class Stack {
+class ClacStack {
 private:
     enum { STACK_SIZE = 100 };
 
     Entity *data[STACK_SIZE];
 
 public:
-    Stack( );    // Initialize stack object to something sensible.
-   ~Stack( );    // Get rid of all the objects on the stack as well as the stack itself.
+    ClacStack( );    // Initialize stack object to something sensible.
+   ~ClacStack( );    // Get rid of all the objects on the stack as well as the stack itself.
 
     // Push an entity on the stack. Return ERROR on failure.
     bool push( Entity *item );
@@ -31,7 +31,7 @@ public:
     // Put a copy of the argument into stack level zero. The old object is deleted.
     void put( Entity *new_object );
 
-    // Stack operations.
+    // ClacStack operations.
     void   clear( );           // Drop everything off of the stack.
     void   drop( );            // Delete level 0 of stack.
     bool   dup( const VeryLong &level = 0 ); // Make a copy of 'level'. Return ERROR on failure.

@@ -7,7 +7,7 @@ CXXFLAGS=-c -g -std=c++17 -Wall -I../ClacEntity
 LINK=ar
 LINKFLAGS=-r -c
 SOURCES=actions.cpp    \
-	cstack.cpp     \
+	ClacStack.cpp  \
 	get.cpp        \
 	global.cpp     \
 	words.cpp      \
@@ -30,19 +30,19 @@ $(LIBRARY):	$(OBJECTS)
 actions.o:	actions.cpp ../ClacEntity/BinaryEntity.hpp ../ClacEntity/Entity.hpp ../ClacEntity/ComplexEntity.hpp \
 	../ClacEntity/FloatEntity.hpp ../ClacEntity/IntegerEntity.hpp ../ClacEntity/VeryLong.hpp \
 	../ClacEntity/ListEntity.hpp ../ClacEntity/MatrixEntity.hpp ../ClacEntity/RationalEntity.hpp \
-	../ClacEntity/Rational.hpp ../ClacEntity/StringEntity.hpp actions.hpp cstack.hpp global.hpp \
+	../ClacEntity/Rational.hpp ../ClacEntity/StringEntity.hpp actions.hpp ClacStack.hpp global.hpp \
 	WordStream.hpp ../ClacEntity/support.hpp 
 
-cstack.o:	cstack.cpp cstack.hpp ../ClacEntity/Entity.hpp ../ClacEntity/VeryLong.hpp ../ClacEntity/support.hpp \
+ClacStack.o:	ClacStack.cpp ClacStack.hpp ../ClacEntity/Entity.hpp ../ClacEntity/VeryLong.hpp ../ClacEntity/support.hpp \
 	
 
 get.o:	get.cpp ../ClacEntity/Rational.hpp ../ClacEntity/BinaryEntity.hpp ../ClacEntity/Entity.hpp \
 	../ClacEntity/ComplexEntity.hpp ../ClacEntity/FloatEntity.hpp ../ClacEntity/IntegerEntity.hpp \
 	../ClacEntity/VeryLong.hpp ../ClacEntity/LabeledEntity.hpp ../ClacEntity/ListEntity.hpp \
 	../ClacEntity/MatrixEntity.hpp ../ClacEntity/RationalEntity.hpp ../ClacEntity/StringEntity.hpp \
-	../ClacEntity/support.hpp get.hpp WordStream.hpp global.hpp cstack.hpp words.hpp 
+	../ClacEntity/support.hpp get.hpp WordStream.hpp global.hpp ClacStack.hpp words.hpp 
 
-global.o:	global.cpp global.hpp ../ClacEntity/VeryLong.hpp cstack.hpp ../ClacEntity/Entity.hpp \
+global.o:	global.cpp global.hpp ../ClacEntity/VeryLong.hpp ClacStack.hpp ../ClacEntity/Entity.hpp \
 	WordStream.hpp 
 
 words.o:	words.cpp words.hpp 

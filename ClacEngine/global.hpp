@@ -8,7 +8,7 @@
 
 #include "VeryLong.hpp"
 
-#include "cstack.hpp"
+#include "ClacStack.hpp"
 #include "WordStream.hpp"
 
 namespace global {
@@ -31,7 +31,7 @@ namespace global {
     DisplayModeType get_display_mode( );
 
     MasterStream &word_source( );
-    Stack        &the_stack( );
+    ClacStack    &the_stack( );
 }
 
 #endif

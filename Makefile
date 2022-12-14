@@ -50,7 +50,7 @@ $(EXECUTABLE):	components $(OBJECTS) $(LIBENGINE) $(LIBENTITY)
 
 clac.o:	clac.cpp ClacEntity/BinaryEntity.hpp ClacEntity/Entity.hpp ClacEntity/FloatEntity.hpp \
 	ClacEntity/IntegerEntity.hpp ClacEntity/VeryLong.hpp ClacEntity/StringEntity.hpp ClacEntity/convert.hpp \
-	ClacEntity/support.hpp ClacEngine/actions.hpp ClacEngine/cstack.hpp ClacEngine/get.hpp ClacEngine/WordStream.hpp \
+	ClacEntity/support.hpp ClacEngine/actions.hpp ClacEngine/ClacStack.hpp ClacEngine/get.hpp ClacEngine/WordStream.hpp \
 	ClacEngine/global.hpp ClacEngine/words.hpp 
 
 RecordFile.o:	RecordFile.cpp RecordFile.hpp 

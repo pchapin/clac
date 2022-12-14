@@ -66,7 +66,7 @@ static char *AdjDate( const char *ANSI_Date )
 }
 
 
-static VeryLong pop_int( Stack &the_stack )
+static VeryLong pop_int( ClacStack &the_stack )
 {
     VeryLong return_value;
 
@@ -88,37 +88,37 @@ static VeryLong pop_int( Stack &the_stack )
 }
 
 
-void do_bin( Stack & )
+void do_bin( ClacStack & )
 {
     global::set_base( global::BINARY );
 }
 
 
-void do_clear( Stack &the_stack )
+void do_clear( ClacStack &the_stack )
 {
     the_stack.clear( );
 }
 
 
-void do_dec( Stack & )
+void do_dec( ClacStack & )
 {
     global::set_base( global::DECIMAL );
 }
 
 
-void do_deg( Stack & )
+void do_deg( ClacStack & )
 {
     global::set_angle_mode( global::DEG );
 }
 
 
-void do_drop( Stack &the_stack )
+void do_drop( ClacStack &the_stack )
 {
     the_stack.drop( );
 }
 
 
-void do_dropn( Stack &the_stack )
+void do_dropn( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
 
@@ -128,7 +128,7 @@ void do_dropn( Stack &the_stack )
 }
 
 
-void do_dup( Stack &the_stack )
+void do_dup( ClacStack &the_stack )
 {
     Entity *new_copy = the_stack.get( 0 );
     if( new_copy != nullptr ) {
@@ -140,7 +140,7 @@ void do_dup( Stack &the_stack )
 }
 
 
-void do_dupn( Stack &the_stack )
+void do_dupn( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
 
@@ -157,7 +157,7 @@ void do_dupn( Stack &the_stack )
 }
 
 
-void do_eng( Stack &the_stack )
+void do_eng( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
 
@@ -167,7 +167,7 @@ void do_eng( Stack &the_stack )
 }
 
 
-void do_eval( Stack &the_stack )
+void do_eval( ClacStack &the_stack )
 {
     Entity *temp = the_stack.pop( );
 
@@ -189,7 +189,7 @@ void do_eval( Stack &the_stack )
   }
 
 
-void do_fix( Stack &the_stack )
+void do_fix( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
     global::set_decimal_count( count );
@@ -197,19 +197,19 @@ void do_fix( Stack &the_stack )
 }
 
 
-void do_grad( Stack & )
+void do_grad( ClacStack & )
 {
     global::set_angle_mode( global::GRAD );
 }
 
 
-void do_hex( Stack & )
+void do_hex( ClacStack & )
 {
     global::set_base( global::HEX );
 }
 
 
-void do_info( Stack & )
+void do_info( ClacStack & )
 {
     info_message(
       string("CLAC Version 0.00a  Compiled: ") + AdjDate( __DATE__ ) + '\n' +
@@ -218,19 +218,19 @@ void do_info( Stack & )
 }
 
 
-void do_oct( Stack & )
+void do_oct( ClacStack & )
 {
     global::set_base( global::OCTAL );
 }
 
 
-void do_polar( Stack & )
+void do_polar( ClacStack & )
 {
     global::set_complex_mode( global::POLAR );
 }
 
 
-void do_purge( Stack &the_stack )
+void do_purge( ClacStack &the_stack )
 {
     Entity *temp = the_stack.pop( );
 
@@ -250,13 +250,13 @@ void do_purge( Stack &the_stack )
 }
 
 
-void do_rad( Stack & )
+void do_rad( ClacStack & )
 {
     global::set_angle_mode( global::RAD );
 }
 
 
-void do_rec( Stack & )
+void do_rec( ClacStack & )
 {
     global::set_complex_mode( global::RECTANGULAR );
 }
@@ -291,7 +291,7 @@ static bool read_signature( ifstream &in_file )
 }
 
 
-void do_read( Stack &the_stack )
+void do_read( ClacStack &the_stack )
 {
     Entity *temp = the_stack.pop( );
     ifstream in_file;
@@ -367,27 +367,27 @@ void do_read( Stack &the_stack )
 }
 
 
-void do_roll_up( Stack &the_stack )
+void do_roll_up( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
     the_stack.roll_up( count );
 }
 
 
-void do_roll_down( Stack &the_stack )
+void do_roll_down( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
     the_stack.roll_down( count );
 }
 
 
-void do_rot( Stack &the_stack )
+void do_rot( ClacStack &the_stack )
 {
     the_stack.rotate( );
 }
 
 
-void do_run( Stack &the_stack )
+void do_run( ClacStack &the_stack )
 {
     Entity *temp = the_stack.pop( );
 
@@ -411,7 +411,7 @@ void do_run( Stack &the_stack )
 }
 
 
-void do_sci( Stack &the_stack )
+void do_sci( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
     global::set_decimal_count( count );
@@ -419,7 +419,7 @@ void do_sci( Stack &the_stack )
 }
 
 
-void do_store( Stack &the_stack )
+void do_store( ClacStack &the_stack )
 {
     Entity *temp = the_stack.pop( );
 
@@ -450,7 +450,7 @@ void do_store( Stack &the_stack )
 }
 
 
-void do_stws( Stack &the_stack )
+void do_stws( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
 
@@ -466,7 +466,7 @@ void do_stws( Stack &the_stack )
 }
 
 
-void do_swap( Stack &the_stack )
+void do_swap( ClacStack &the_stack )
 {
     the_stack.swap( );
 }
@@ -474,7 +474,7 @@ void do_swap( Stack &the_stack )
 
 #ifdef NEVER
 // Probably this function should be in the UI component.
-void do_sys( Stack &the_stack )
+void do_sys( ClacStack &the_stack )
 {
     Entity *command = the_stack.get( 0 );
     if( command == nullptr ) {
@@ -529,7 +529,7 @@ static void write_header( ofstream &out_file, Entity *object )
 }
 
 
-void do_write( Stack &the_stack )
+void do_write( ClacStack &the_stack )
 {
     Entity *temp = the_stack.pop( );
     ofstream out_file;
@@ -572,25 +572,25 @@ void do_write( Stack &the_stack )
 }
 
 
-void do_shift_left( Stack & )
+void do_shift_left( ClacStack & )
 {
     return;
 }
 
 
-void do_shift_right( Stack & )
+void do_shift_right( ClacStack & )
 {
     return;
 }
 
 
-void do_ashift_right( Stack & )
+void do_ashift_right( ClacStack & )
 {
     return;
 }
 
 
-void do_off( Stack & )
+void do_off( ClacStack & )
 {
     error_message( "Use 'quit' to terminate Clac" );
 }

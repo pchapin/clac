@@ -104,7 +104,7 @@ SetUp::~SetUp( )
 //           Generic Operation Functions
 //=================================================
 
-static void do_unary( Stack &the_stack, Entity *(Entity::*unary_operation)( ) const )
+static void do_unary( ClacStack &the_stack, Entity *(Entity::*unary_operation)( ) const )
 {
     // Get a pointer to the object on stack level zero.
     Entity *thing = the_stack.get( 0 );
@@ -118,7 +118,7 @@ static void do_unary( Stack &the_stack, Entity *(Entity::*unary_operation)( ) co
     }
 }
 
-static void do_binary( Stack &the_stack, Entity *(Entity::*binary_operation)( const Entity * ) const )
+static void do_binary( ClacStack &the_stack, Entity *(Entity::*binary_operation)( const Entity * ) const )
 {
     Entity *left  = the_stack.get( 1 );
     Entity *right = the_stack.get( 0 );
@@ -161,7 +161,7 @@ struct BuiltinUnary {
 
 struct BuiltinAction {
     const char  *word;
-    void (*operation)( Stack & );
+    void (*operation)( ClacStack & );
 };
 
 static BuiltinBinary binary_words[] = {
@@ -261,7 +261,7 @@ static BuiltinAction action_words[] = {
     { nullptr,  nullptr }
 };
 
-static bool process_binary( Stack &the_stack, const string &word_buffer )
+static bool process_binary( ClacStack &the_stack, const string &word_buffer )
 {
     // Scan the list of builtin binary words.
     BuiltinBinary *bin_op = binary_words;
@@ -278,7 +278,7 @@ static bool process_binary( Stack &the_stack, const string &word_buffer )
     return false;
 }
 
-static bool process_unary( Stack &the_stack, const string &word_buffer )
+static bool process_unary( ClacStack &the_stack, const string &word_buffer )
 {
     // Scan the list of built in unary words.
     BuiltinUnary *unary_op = unary_words;
@@ -295,7 +295,7 @@ static bool process_unary( Stack &the_stack, const string &word_buffer )
     return false;
 }
 
-static bool process_action( Stack &the_stack, const string &word_buffer )
+static bool process_action( ClacStack &the_stack, const string &word_buffer )
 {
     // Scan the list of builtin action words.
     BuiltinAction *action_op = action_words;

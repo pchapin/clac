@@ -15,7 +15,7 @@ namespace global {
     ComplexModeType current_complex_mode;
     VeryLong        current_bit_count;
     MasterStream    current_word_source;
-    Stack           current_stack;
+    ClacStack       current_stack;
 
     // Accessor functions.
     void set_base( BaseType new_base )
@@ -51,7 +51,7 @@ namespace global {
     MasterStream &word_source( )
         { return current_word_source; }
 
-    Stack &the_stack( )
+    ClacStack &the_stack( )
         { return current_stack; }
 
 }

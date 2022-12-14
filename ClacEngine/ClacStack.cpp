@@ -1,12 +1,14 @@
-/*! \file    cstack.cpp
+/*! \file    ClacStack.cpp
  *  \brief   This file contains...
  *  \author  Peter Chapin <chapinp@proton.me>
  */
 
-#include "cstack.hpp"
+#include "ClacStack.hpp"
 #include "support.hpp"
 
-Stack::Stack( )
+using namespace std;
+
+ClacStack::ClacStack( )
 {
     for( size_t i = 0; i < STACK_SIZE; i++ ) {
         data[i] = nullptr;
@@ -14,7 +16,7 @@ Stack::Stack( )
 }
 
 
-Stack::~Stack( )
+ClacStack::~ClacStack( )
 {
     for( size_t i = 0; i < STACK_SIZE; i++ ) {
         delete data[i];
@@ -22,7 +24,7 @@ Stack::~Stack( )
 }
 
 
-bool Stack::push( Entity *item )
+bool ClacStack::push( Entity *item )
 {
     delete data[STACK_SIZE-1];
     for( size_t i = STACK_SIZE-1; i > 0; i-- ) {
@@ -33,7 +35,7 @@ bool Stack::push( Entity *item )
 }
 
 
-Entity *Stack::pop( )
+Entity *ClacStack::pop( )
 {
     Entity *return_value = data[0];
 
@@ -45,7 +47,7 @@ Entity *Stack::pop( )
 }
 
 
-Entity *Stack::get( const VeryLong &index )
+Entity *ClacStack::get( const VeryLong &index )
 {
     Entity *return_value = nullptr;
 
@@ -56,14 +58,14 @@ Entity *Stack::get( const VeryLong &index )
 }
 
 
-void Stack::put( Entity *new_object )
+void ClacStack::put( Entity *new_object )
 {
     delete data[0];
     data[0] = new_object;
 }
 
 
-void Stack::clear( )         // Drop everything from the stack.
+void ClacStack::clear( )      // Drop everything from the stack.
 {
     size_t i;
     for( i = 0; i <= STACK_SIZE && data[i] != nullptr; i++ ) {
@@ -73,7 +75,7 @@ void Stack::clear( )         // Drop everything from the stack.
 }
 
 
-void Stack::drop( )           // Discard level 1 of the stack.
+void ClacStack::drop( )       // Discard level 1 of the stack.
 {
     Entity *temp = pop( );    // pop item off of the stack.
     if( temp == nullptr )
@@ -82,7 +84,7 @@ void Stack::drop( )           // Discard level 1 of the stack.
 }
 
 
-size_t Stack::height( )  // Depth of the stack.
+size_t ClacStack::height( )  // Depth of the stack.
 {
     size_t C = 0;
     for( size_t i = 0; i < STACK_SIZE-1; i++ ) {
@@ -93,7 +95,7 @@ size_t Stack::height( )  // Depth of the stack.
 }
 
 
-void Stack::roll_down( const VeryLong &C )
+void ClacStack::roll_down( const VeryLong &C )
 {
     size_t count = static_cast<size_t>( C.to_long( ) );
     if( count == 0 ) count = 1;
@@ -109,7 +111,7 @@ void Stack::roll_down( const VeryLong &C )
 }
 
 
-void Stack::roll_up( const VeryLong &C )
+void ClacStack::roll_up( const VeryLong &C )
 {
     size_t count = static_cast<size_t>( C.to_long( ) );
     if( count == 0 ) count = 1;
@@ -125,7 +127,7 @@ void Stack::roll_up( const VeryLong &C )
 }
 
 
-void Stack::rotate( )    // Perform a 3 Roll_Up.
+void ClacStack::rotate( )    // Perform a 3 Roll_Up.
 {
     if( data[0] != nullptr && data[1] != nullptr && data[2] != nullptr ) {
         Entity *temp = data[2];
@@ -139,7 +141,7 @@ void Stack::rotate( )    // Perform a 3 Roll_Up.
 }
 
 
-void Stack::swap( )    // Perform a swap of levels 1 and 2.
+void ClacStack::swap( )    // Perform a swap of levels 1 and 2.
 {
     if( data[0] != nullptr && data[1] != nullptr ) {
         Entity *temp = data[0];
