@@ -1,8 +1,7 @@
 /*! \file    global.hpp
-    \brief   This file contains the interface to clac's global state.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   This file contains the interface to clac's global state.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef GLOBAL_HPP
 #define GLOBAL_HPP

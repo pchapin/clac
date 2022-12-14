@@ -6,7 +6,7 @@ CXX=g++
 CXXFLAGS=-c -g -std=c++17 -Wall -IClacEntity -IClacEngine
 LINK=g++
 SOURCES=clac.cpp              \
-	record_f.cpp
+	RecordFile.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=clac
 LIBENTITY=ClacEntity/libClacEntity.a
@@ -50,7 +50,7 @@ clac.o:	clac.cpp ClacEntity/BinaryEntity.hpp ClacEntity/Entity.hpp ClacEntity/Fl
 	ClacEntity/support.hpp ClacEngine/actions.hpp ClacEngine/cstack.hpp ClacEngine/get.hpp ClacEngine/WordStream.hpp \
 	ClacEngine/global.hpp ClacEngine/words.hpp 
 
-record_f.o:	record_f.cpp record_f.h 
+RecordFile.o:	RecordFile.cpp RecordFile.hpp 
 
 
 # Additional Rules

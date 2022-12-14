@@ -1,6 +1,6 @@
 /*! \file    get.cpp
  *  \brief   This file contains the implementation of the general Get functions.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include <cctype>
@@ -9,8 +9,6 @@
 #include <cstdlib>
 #include <cstring>
 #include <string>
-
-using namespace std;
 
 #include "Rational.hpp"
 
@@ -29,6 +27,8 @@ using namespace std;
 #include "global.hpp"
 #include "words.hpp"
 
+using namespace std;
+
 //
 // Each of the following helper functions knows how to read the given entity type.
 //
@@ -40,6 +40,7 @@ static ListEntity     *get_list    ( const string &s );
 static MatrixEntity   *get_matrix  ( const string &s );
 static RationalEntity *get_rational( const string &s );
 static StringEntity   *get_string  ( const string &s );
+
 
 static bool is_special_word( const string &word )
 {
@@ -54,6 +55,7 @@ static bool is_special_word( const string &word )
     }
     return false;
 }
+
 
 static Entity *get_special_word( const string &word )
 {
@@ -269,6 +271,7 @@ ComplexEntity *get_complex( const string &word )
     return new ComplexEntity( first_part * cos( second_part ),
                               first_part * sin( second_part ) );
 }
+
 
 /*!
  * The following function creates a new BinaryEntity.

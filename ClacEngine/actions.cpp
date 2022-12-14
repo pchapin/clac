@@ -1,8 +1,7 @@
 /*! \file    actions.cpp
-    \brief   This file contains...
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   This file contains...
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #include <climits>
 #include <iomanip>
@@ -10,8 +9,6 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-
-using namespace std;
 
 #include "BinaryEntity.hpp"
 #include "ComplexEntity.hpp"
@@ -29,15 +26,17 @@ using namespace std;
 #include "support.hpp"
 #include "WordStream.hpp"
 
+using namespace std;
+
 
 /*!
  * Adjusts the format of __DATE__. Puts a comma after the day of the month and purge leading
  * zeros or spaces from the day of the month.
  *
- * \param ANSI_Date The date in the format given by the __DATE__ macros.
- * \return A pointer to a statically allocated buffer (of size 13) holding the cleaned up date.
+ * \param ANSI_Date The date in the format given by the __DATE__ macros. \return A pointer to a
+ * statically allocated buffer (of size 13) holding the cleaned up date.
  */
-static char *AdjDate(const char *ANSI_Date)
+static char *AdjDate( const char *ANSI_Date )
 {
     static char  buffer[13];
            char *buffer_pointer;
@@ -49,7 +48,7 @@ static char *AdjDate(const char *ANSI_Date)
     for( buffer_pointer  = strchr( buffer, '\0' );
          buffer_pointer >= &buffer[6];
          buffer_pointer-- ) {
-        *(buffer_pointer+1) = *buffer_pointer;
+        *( buffer_pointer+1 ) = *buffer_pointer;
     }
 
     // Put the comma in.
@@ -88,30 +87,36 @@ static VeryLong pop_int( Stack &the_stack )
     return return_value;
 }
 
+
 void do_bin( Stack & )
 {
     global::set_base( global::BINARY );
 }
+
 
 void do_clear( Stack &the_stack )
 {
     the_stack.clear( );
 }
 
+
 void do_dec( Stack & )
 {
     global::set_base( global::DECIMAL );
 }
+
 
 void do_deg( Stack & )
 {
     global::set_angle_mode( global::DEG );
 }
 
+
 void do_drop( Stack &the_stack )
 {
     the_stack.drop( );
 }
+
 
 void do_dropn( Stack &the_stack )
 {
@@ -121,6 +126,7 @@ void do_dropn( Stack &the_stack )
     for( VeryLong i = 0; i < count; ++i )
         the_stack.drop( );
 }
+
 
 void do_dup( Stack &the_stack )
 {
@@ -132,6 +138,7 @@ void do_dup( Stack &the_stack )
             the_stack.push( new_copy );
     }
 }
+
 
 void do_dupn( Stack &the_stack )
 {
@@ -149,6 +156,7 @@ void do_dupn( Stack &the_stack )
     }
 }
 
+
 void do_eng( Stack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
@@ -157,6 +165,7 @@ void do_eng( Stack &the_stack )
     global::set_decimal_count( count );
     global::set_display_mode( global::ENGINEERING );
 }
+
 
 void do_eval( Stack &the_stack )
 {
@@ -179,6 +188,7 @@ void do_eval( Stack &the_stack )
     }
   }
 
+
 void do_fix( Stack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
@@ -186,33 +196,39 @@ void do_fix( Stack &the_stack )
     global::set_display_mode( global::FIXED );
 }
 
+
 void do_grad( Stack & )
 {
     global::set_angle_mode( global::GRAD );
 }
+
 
 void do_hex( Stack & )
 {
     global::set_base( global::HEX );
 }
 
+
 void do_info( Stack & )
 {
     info_message(
       string("CLAC Version 0.00a  Compiled: ") + AdjDate( __DATE__ ) + '\n' +
-             "(C) Copyright 2020 by Peter Chapin and Peter Nikolaidis" );
+             "(C) Copyright 2022 by Peter Chapin and Peter Nikolaidis" );
 
 }
+
 
 void do_oct( Stack & )
 {
     global::set_base( global::OCTAL );
 }
 
+
 void do_polar( Stack & )
 {
     global::set_complex_mode( global::POLAR );
 }
+
 
 void do_purge( Stack &the_stack )
 {
@@ -233,15 +249,18 @@ void do_purge( Stack &the_stack )
     delete variable_name;
 }
 
+
 void do_rad( Stack & )
 {
     global::set_angle_mode( global::RAD );
 }
 
+
 void do_rec( Stack & )
 {
     global::set_complex_mode( global::RECTANGULAR );
 }
+
 
 static unsigned long read_header( ifstream &in_file )
 {
@@ -270,6 +289,7 @@ static bool read_signature( ifstream &in_file )
 #endif
     return false;
 }
+
 
 void do_read( Stack &the_stack )
 {
@@ -346,11 +366,13 @@ void do_read( Stack &the_stack )
     return;
 }
 
+
 void do_roll_up( Stack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
     the_stack.roll_up( count );
 }
+
 
 void do_roll_down( Stack &the_stack )
 {
@@ -358,10 +380,12 @@ void do_roll_down( Stack &the_stack )
     the_stack.roll_down( count );
 }
 
+
 void do_rot( Stack &the_stack )
 {
     the_stack.rotate( );
 }
+
 
 void do_run( Stack &the_stack )
 {
@@ -386,12 +410,14 @@ void do_run( Stack &the_stack )
 #endif
 }
 
+
 void do_sci( Stack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
     global::set_decimal_count( count );
     global::set_display_mode( global::SCIENTIFIC );
 }
+
 
 void do_store( Stack &the_stack )
 {
@@ -423,6 +449,7 @@ void do_store( Stack &the_stack )
     return;
 }
 
+
 void do_stws( Stack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
@@ -438,10 +465,12 @@ void do_stws( Stack &the_stack )
     }
 }
 
+
 void do_swap( Stack &the_stack )
 {
     the_stack.swap( );
 }
+
 
 #ifdef NEVER
 // Probably this function should be in the UI component.
@@ -480,6 +509,7 @@ void do_sys( Stack &the_stack )
 }
 #endif
 
+
 static void write_signature( ofstream &Out_File )
 {
     // TODO: Change this to use IOStreams properly.
@@ -487,6 +517,7 @@ static void write_signature( ofstream &Out_File )
     fprintf( out_file, "CLAC FILE\x1A");
 #endif
 }
+
 
 static void write_header( ofstream &out_file, Entity *object )
 {
@@ -496,6 +527,7 @@ static void write_header( ofstream &out_file, Entity *object )
     fwrite( &length, sizeof(length), 1, out_file );
 #endif
 }
+
 
 void do_write( Stack &the_stack )
 {
@@ -539,20 +571,24 @@ void do_write( Stack &the_stack )
     return;
 }
 
+
 void do_shift_left( Stack & )
 {
     return;
 }
+
 
 void do_shift_right( Stack & )
 {
     return;
 }
 
+
 void do_ashift_right( Stack & )
 {
     return;
 }
+
 
 void do_off( Stack & )
 {

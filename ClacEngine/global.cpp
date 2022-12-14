@@ -1,7 +1,6 @@
 /*! \file    global.cpp
-    \brief   This file contains the implementation of clac's global state.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
+ *  \brief   This file contains the implementation of clac's global state.
+ *  \author  Peter Chapin <chapinp@proton.me>
 */
 
 #include "global.hpp"

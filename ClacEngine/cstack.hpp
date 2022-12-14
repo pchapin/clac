@@ -1,8 +1,7 @@
-/*! \file    name.cpp
-    \brief   This file contains the interface to class Stack.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+/*! \file    cstack.cpp
+ *  \brief   This file contains the interface to class Stack.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef CSTACK_H
 #define CSTACK_H
@@ -41,7 +40,7 @@ public:
     void   roll_up( const VeryLong & );     // Roll stack up.
     void   rotate( );          // Exchange level 0 and 2.
     void   swap( );            // Exchange level 0 and 1.
-  };
+};
 
 #endif
 

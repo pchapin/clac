@@ -1,28 +1,6 @@
 /*! \file    clac.cpp
  *  \brief   Clac main program.
- *  \author  Peter C. Chapin <pchapin@vtc.edu> and Peter Nikolaidis
- *
- * LICENSE
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of
- * the GNU General Public License as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
- * the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with this program; if
- * not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
- * 02111-1307 USA
- *
- * Please send comments and bug reports to
- *
- *      Peter C. Chapin
- *      c/o Computer Information Systems Department
- *      Vermont Technical College
- *      Williston, VT 05495
- *      pchapin@vtc.edu
+ *  \author  Peter C. Chapin <chapinp@proton.me> and Peter Nikolaidis
  */
 
 #include <cstdarg>
@@ -35,9 +13,7 @@
 #include <iomanip>
 #include <memory>
 
-using namespace std;
-
-// clac_entity library.
+// ClacEntity library.
 #include "BinaryEntity.hpp"
 #include "FloatEntity.hpp"
 #include "IntegerEntity.hpp"
@@ -45,12 +21,13 @@ using namespace std;
 #include "convert.hpp"
 #include "support.hpp"
 
-// clac_engine library.
+// ClacEngine library.
 #include "actions.hpp"
 #include "get.hpp"
 #include "global.hpp"
 #include "words.hpp"
 
+using namespace std;
 
 //=====================================
 //           Message Handling
@@ -135,7 +112,6 @@ static void do_unary( Stack &the_stack, Entity *(Entity::*unary_operation)( ) co
     // If it didn't work, we have an error!
     if( thing == NULL ) underflow( );
     else {
-
         // Do the unary operation. If it works, we will get a pointer to a new object.
         Entity *new_thing = ( thing->*unary_operation )( );
         the_stack.put( new_thing );
@@ -275,9 +251,8 @@ static BuiltinAction action_words[] = {
     { "sr",     do_shift_right  },
     //{ "asr",    do_ashift_right },
 
-    // Off. Currently the 'quit' command is handled in a special way to ensure that the window
-    // system is shut down properly. The other versions of "off" just produce a message telling
-    // the user to use the 'quit' command.
+    // Off. The other versions of "off" just produce a message telling the user to use the
+    // 'quit' command.
     //
     { "exit",   do_off },
     { "off",    do_off },
@@ -340,15 +315,15 @@ static bool process_action( Stack &the_stack, const string &word_buffer )
 
 //! Process the words on the master stream, executing them one at a time.
 /*!
- * This function continues working until the master stream is completely empty. Note that
- * some words cause new WordStream objects to be pushed onto the master stream. This function
+ * This function continues working until the master stream is completely empty. Note that some
+ * words cause new WordStream objects to be pushed onto the master stream. This function
  * continues until all of those streams are exhausted as well.
  *
  * \return true if the program should continue; false if the "quit" word was encountered.
  */
 bool process_words( )
 {
-    while (1) {
+    while( 1 ) {
         try {
             string new_word( global::word_source( ).next_word( ) );
 

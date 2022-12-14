@@ -1,0 +1,45 @@
+/***************************************************************************
+FILE          : RecordFile.hpp
+LAST REVISION : 2005-12-22
+SUBJECT       : Interface to a "record file" class.
+
+(C) Copyright 2006 by Peter Chapin and Peter Nikolaidis
+
+--**--
+[Put comments here]
+--**--
+***************************************************************************/
+#ifndef RECORDFILE_HPP
+#define RECORDFILE_HPP
+
+#include <fstream>
+
+class RecordFile {
+
+public:
+    RecordFile(            // Opens file and allocates space for buffer.
+        char *file_name,
+        int   search_method,
+        int   length,
+        char  comment,
+        char *delimit );
+   ~RecordFile( );         // Closes file and frees buffer.
+
+    char **get_line( );    // Reads a line and breaks it into fields.
+    int    get_length( );  // Returns the number of fields.
+    bool   is_ok;          // =true if constructor works.
+    bool   too_long;       // =false if too many fields in line.
+
+    enum { DEFAULT };      // Search methods.
+
+private:
+    std::ifstream the_file;   // Refers to actual file.
+    char  comment_char;    // Defines comment character in file.
+    int   line_length;     // Longest allowed line length in file.
+    char *buffer;          // Points at buffer to hold each raw line.
+    char *delimiters;      // String of delimiters for fields in the file.
+    char *parts[16];       // Points at each field (note fixed size).
+    int   nmbr_of_parts;   // Number of fields.
+};
+
+#endif

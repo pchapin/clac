@@ -1,13 +1,13 @@
 /*! \file   words.cpp
  *  \brief  This file contains...
- *  \author Peter C. Chapin <chapinp@acm.org>
+ *  \author Peter Chapin <chapinp@proton.me>
  */
 
 #include <cctype>
 
-using namespace std;
-
 #include "words.hpp"
+
+using namespace std;
 
 namespace {
     bool float_number( const char *& );
@@ -48,6 +48,7 @@ bool is_float( const char *word )
     return true;
 }
 
+
 bool is_rational( const char *word )
 {
     if( *word == '-' ) word++;
@@ -64,6 +65,7 @@ bool is_rational( const char *word )
     } while( *word != '\0' );
     return true;
 }
+
 
 namespace {
     /*!
@@ -128,6 +130,7 @@ namespace {
         }
     }
 
+    
     bool floating_mantissa( const char *&p )
     {
         if( *p == '+' || *p == '-' )                // If the number is signed,
@@ -135,6 +138,7 @@ namespace {
         return floating_number( p );                //  and return a float.
     }
 
+    
     bool floating_number( const char *&p ) // A floating_number has no exponent.
     {                                      // Ex: 3.14,  31.415, .31415
         if( *p == '.' ) {
@@ -150,6 +154,7 @@ namespace {
         return true;
     }
 
+    
     bool integer_mantissa( const char *&p )
     {
         if (*p == '+' || *p == '-')                 // If the number is signed,
@@ -157,6 +162,7 @@ namespace {
         return digit_list(p);                       //  and return a digit_list.
     }
 
+    
     bool exponent( const char *&p )
     {
         if(*p != 'e' && *p != 'E')                  // char is not e or E.
@@ -176,6 +182,7 @@ namespace {
         return true;
     }
 
+    
     /*!
     * The following is the grammar used to accept or reject a string as a valid
     * complex number. This grammar is implemented with a hand written recursive
@@ -206,12 +213,14 @@ namespace {
         return false;
     }
 
+    
     bool white( const char *&p )
     {
         while( *p == ' ' ) p++;
         return true;
     }
 
+    
     bool separator( const char *&p )
     {
         if( *p == ',' || *p == '@' ) {
@@ -221,6 +230,7 @@ namespace {
         return false;
     }
 
+    
     bool complex_number( const char *&p )
     {
         if(*p != '(' ) return false;

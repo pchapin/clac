@@ -1,8 +1,7 @@
 /*! \file    cstack.cpp
-    \brief   This file contains...
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   This file contains...
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #include "cstack.hpp"
 #include "support.hpp"

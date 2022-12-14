@@ -4,8 +4,8 @@ C++ Style Guide
 
 ## Introduction
 
-This document describes my personal style for C++ programming. Although the style described here
-has many traditional elements, some of its features are unique to me.
+This document describes the style used for the C++ code in the Clac project. This document is,
+of course, subject to discussion, change, and evolution.
 
 In this document "shall" is intended to define a requirement, "should" is intended to define a
 recommendation, and "may" is intended to define an option. Making exceptions to this style is
@@ -109,7 +109,12 @@ acceptable; exceptional circumstances are common.
   
       inline int max( int a, int b )
           { return ( a > b ) ? a : b; }
-           
+
++ The `else` of a conditional statement and `catch` clauses of exception handlers shall be the
+  first non-white space character of a line (no preceeding '}').
+  
++ Function and method definitions shall be separated by two blank lines.
+
 + There should be no space between a unary operator and its operand.
   
 + There should be at least one space between a binary operator and its operands. Exception: the
@@ -142,6 +147,12 @@ acceptable; exceptional circumstances are common.
   most systems. On a device with a large display, the 96 character limit makes putting multiple
   editor windows side by side a feasible thing to do.
   
+## Structure
+
++ C++ source files shall be named with a `.cpp` extension. Header files containing C++
+  constructors (or potentially containing such constructs) shall be named with a `.hpp`
+  extension.
+  
 ## Usage
 
 + Every object should be initialized when it is declared. Every object’s point of declaration
@@ -165,6 +176,8 @@ acceptable; exceptional circumstances are common.
   unreasonable for general use.
 
 + An explicit return statement may be placed at the end of void functions.
+
++ All uses of the null pointer shall be done with the `nullptr` construct.
 
 + Every possible value of a switch statement's controlling expression should be accounted for in
   the switch statement's case list. If necessary one should include an empty default case to

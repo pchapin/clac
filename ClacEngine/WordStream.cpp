@@ -1,11 +1,12 @@
 /*! \file    WordStream.cpp
-    \brief   This file contains the implementation of various word stream classes.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   This file contains the implementation of various word stream classes.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #include <cstring>
 #include "WordStream.hpp"
+
+using namespace std;
 
 // -------------------
 // Word_Stream Members
@@ -29,8 +30,8 @@ WordStream::~WordStream( ) { }
 const char *WordStream::find_next_word( const char *string )
 {
     while( *string ) {
-        if( std::strchr( delimiters, *string ) != 0 ) string++;
-        else if( *string == comment ) string = std::strchr( string, '\0' );
+        if( strchr( delimiters, *string ) != 0 ) string++;
+        else if( *string == comment ) string = strchr( string, '\0' );
         else break;
     }
     return string;
@@ -54,10 +55,10 @@ const char *WordStream::find_next_space( const char *string )
 {
     // If this word is a quoted string, search for the close quote mark.
     if( *string == '\"' ) {
-        const char *end_quote = std::strchr( string + 1, '\"' );
+        const char *end_quote = strchr( string + 1, '\"' );
 
         if( end_quote != 0 ) end_quote++;
-        else end_quote = std::strchr( string + 1, '\0' );
+        else end_quote = strchr( string + 1, '\0' );
         return end_quote;
     }
 
@@ -65,7 +66,7 @@ const char *WordStream::find_next_space( const char *string )
     while( *string ) {
         if( *string == '\"' ) break;
         if( *string == comment ) break;
-        if( std::strchr( delimiters, *string ) == 0 ) string++;
+        if( strchr( delimiters, *string ) == 0 ) string++;
         else break;
     }
 

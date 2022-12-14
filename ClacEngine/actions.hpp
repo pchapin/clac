@@ -1,6 +1,6 @@
 /*! \file    actions.hpp
  *  \brief   This file contains prototypes of functions that implement the action words.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #ifndef ACTIONS_HPP
@@ -43,6 +43,6 @@ extern void do_shift_left  ( Stack & );
 extern void do_shift_right ( Stack & );
 // extern void do_ashift_right( Stack & );
 
-extern void do_off       ( Stack & );
+extern void do_off         ( Stack & );
 
 #endif
