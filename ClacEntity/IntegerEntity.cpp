@@ -1,6 +1,8 @@
 /*! \file    IntegerEntity.cpp
  *  \brief   Implementation of the clac numeric type IntegerEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
+ *
+ * TODO
  *
  * + IntegerEntity::to_float doesn't deal with the possibility of overflow and it should.
  */

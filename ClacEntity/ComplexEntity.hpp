@@ -1,8 +1,7 @@
 /*! \file    ComplexEntity.hpp
-    \brief   Interface to the clac numeric type ComplexEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the clac numeric type ComplexEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef COMPLEXENTITY_HPP
 #define COMPLEXENTITY_HPP

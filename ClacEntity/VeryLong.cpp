@@ -1,36 +1,35 @@
 /*! \file    VeryLong.cpp
-    \brief   Implementation of an arbitrary precision integer class.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-VeryLong integers are implemented as vectors of "long digits". Each long digit contains several
-(generally 16 or 32) bits; the exact number depends on the capacity of the system's primitive
-types. The intent of this design is to improve performance by allowing VeryLongs to calculate
-several bits at once and to decrease memory requirements by packing as much information as
-possible into a primitive type. I/O operations are somewhat inefficient since the conversion
-between a large base 10 number and its binary representation is awkward.
-
-This implementation uses a "signed magnitude" representation and not a two's complement
-representation. This is significant when individual bits are accessed, but should not be
-noticable for other, higher level operations. This implementation ensures that there is no
-negative zero. Thus two zero values generated in different ways will compare equal.
-
-TODO:
-
-+ The I/O operations should be modified so that they don't depend on ASCII and they should honor
-  formatting flags in the stream objects they are given. Also the handling of white space on
-  input should be done by the standard 'eatwhite' manipulator. Support for I/O in bases other
-  than 10 should be added.
-
-+ The multiplication code runs in O(n^2) where n is the number of digits in the two numbers.
-  This can be improved.
-
-+ The technique used to do division and modulus is a hack I worked up myself. It is probably
-  buggy and inefficient. I should probably implement "Algorithm D" in Knuth.
-
-+ The code should be reviewed for thread safety.
-
-+ Support should be added for overloaded bit manipulation operators.
-
+ *  \brief   Implementation of an arbitrary precision integer class.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ *
+ * VeryLong integers are implemented as vectors of "long digits". Each long digit contains
+ * several (generally 16 or 32) bits; the exact number depends on the capacity of the system's
+ * primitive types. The intent of this design is to improve performance by allowing VeryLongs to
+ * calculate several bits at once and to decrease memory requirements by packing as much
+ * information as possible into a primitive type. I/O operations are somewhat inefficient since
+ * the conversion between a large base 10 number and its binary representation is awkward.
+ *
+ * This implementation uses a "signed magnitude" representation and not a two's complement
+ * representation. This is significant when individual bits are accessed, but should not be
+ * noticable for other, higher level operations. This implementation ensures that there is no
+ * negative zero. Thus two zero values generated in different ways will compare equal.
+ *
+ * TODO:
+ *
+ * + The I/O operations should be modified so that they don't depend on ASCII and they should
+ *   honor formatting flags in the stream objects they are given. Also the handling of white
+ *   space on input should be done by the standard 'eatwhite' manipulator. Support for I/O in
+ *   bases other than 10 should be added.
+ *
+ * + The multiplication code runs in O(n^2) where n is the number of digits in the two numbers.
+ *   This can be improved.
+ *
+ * + The technique used to do division and modulus is a hack I worked up myself. It is probably
+ *   both buggy and inefficient. I should probably implement "Algorithm D" in Knuth.
+ *
+ * + The code should be reviewed for thread safety.
+ *
+ * + Support should be added for overloaded bit manipulation operators.
 */
 
 #include <algorithm>

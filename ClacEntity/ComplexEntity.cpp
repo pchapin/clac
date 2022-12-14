@@ -1,6 +1,6 @@
 /*! \file    ComplexEntity.cpp
  *  \brief   Implementation of the clac numeric type ComplexEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include <cmath>
@@ -12,6 +12,8 @@
 #include "Entities.hpp"
 #include "DisplayState.hpp"
 #include "support.hpp"
+
+using namespace std;
 
 static const std::complex< double > j( 0.0, 1.0 );
   // Square root of -1. (We are electrical engineers)
@@ -166,25 +168,25 @@ Entity *ComplexEntity::tan( ) const
 
 Entity *ComplexEntity::divide( const Entity *R ) const
 {
-    const ComplexEntity *right = dynamic_cast< const ComplexEntity * >( R );
+    const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
     return new ComplexEntity( value / right->value );
 }
 
 Entity *ComplexEntity::minus( const Entity *R ) const
 {
-    const ComplexEntity *right = dynamic_cast< const ComplexEntity * >( R );
+    const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
     return new ComplexEntity( value - right->value );
 }
 
 Entity *ComplexEntity::multiply( const Entity *R ) const
 {
-    const ComplexEntity *right = dynamic_cast< const ComplexEntity * >( R );
+    const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
     return new ComplexEntity( value * right->value );
 }
 
 Entity *ComplexEntity::plus( const Entity *R ) const
 {
-    const ComplexEntity *right = dynamic_cast< const ComplexEntity * >( R );
+    const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
     return new ComplexEntity( value + right->value );
 }
 

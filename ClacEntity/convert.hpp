@@ -1,8 +1,7 @@
 /*! \file    convert.hpp
-    \brief   Interface to the entity conversion table.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the entity conversion table.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef CONVERT_HPP
 #define CONVERT_HPP

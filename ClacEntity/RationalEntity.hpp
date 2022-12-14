@@ -1,8 +1,7 @@
 /*! \file    RationalEntity.hpp
-    \brief   Interface to the clac numeric type RationalEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the clac numeric type RationalEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef RATIONALENTITY_HPP
 #define RATIONALENTITY_HPP
@@ -13,7 +12,7 @@
 
 class RationalEntity : public Entity {
 public:
-    RationalEntity( const Rational< VeryLong > & );
+    RationalEntity( const Rational<VeryLong> & );
 
     virtual EntityType my_type( ) const;
     virtual std::string display( ) const;
@@ -60,7 +59,7 @@ public:
     virtual Entity *is_greaterorequal ( const Entity * ) const;
 
 private:
-    Rational< VeryLong > value;
+    Rational<VeryLong> value;
 
 };
 

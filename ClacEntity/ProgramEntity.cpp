@@ -1,6 +1,6 @@
 /*! \file    ProgramEntity.cpp
  *  \brief   Implementation of the clac numeric type ProgramEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include "Entities.hpp"

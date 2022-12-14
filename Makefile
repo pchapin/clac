@@ -29,13 +29,16 @@ components:	$(COMPONENTS)
 $(COMPONENTS):
 	$(MAKE) -C $@
 
+# In general, the engine depends on the entity library so build them in the right order.
+ClacEngine:	ClacEntity
+
 # Top-Level Rules and Dependencies
 ###################################
 
 %.o:	%.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-$(EXECUTABLE):	components $(OBJECTS)
+$(EXECUTABLE):	components $(OBJECTS) $(LIBENGINE) $(LIBENTITY)
 	$(CXX) $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LINKFLAGS) -o $@
 
 

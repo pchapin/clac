@@ -1,8 +1,7 @@
 /*! \file    FloatEntity.hpp
-    \brief   Interface to the clac numeric type FloatEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the clac numeric type FloatEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef FLOATENTITY_HPP
 #define FLOATENTITY_HPP

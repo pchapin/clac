@@ -1,8 +1,7 @@
 /*! \file    LabeledEntity.hpp
-    \brief   Interface to the clac numeric type LabeledEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the clac numeric type LabeledEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef LABELEDENTITY_HPP
 #define LABELEDENTITY_HPP

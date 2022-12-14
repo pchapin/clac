@@ -1,8 +1,7 @@
 /*! \file    ProgramEntity.hpp
-    \brief   Interface to the clac numeric type ProgramEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the clac numeric type ProgramEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef PROGRAMENTITY_HPP
 #define PROGRAMENTITY_HPP

@@ -1,10 +1,11 @@
 /*! \file    Entity.hpp
-    \brief   Interface to the abstract base class Entity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-There are 12 entity types all derived from the class defined here. They are binary, complex,
-directory, float, integer, labeled, list, matrix, program, rational, string, and vector.
-*/
+ *  \brief   Interface to the abstract base class Entity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ *
+ * There are 12 entity types all derived from the class defined here. They are binary (BIN),
+ * complex (CPX), directory (DIR), float (FLT), integer (INT), labeled (LBL), list (LST), matrix
+ * (MAT), program (PGM), rational (RAT), string (STR), and vector (VEC).
+ */
 
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
@@ -141,6 +142,6 @@ public:
     virtual long    file_size( ) const;
     virtual void    write( std::ofstream & ) const;
     static  Entity *read( std::ifstream & );
-  };
+};
 
 #endif

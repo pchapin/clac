@@ -7,9 +7,14 @@ C++ Style Guide
 This document describes the style used for the C++ code in the Clac project. This document is,
 of course, subject to discussion, change, and evolution.
 
-In this document "shall" is intended to define a requirement, "should" is intended to define a
-recommendation, and "may" is intended to define an option. Making exceptions to this style is
-acceptable; exceptional circumstances are common.
+The intent of this style guide is to promote a consistent, readible style, and to reduce the
+chances for errors. Exceptions to this style should be made with those primary goals in mind.
+Exceptions are expected and are not considered problematic, particularly if they enhance local
+readibility, unless the exceptions become commonplace. In that situation, either the code or the
+style guide should be reviewed and modified.
+
+In this document "shall" is intended to define a requirement of this guide, "should" is intended
+to define a recommendation, and "may" is intended to define an option.
 
 ## Naming
 
@@ -30,17 +35,18 @@ acceptable; exceptional circumstances are common.
   consisting of all lower case letters with a `_type` suffix. Multiple words in such names shall
   be separated by a single underscore character. For example: `size_type`.
  
- + Names of entities that are intended to extend or mimic the standard library should follow the
-   same naming convention as the standard library even if that would violate the above rules.
-   For example: `netbuff`.
++ Names of entities that are intended to extend or mimic the standard library should follow the
+  same naming convention as the standard library even if that would violate the above rules. For
+  example: `netbuff`.
 
-+  Names of constant objects and enumerators shall be given names using mixed case where the
-   first letter of each word in the name is uppercase and all other letters are lowercase.
-   Multiple words in such names shall be separated by a single underscore character. For
-   example: `Red_Light`, `Pi`.
-
-+ Macros, both object-like and function-like, shall consist entirely of uppercase letters.
++ Names of constant objects and enumerators shall consist entirely of upper case letters.
   Multiple words in such names shall be separated by a single underscore. For example:
+  `RED_LIGHT`, `PI`.
+
++ Macros, both object-like and function-like, should be avoided in favor of constant objects and
+  inline functions. However, if macros are used their names shall consist entirely of uppercase
+  letters. Multiple words in such names shall be separated by a single underscore. These rules
+  are intended to be the same as for constant objects and enumerators. For example:
   `BUFFER_SIZE`.
 
 + Abbreviations should be avoided in names except for certain very well known exceptions.
@@ -113,6 +119,18 @@ acceptable; exceptional circumstances are common.
 + The `else` of a conditional statement and `catch` clauses of exception handlers shall be the
   first non-white space character of a line (no preceeding '}').
   
+      try {
+          if( a < b ) {
+              // Do stuff...
+          }
+          else {
+              // Do other stuff...
+          }
+      }
+      catch( ... ) {
+          // Handle me!
+      }
+  
 + Function and method definitions shall be separated by two blank lines.
 
 + There should be no space between a unary operator and its operand.
@@ -131,6 +149,10 @@ acceptable; exceptional circumstances are common.
   rule also applies to function-like macros.
 
 + There should be no space after the reserved words `if`, `for`, or `while`.
+
++ There should be no space after '<' or before '>' in a template argument or paramter list.
+
+      template<typename T>
 
 + A source file shall be formatted assuming that a fixed width font is used. Alignment may be
   used between source lines to emphasize relationships between those lines even if doing so
@@ -193,14 +215,6 @@ acceptable; exceptional circumstances are common.
   Structures (as opposed to classes) may have public data members. Indeed, that is presumed to
   be the reason why a struct is being used.
 
-+ Inline methods should be defined outside the class definition. Class definitions should only
-  contain method declarations. RATIONALE: Although this is awkward at times, it is important to
-  separate the interface of a type from its internal structure. Making a method inline is an
-  implementation detail; it should not be part of a class's interface. However it is understood
-  that the syntactic overhead of defining an inline method outside the class definition,
-  particular in the case of template classes, is sometimes very high. In such a case, this rule
-  can be cautiously violated.
-  
 ## Documentation
 
 + Each source file shall have a comment header containing the name of the file, the author, and

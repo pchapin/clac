@@ -1,8 +1,7 @@
 /*! \file    support.hpp
-    \brief   Declarations of various support functions.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Declarations of various support functions.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef SUPPORT_HPP
 #define SUPPORT_HPP

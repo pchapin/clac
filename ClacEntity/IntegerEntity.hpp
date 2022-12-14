@@ -1,8 +1,7 @@
 /*! \file    IntegerEntity.hpp
-    \brief   Interface to the clac numeric type IntegerEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the clac numeric type IntegerEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef INTEGERENTITY_HPP
 #define INTEGERENTITY_HPP

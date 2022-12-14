@@ -1,6 +1,6 @@
 /*! \file    BinaryEntity.cpp
  *  \brief   Implementation of the clac numeric type BinaryEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  *
  * Objects of this class are unsigned integers which can be manipulated on a bitwise bases. The
  * current implementation allows for a maximum of 32 bits. The actual number of bits being used
@@ -14,7 +14,7 @@
 #include "DisplayState.hpp"
 #include "support.hpp"
 
-using std::unique_ptr;
+using namespace std;
 
 // Number of decimal digits required to display the binaries with bit counts from 1 to 32. This
 // is used in the display method. (currently not used)
@@ -265,7 +265,7 @@ Entity *BinaryEntity::neg( ) const
 
 Entity *BinaryEntity::divide( const Entity *R ) const
 {
-    const BinaryEntity *right = dynamic_cast< const BinaryEntity * >( R );
+    const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
     unsigned long new_value = value / right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
@@ -273,7 +273,7 @@ Entity *BinaryEntity::divide( const Entity *R ) const
 
 Entity *BinaryEntity::logical_and( const Entity *R ) const
 {
-    const BinaryEntity *right = dynamic_cast< const BinaryEntity * >( R );
+    const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
     unsigned long new_value = value & right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
@@ -281,7 +281,7 @@ Entity *BinaryEntity::logical_and( const Entity *R ) const
 
 Entity *BinaryEntity::logical_or( const Entity *R ) const
 {
-    const BinaryEntity *right = dynamic_cast< const BinaryEntity * >( R );
+    const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
     unsigned long new_value = value | right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
@@ -289,7 +289,7 @@ Entity *BinaryEntity::logical_or( const Entity *R ) const
 
 Entity *BinaryEntity::logical_xor( const Entity *R ) const
 {
-    const BinaryEntity *right = dynamic_cast< const BinaryEntity * >( R );
+    const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
     unsigned long new_value = value ^ right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
@@ -297,7 +297,7 @@ Entity *BinaryEntity::logical_xor( const Entity *R ) const
 
 Entity *BinaryEntity::minus( const Entity *R ) const
 {
-    const BinaryEntity *right = dynamic_cast< const BinaryEntity * >( R );
+    const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
     unsigned long new_value = value - right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
@@ -313,7 +313,7 @@ Entity *BinaryEntity::multiply( const Entity *R ) const
 
 Entity *BinaryEntity::plus( const Entity *R ) const
 {
-    const BinaryEntity *right = dynamic_cast< const BinaryEntity * >( R );
+    const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
     unsigned long new_value = value + right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
@@ -331,12 +331,12 @@ Entity *BinaryEntity::to_binary( ) const
 
 Entity *BinaryEntity::to_complex( ) const
 {
-    return new ComplexEntity( static_cast< double >( value ) );
+    return new ComplexEntity( static_cast<double>( value ) );
 }
 
 Entity *BinaryEntity::to_float( ) const
 {
-    return new FloatEntity( static_cast< double >( value ) );
+    return new FloatEntity( static_cast<double>( value ) );
 }
 
 Entity *BinaryEntity::to_integer( ) const

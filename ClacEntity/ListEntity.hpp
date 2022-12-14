@@ -1,8 +1,7 @@
 /*! \file    ListEntity.hpp
-    \brief   Interface to the clac numeric type ListEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the clac numeric type ListEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef LISTENTITY_HPP
 #define LISTENTITY_HPP
@@ -14,7 +13,7 @@
 class ListEntity : public Entity {
 public:
     ListEntity( ) { }
-    ListEntity( const std::list< Entity * > &incoming ) : value( incoming ) { }
+    ListEntity( const std::list<Entity *> &incoming ) : value( incoming ) { }
    ~ListEntity( );
 
     virtual EntityType my_type( ) const;
@@ -24,7 +23,7 @@ public:
     virtual Entity *plus( const Entity * ) const;
 
 private:
-    std::list< Entity * > value;
+    std::list<Entity *> value;
 };
 
 #endif

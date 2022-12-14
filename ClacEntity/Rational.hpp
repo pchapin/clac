@@ -1,10 +1,10 @@
 /*! \file    Rational.hpp
-    \brief   Rational number template.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-Rational is a template that uses any signed integral type to implement rational numbers
-(fractions).
-*/
+ *  \brief   Rational number template.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ *
+ * Rational is a template that uses any signed integral type to implement rational numbers
+ * (fractions).
+ */
 
 #ifndef RATIONAL_HPP
 #define RATIONAL_HPP

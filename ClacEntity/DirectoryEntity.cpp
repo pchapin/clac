@@ -1,13 +1,13 @@
 /*! \file    DirectoryEntity.cpp
  *  \brief   Implementation of the clac numeric type DirectoryEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include "Entities.hpp"
 
 DirectoryEntity::DirectoryEntity( const std::map< std::string, Entity * > &existing )
 {
-    std::map< std::string, Entity * >::const_iterator p;
+    std::map<std::string, Entity *>::const_iterator p;
 
     try {
         for( p = existing.begin( ); p != existing.end( ); ++p ) {
@@ -25,7 +25,7 @@ DirectoryEntity::DirectoryEntity( const std::map< std::string, Entity * > &exist
 
 DirectoryEntity::~DirectoryEntity( )
 {
-    std::map< std::string, Entity * >::iterator p;
+    std::map<std::string, Entity *>::iterator p;
     
     for( p = value.begin( ); p != value.end( ); ++p ) {
         delete p->second;

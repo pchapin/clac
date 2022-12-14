@@ -1,8 +1,7 @@
 /*! \file    DisplayState.cpp
-    \brief   Implementation of clac's display state variables.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Implementation of clac's display state variables.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #include "DisplayState.hpp"
 

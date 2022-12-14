@@ -1,6 +1,6 @@
 /*! \file    RationalEntity.cpp
  *  \brief   Implementation of the clac numeric type RationalEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include <memory>
@@ -9,12 +9,12 @@
 
 #include "Entities.hpp"
 
-using std::unique_ptr;
+using namespace std;
 
 //
 // The constructor allows a rational entity to be initialized with a Rational object.
 //
-RationalEntity::RationalEntity( const Rational< VeryLong > &number ) :
+RationalEntity::RationalEntity( const Rational<VeryLong> &number ) :
   value( number )
   {  }
 
@@ -24,7 +24,7 @@ RationalEntity::RationalEntity( const Rational< VeryLong > &number ) :
 // more work is needed before it is really ready to use. The current version of display is very
 // lame so this work should be done eventually.
 
-static char *format_rational( const Rational< VeryLong > &number )
+static char *format_rational( const Rational<VeryLong> &number )
 {
     // Make sure we have a buffer big enough to hold whatever comes from format_integer.
     static char  buffer[2 * format_size + 2 + 1];
@@ -69,27 +69,27 @@ Entity *RationalEntity::abs( ) const
     VeryLong new_numerator = value.get_numerator( );
     if( new_numerator < VeryLong::zero ) new_numerator = -new_numerator;
 
-    Rational< VeryLong > new_value( new_numerator, value.get_denominator( ) );
+    Rational<VeryLong> new_value( new_numerator, value.get_denominator( ) );
     return new RationalEntity( new_value );
 }
 
 Entity *RationalEntity::acos( ) const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->acos( );
 }
 
 
 Entity *RationalEntity::asin( ) const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return  converted->asin( );
 }
 
 
 Entity *RationalEntity::atan( ) const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->atan( );
 }
 
@@ -102,28 +102,28 @@ Entity *RationalEntity::complex_conjugate( ) const
 
 Entity *RationalEntity::cos( ) const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->cos( );
 }
 
 
 Entity *RationalEntity::exp() const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->exp( );
 }
 
 
 Entity *RationalEntity::exp10( ) const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->exp10( );
 }
 
 
 Entity *RationalEntity::imaginary_part( ) const
 {
-    Rational< VeryLong > new_value( VeryLong::zero, VeryLong::one );
+    Rational<VeryLong> new_value( VeryLong::zero, VeryLong::one );
     return new RationalEntity( new_value );
 }
 
@@ -133,28 +133,28 @@ Entity *RationalEntity::inv( ) const
     if( value.get_numerator( ) == VeryLong::zero )
         throw Error( "Can't divide by zero" );
 
-    Rational< VeryLong > new_value( value.get_denominator( ), value.get_numerator( ) );
+    Rational<VeryLong> new_value( value.get_denominator( ), value.get_numerator( ) );
     return new RationalEntity( new_value );
 }
 
 
 Entity *RationalEntity::ln( ) const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->ln( );
 }
 
 
 Entity *RationalEntity::log( ) const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->log( );
 }
 
 
 Entity *RationalEntity::neg( ) const
 {
-    Rational< VeryLong > new_value( -value.get_numerator( ), value.get_denominator( ) );
+    Rational<VeryLong> new_value( -value.get_numerator( ), value.get_denominator( ) );
     return new RationalEntity( new_value );
 }
 
@@ -192,7 +192,7 @@ Entity *RationalEntity::sq( ) const
 
     new_numerator *= value.get_numerator( );
     new_denominator *= value.get_denominator( );
-    Rational< VeryLong > new_value( new_numerator, new_denominator );
+    Rational<VeryLong> new_value( new_numerator, new_denominator );
 
     return new RationalEntity( new_value );
 }
@@ -200,14 +200,14 @@ Entity *RationalEntity::sq( ) const
 
 Entity *RationalEntity::sqrt( ) const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->sqrt( );
 }
 
 
 Entity *RationalEntity::tan( ) const
 {
-    unique_ptr< FloatEntity > converted( static_cast< FloatEntity * >( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->tan( );
 }
 
@@ -217,25 +217,25 @@ Entity *RationalEntity::tan( ) const
 
 Entity *RationalEntity::plus( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
     return new RationalEntity( value + right->value );
 }
 
 Entity *RationalEntity::minus( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
     return new RationalEntity( value - right->value );
 }
 
 Entity *RationalEntity::multiply( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
     return new RationalEntity( value * right->value );
 }
 
 Entity *RationalEntity::divide( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
     return new RationalEntity( value / right->value );
 }
 
@@ -252,38 +252,38 @@ Entity *RationalEntity::power( const Entity *R ) const
 
 Entity *RationalEntity::is_equal( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
-    return new IntegerEntity( static_cast< VeryLong >( value == right->value ) );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
+    return new IntegerEntity( static_cast<VeryLong>( value == right->value ) );
 }
 
 Entity *RationalEntity::is_notequal( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
-    return new IntegerEntity( static_cast< VeryLong >( value != right->value ) );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
+    return new IntegerEntity( static_cast<VeryLong>( value != right->value ) );
 }
 
 Entity *RationalEntity::is_less( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
-    return new IntegerEntity( static_cast< VeryLong >( value < right->value ) );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
+    return new IntegerEntity( static_cast<VeryLong>( value < right->value ) );
 }
 
 Entity *RationalEntity::is_lessorequal( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
-    return new IntegerEntity( static_cast< VeryLong >( value <= right->value ) );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
+    return new IntegerEntity( static_cast<VeryLong>( value <= right->value ) );
 }
 
 Entity *RationalEntity::is_greater( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
-    return new IntegerEntity( static_cast< VeryLong >( value > right->value ) );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
+    return new IntegerEntity( static_cast<VeryLong>( value > right->value ) );
 }
 
 Entity *RationalEntity::is_greaterorequal( const Entity *R ) const
 {
-    const RationalEntity *right = dynamic_cast< const RationalEntity * >( R );
-    return new IntegerEntity( static_cast< VeryLong >( value >= right->value ) );
+    const RationalEntity *right = dynamic_cast<const RationalEntity *>( R );
+    return new IntegerEntity( static_cast<VeryLong>( value >= right->value ) );
 }
 
 

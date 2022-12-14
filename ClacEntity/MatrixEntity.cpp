@@ -1,14 +1,14 @@
 /*! \file    MatrixEntity.cpp
  *  \brief   Implementation of the clac numeric type MatrixEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include "Entities.hpp"
 
 MatrixEntity::~MatrixEntity( )
 {
-    std::vector< row_type >::iterator p1;
-    std::vector< Entity * >::iterator p2;
+    std::vector<row_type>::iterator p1;
+    std::vector<Entity *>::iterator p2;
 
     for( p1 = value.begin( ); p1 != value.end( ); ++p1 ) {
         for( p2 = p1->begin( ); p2 != p1->end( ); ++p2 ) {

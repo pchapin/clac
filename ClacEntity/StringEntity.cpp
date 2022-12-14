@@ -1,6 +1,6 @@
 /*! \file    StringEntity.cpp
  *  \brief   Implementation of the clac numeric type StringEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include "Entities.hpp"
@@ -22,7 +22,7 @@ Entity *StringEntity::duplicate( ) const
 
 Entity *StringEntity::plus( const Entity *R ) const
 {
-    const StringEntity *right = dynamic_cast< const StringEntity * >( R );
+    const StringEntity *right = dynamic_cast<const StringEntity *>( R );
     return new StringEntity( value + right->value );
 }
 

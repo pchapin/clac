@@ -1,6 +1,6 @@
 /*! \file    support.cpp
  *  \brief   Definitions of various support functions.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include <cctype>

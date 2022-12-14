@@ -1,7 +1,6 @@
 /*! \file    BinaryEntity.hpp
-    \brief   Interface to the clac numeric type BinaryEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
+ *  \brief   Interface to the clac numeric type BinaryEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
 */
 
 #ifndef BINARYENTITY_HPP
@@ -56,6 +55,6 @@ private:
     unsigned long value;  // The bits themselves.
     void normalize( );    // Function to zero out most significant bits.
 
-  };
+};
 
 #endif

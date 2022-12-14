@@ -1,6 +1,6 @@
 /*! \file    convert.cpp
  *  \brief   Type conversion functions.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include <cmath>
@@ -18,17 +18,17 @@ using namespace std;
 // FINISH ME! (When all the necessary conversion functions are defined).
 #define E &Entity
 Entity *( Entity::*convert_table[type_count][type_count] )( ) const = {
-//           Bin            Cpx            Dir   Flt            Int            Lbl   Lst   Mat   Prg   Rat             Str           Vec
-/* Bin */  { E::to_binary,  E::to_complex, NULL, E::to_float,   E::to_integer, NULL, NULL, NULL, NULL, NULL,           NULL,         NULL },
-/* Cpx */  { E::to_complex, E::to_complex, NULL, E::to_complex, NULL,          NULL, NULL, NULL, NULL, NULL,           NULL,         NULL },
-/* Dir */  { NULL,          NULL,          NULL, NULL,          NULL,          NULL, NULL, NULL, NULL, NULL,           NULL,         NULL },
-/* Flt */  { E::to_float,   E::to_complex, NULL, E::to_float,   E::to_float,   NULL, NULL, NULL, NULL, E::to_float,    NULL,         NULL },
-/* Int */  { E::to_integer, NULL,          NULL, E::to_float,   E::to_integer, NULL, NULL, NULL, NULL, NULL,           NULL,         NULL },
-/* Lbl */  { NULL,          NULL,          NULL, NULL,          NULL,          NULL, NULL, NULL, NULL, NULL,           NULL,         NULL },
-/* Lst */  { NULL,          NULL,          NULL, NULL,          NULL,          NULL, NULL, NULL, NULL, NULL,           NULL,         NULL },
-/* Mat */  { NULL,          NULL,          NULL, NULL,          NULL,          NULL, NULL, NULL, NULL, NULL,           NULL,         NULL },
-/* Prg */  { NULL,          NULL,          NULL, NULL,          NULL,          NULL, NULL, NULL, NULL, NULL,           NULL,         NULL },
-/* Rat */  { NULL,          NULL,          NULL, E::to_float,   NULL,          NULL, NULL, NULL, NULL, E::to_rational, NULL,         NULL },
-/* Str */  { NULL,          NULL,          NULL, NULL,          NULL,          NULL, NULL, NULL, NULL, NULL,           E::to_string, NULL },
-/* Vec */  { NULL,          NULL,          NULL, NULL,          NULL,          NULL, NULL, NULL, NULL, NULL,           NULL,         NULL }
+//           Bin            Cpx            Dir      Flt            Int            Lbl      Lst      Mat      Prg      Rat             Str           Vec
+/* Bin */  { E::to_binary,  E::to_complex, nullptr, E::to_float,   E::to_integer, nullptr, nullptr, nullptr, nullptr, nullptr,        nullptr,      nullptr },
+/* Cpx */  { E::to_complex, E::to_complex, nullptr, E::to_complex, nullptr,       nullptr, nullptr, nullptr, nullptr, nullptr,        nullptr,      nullptr },
+/* Dir */  { nullptr,       nullptr,       nullptr, nullptr,       nullptr,       nullptr, nullptr, nullptr, nullptr, nullptr,        nullptr,      nullptr },
+/* Flt */  { E::to_float,   E::to_complex, nullptr, E::to_float,   E::to_float,   nullptr, nullptr, nullptr, nullptr, E::to_float,    nullptr,      nullptr },
+/* Int */  { E::to_integer, nullptr,       nullptr, E::to_float,   E::to_integer, nullptr, nullptr, nullptr, nullptr, nullptr,        nullptr,      nullptr },
+/* Lbl */  { nullptr,       nullptr,       nullptr, nullptr,       nullptr,       nullptr, nullptr, nullptr, nullptr, nullptr,        nullptr,      nullptr },
+/* Lst */  { nullptr,       nullptr,       nullptr, nullptr,       nullptr,       nullptr, nullptr, nullptr, nullptr, nullptr,        nullptr,      nullptr },
+/* Mat */  { nullptr,       nullptr,       nullptr, nullptr,       nullptr,       nullptr, nullptr, nullptr, nullptr, nullptr,        nullptr,      nullptr },
+/* Prg */  { nullptr,       nullptr,       nullptr, nullptr,       nullptr,       nullptr, nullptr, nullptr, nullptr, nullptr,        nullptr,      nullptr },
+/* Rat */  { nullptr,       nullptr,       nullptr, E::to_float,   nullptr,       nullptr, nullptr, nullptr, nullptr, E::to_rational, nullptr,      nullptr },
+/* Str */  { nullptr,       nullptr,       nullptr, nullptr,       nullptr,       nullptr, nullptr, nullptr, nullptr, nullptr,        E::to_string, nullptr },
+/* Vec */  { nullptr,       nullptr,       nullptr, nullptr,       nullptr,       nullptr, nullptr, nullptr, nullptr, nullptr,        nullptr,      nullptr }
 };

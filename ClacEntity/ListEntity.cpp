@@ -1,6 +1,6 @@
 /*! \file    ListEntity.cpp
  *  \brief   Implementation of the clac numeric type ListEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include <memory>
@@ -8,7 +8,7 @@
 
 ListEntity::~ListEntity( )
 {
-    std::list< Entity * >::iterator p;
+    std::list<Entity *>::iterator p;
     for( p = value.begin( ); p != value.end( ); ++p ) {
         delete *p;
     }
@@ -22,7 +22,7 @@ EntityType ListEntity::my_type( ) const
 std::string ListEntity::display( ) const
 {
     std::string workspace = "{ ";
-    std::list< Entity * >::const_iterator p;
+    std::list<Entity *>::const_iterator p;
 
     for( p = value.begin( ); p != value.end( ); ++p ) {
         workspace.append( ( *p )->display( ) );
@@ -36,8 +36,8 @@ std::string ListEntity::display( ) const
 
 Entity *ListEntity::duplicate( ) const
 {
-    std::list< Entity * > new_value;
-    std::list< Entity * >::const_iterator p;
+    std::list<Entity *> new_value;
+    std::list<Entity *>::const_iterator p;
 
     for( p = value.begin( ); p != value.end( ); ++p ) {
 
@@ -57,9 +57,9 @@ Entity *ListEntity::duplicate( ) const
 Entity *ListEntity::plus( const Entity *R ) const
 {
     const ListEntity *right = dynamic_cast< const ListEntity * >( R );
-    std::list< Entity * >::const_iterator p;
+    std::list<Entity *>::const_iterator p;
 
-    std::unique_ptr< ListEntity > new_list( new ListEntity( value ) );
+    std::unique_ptr<ListEntity> new_list( new ListEntity( value ) );
     for( p = right->value.begin( ); p != right->value.end( ); ++p ) {
         new_list->value.push_back( *p );
     }

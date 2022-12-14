@@ -1,8 +1,7 @@
 /*! \file    VectorEntity.hpp
-    \brief   Interface to the clac numeric type VectorEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the clac numeric type VectorEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef VECTORENTITY_HPP
 #define VECTORENTITY_HPP

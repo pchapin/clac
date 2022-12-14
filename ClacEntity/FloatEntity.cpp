@@ -1,6 +1,6 @@
 /*! \file    FloatEntity.cpp
  *  \brief   Implementation of the clac numeric type FloatEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  *
  * TODO:
  *

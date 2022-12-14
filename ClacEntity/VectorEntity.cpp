@@ -1,13 +1,13 @@
 /*! \file    VectorEntity.cpp
  *  \brief   Implementation of the clac numeric type VectorEntity.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  */
 
 #include "Entities.hpp"
 
 VectorEntity::~VectorEntity( )
 {
-    std::vector< Entity * >::iterator p;
+    std::vector<Entity *>::iterator p;
 
     for( p = value.begin( ); p != value.end( ); ++p ) {
         delete *p;

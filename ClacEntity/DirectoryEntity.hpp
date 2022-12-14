@@ -1,8 +1,7 @@
 /*! \file    DirectoryEntity.hpp
-    \brief   Interface to the clac numeric type DirectoryEntity.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-*/
+ *  \brief   Interface to the clac numeric type DirectoryEntity.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #ifndef DIRECTORYENTITY_HPP
 #define DIRECTORYENTITY_HPP
@@ -22,8 +21,8 @@ public:
     virtual Entity *duplicate( ) const;
 
 private:
-    DirectoryEntity( const std::map< std::string, Entity * > &existing );
-    std::map< std::string, Entity * > value;
+    DirectoryEntity( const std::map<std::string, Entity *> &existing );
+    std::map<std::string, Entity *> value;
 };
 
 #endif

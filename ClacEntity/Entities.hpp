@@ -1,8 +1,8 @@
 /*! \file    Entities.cpp
  *  \brief   Master header that draws in all Entity headers.
- *  \author  Peter C. Chapin <chapinp@acm.org>
+ *  \author  Peter Chapin <chapinp@proton.me>
  *
- * This header is useful because each of the *Entity.cpp files needs to include all Entity
+ * This header is useful because each of the Entity.cpp files needs to include all Entity
  * headers. Why is that? It's because of the conversion methods in every Entity class (there are
  * methods that target each Entity type).
  *

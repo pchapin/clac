@@ -1,16 +1,16 @@
 /*! \file    DisplayState.hpp
-    \brief   Interface to clac's display state variables.
-    \author  Peter C. Chapin <chapinp@acm.org>
-
-Class DisplayState is a wrapper around all of clac's display state variables. Such variables
-specify how certain objects are to be displayed. Having all the display state variables in one
-place like this makes it easier to keep track of them.
-
-This class manages access to the display state variables and forces them to be refered to only
-with qualified names. This helps to organize them. It might be better to use a namespace for
-this purpose. However, this class was originally designed before namespaces were a part of C++
-and we don't see any reason to change this design now.
-*/
+ *  \brief   Interface to clac's display state variables.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ *
+ * Class DisplayState is a wrapper around all of clac's display state variables. Such variables
+ * specify how certain objects are to be displayed. Having all the display state variables in
+ * one place like this makes it easier to keep track of them.
+ *
+ * This class manages access to the display state variables and forces them to be refered to
+ * only with qualified names. This helps to organize them. It might be better to use a namespace
+ * for this purpose. However, this class was originally designed before namespaces were a part
+ * of C++ and we don't see any reason to change this design now.
+ */
 
 #ifndef DISPLAYSTATE_HPP
 #define DISPLAYSTATE_HPP
