@@ -9,7 +9,7 @@
 Stack::Stack( )
 {
     for( size_t i = 0; i < STACK_SIZE; i++ ) {
-        data[i] = NULL;
+        data[i] = nullptr;
     }
 }
 
@@ -40,14 +40,14 @@ Entity *Stack::pop( )
     for( size_t i = 0; i < STACK_SIZE-1; i++ ) {
         data[i] = data[i+1];
     }
-    data[STACK_SIZE-1] = NULL;
+    data[STACK_SIZE-1] = nullptr;
     return return_value;
 }
 
 
 Entity *Stack::get( const VeryLong &index )
 {
-    Entity *return_value = NULL;
+    Entity *return_value = nullptr;
 
     if( index < STACK_SIZE ) {
         return_value = data[index.to_long( )];
@@ -66,9 +66,9 @@ void Stack::put( Entity *new_object )
 void Stack::clear( )         // Drop everything from the stack.
 {
     size_t i;
-    for( i = 0; i <= STACK_SIZE && data[i] != NULL; i++ ) {
+    for( i = 0; i <= STACK_SIZE && data[i] != nullptr; i++ ) {
         delete data[i];
-        data[i] = NULL;
+        data[i] = nullptr;
     }
 }
 
@@ -76,7 +76,7 @@ void Stack::clear( )         // Drop everything from the stack.
 void Stack::drop( )           // Discard level 1 of the stack.
 {
     Entity *temp = pop( );    // pop item off of the stack.
-    if( temp == NULL )
+    if( temp == nullptr )
         error_message( "Can't drop from an empty stack" );
     delete temp;
 }
@@ -86,7 +86,7 @@ size_t Stack::height( )  // Depth of the stack.
 {
     size_t C = 0;
     for( size_t i = 0; i < STACK_SIZE-1; i++ ) {
-        if( data[i] != NULL )
+        if( data[i] != nullptr )
             C++;
     }
     return C;
@@ -127,7 +127,7 @@ void Stack::roll_up( const VeryLong &C )
 
 void Stack::rotate( )    // Perform a 3 Roll_Up.
 {
-    if( data[0] != NULL && data[1] != NULL && data[2] != NULL ) {
+    if( data[0] != nullptr && data[1] != nullptr && data[2] != nullptr ) {
         Entity *temp = data[2];
         data[2] = data[1];
         data[1] = data[0];
@@ -141,7 +141,7 @@ void Stack::rotate( )    // Perform a 3 Roll_Up.
 
 void Stack::swap( )    // Perform a swap of levels 1 and 2.
 {
-    if( data[0] != NULL && data[1] != NULL ) {
+    if( data[0] != nullptr && data[1] != nullptr ) {
         Entity *temp = data[0];
         data[0] = data[1];
         data[1] = temp;

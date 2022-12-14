@@ -110,7 +110,7 @@ static void do_unary( Stack &the_stack, Entity *(Entity::*unary_operation)( ) co
     Entity *thing = the_stack.get( 0 );
 
     // If it didn't work, we have an error!
-    if( thing == NULL ) underflow( );
+    if( thing == nullptr ) underflow( );
     else {
         // Do the unary operation. If it works, we will get a pointer to a new object.
         Entity *new_thing = ( thing->*unary_operation )( );
@@ -123,12 +123,12 @@ static void do_binary( Stack &the_stack, Entity *(Entity::*binary_operation)( co
     Entity *left  = the_stack.get( 1 );
     Entity *right = the_stack.get( 0 );
 
-    if( left == NULL || right == NULL ) underflow( );
+    if( left == nullptr || right == nullptr ) underflow( );
     else {
         Entity *(Entity::*conversion)( ) const =
             convert_table[left->my_type( )][right->my_type( )];
 
-        if( conversion == NULL ) {
+        if( conversion == nullptr ) {
             error_message( "Required implicit conversion not implemented!" );
             return;
         }
@@ -177,7 +177,7 @@ static BuiltinBinary binary_words[] = {
     { "<=",     &Entity::is_lessorequal    },
     { "mod",    &Entity::modulo            },
     { "^",      &Entity::power             },
-    { NULL,      NULL                      }
+    { nullptr,   nullptr                   }
 };
 
 static BuiltinUnary unary_words[] = {
@@ -210,7 +210,7 @@ static BuiltinUnary unary_words[] = {
     { ">mat",   &Entity::to_matrix         },
     { ">rat",   &Entity::to_rational       },
     { ">str",   &Entity::to_string         },
-    { NULL,      NULL                      }
+    { nullptr,   nullptr                   }
 };
 
 static BuiltinAction action_words[] = {
@@ -258,20 +258,20 @@ static BuiltinAction action_words[] = {
     { "off",    do_off },
     { "quit",   do_off },
 
-    { NULL, NULL }
+    { nullptr,  nullptr }
 };
 
 static bool process_binary( Stack &the_stack, const string &word_buffer )
 {
     // Scan the list of builtin binary words.
     BuiltinBinary *bin_op = binary_words;
-    while( bin_op->word != NULL ) {
+    while( bin_op->word != nullptr ) {
         if( bin_op->word == word_buffer ) break;
         bin_op++;
     }
 
     // If we found it, do the operation.
-    if( bin_op->word != NULL ) {
+    if( bin_op->word != nullptr ) {
         do_binary( the_stack, bin_op->binary_operation );
         return true;
     }
@@ -282,13 +282,13 @@ static bool process_unary( Stack &the_stack, const string &word_buffer )
 {
     // Scan the list of built in unary words.
     BuiltinUnary *unary_op = unary_words;
-    while( unary_op->word != NULL ) {
+    while( unary_op->word != nullptr ) {
         if( unary_op->word == word_buffer ) break;
         unary_op++;
     }
 
     // If we found it, do the operation.
-    if( unary_op->word != NULL ) {
+    if( unary_op->word != nullptr ) {
         do_unary( the_stack, unary_op->unary_operation );
         return true;
     }
@@ -299,13 +299,13 @@ static bool process_action( Stack &the_stack, const string &word_buffer )
 {
     // Scan the list of builtin action words.
     BuiltinAction *action_op = action_words;
-    while( action_op->word != NULL ) {
+    while( action_op->word != nullptr ) {
         if( action_op->word == word_buffer ) break;
         action_op++;
     }
 
     // If we found it, do the operation.
-    if( action_op->word != NULL ) {
+    if( action_op->word != nullptr ) {
         action_op->operation( the_stack );
         return true;
     }
@@ -346,7 +346,7 @@ bool process_words( )
 
             StringStream stream( new_word );
             Entity *new_object = get_entity( stream );
-            if( new_object != NULL )
+            if( new_object != nullptr )
                 global::the_stack( ).push( new_object );
         }
         catch( const char *the_message ) {

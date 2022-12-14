@@ -118,14 +118,14 @@ Entity *ComplexEntity::ln( ) const
 {
     // TODO: Implement me!
     throw "ComplexEntity::ln not implemented!";
-    return NULL;
+    return nullptr;
 }
 
 Entity *ComplexEntity::log( ) const
 {
     // TODO: Implement me!
     throw "ComplexEntity::log not implemented!";
-    return NULL;
+    return nullptr;
 }
 
 Entity *ComplexEntity::neg( ) const
@@ -142,7 +142,7 @@ Entity *ComplexEntity::sign( ) const
 {
     // TODO: Implement me!
     throw "ComplexEntity::sign not implemented!";
-    return NULL;
+    return nullptr;
 }
 
 Entity *ComplexEntity::sin( ) const
@@ -192,7 +192,7 @@ Entity *ComplexEntity::power( const Entity *R ) const
 {
     // TODO: Implement me!
     throw "ComplexEntity::power not implemented!";
-    return NULL;
+    return nullptr;
 }
 
 

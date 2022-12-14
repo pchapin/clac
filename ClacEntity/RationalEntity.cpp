@@ -243,7 +243,7 @@ Entity *RationalEntity::power( const Entity *R ) const
 {
     // TODO: Implement me!
     throw "RationalEntity::power not implemented!";
-    return NULL;
+    return nullptr;
 }
 
 //

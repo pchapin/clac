@@ -45,11 +45,11 @@ static StringEntity   *get_string  ( const string &s );
 static bool is_special_word( const string &word )
 {
     static const char * const special_words[] = {
-        "pi", "e", "j", "i", NULL
+        "pi", "e", "j", "i", nullptr
     };
 
     const char * const *current_word = special_words;
-    while( *current_word != NULL ) {
+    while( *current_word != nullptr ) {
         if( word == *current_word ) return true;
         current_word++;
     }
@@ -59,7 +59,7 @@ static bool is_special_word( const string &word )
 
 static Entity *get_special_word( const string &word )
 {
-    Entity *result = NULL;
+    Entity *result = nullptr;
     if( word == "pi" ) {
         result = new FloatEntity( 3.141592653589793238462643 );
     }
@@ -79,12 +79,12 @@ static Entity *get_special_word( const string &word )
 /*!
  * The following function returns a pointer to a newly constructed Entity formed by the given
  * word. Since some entities require several words to be read from the input stream, this
- * function will read additional words as needed. It returns NULL if it can't form a valid
+ * function will read additional words as needed. It returns nullptr if it can't form a valid
  * Entity.
  */
 Entity *get_entity( WordStream &word_source )
 {
-    Entity *return_value = NULL;
+    Entity *return_value = nullptr;
     string word = word_source.next_word( );
 
     switch( word[0] ) {
@@ -123,7 +123,7 @@ Entity *get_entity( WordStream &word_source )
                 return_value = get_string( word );
             }
 // [This code pertains to the handling of directory entries... currently not implemented]
-//            else if( ( item = global::get_root( ).lookup( word ) ) != NULL ) {
+//            else if( ( item = global::get_root( ).lookup( word ) ) != nullptr ) {
 //                Entity *directory_element = *item;
 //                return_value = directory_element->duplicate( );
 //            }
@@ -201,7 +201,7 @@ RationalEntity *get_rational( const string &word )
     // Split off the top and bottom parts of the rational, etc...
     // TODO: Converting the return value of c_str() to char* is a hack. This should be rewritten in a better way.
     char *numerator   = strtok( const_cast<char *>(workspace.c_str( )), "/" );
-    char *denominator = strtok( NULL, "/" );
+    char *denominator = strtok( nullptr, "/" );
 
     VeryLong vl_numerator( numerator );
     VeryLong vl_denominator( denominator );
@@ -224,7 +224,7 @@ StringEntity *get_string( const string &word )
     // Get rid of quotation marks if there are any.
     if( workspace[0] == '"' ) {
         workspace = workspace.substr( 1 );
-        if( ( end_pointer = strchr( workspace.c_str( ), '"' ) ) != NULL )
+        if( ( end_pointer = strchr( workspace.c_str( ), '"' ) ) != nullptr )
             workspace = workspace.substr(0, workspace.length( ) - 1 );
     }
 
@@ -242,7 +242,7 @@ ComplexEntity *get_complex( const string &word )
     char working_buffer[128+1];
 
     strcpy( working_buffer, word.c_str( ) );
-    while( strchr( working_buffer, ')' ) == NULL ) {
+    while( strchr( working_buffer, ')' ) == nullptr ) {
         string word_buffer;
 
         word_buffer = global::word_source( ).next_word( );
@@ -251,18 +251,18 @@ ComplexEntity *get_complex( const string &word )
     }
     if( !is_complex( working_buffer ) ) {
         error_message( "%s is an invalid complex number", working_buffer );
-        return NULL;
+        return nullptr;
     }
     int format_flag = 1;              // Check for polar or rectangular mode.
-    if( strchr( working_buffer, '@' ) != NULL )
+    if( strchr( working_buffer, '@' ) != nullptr )
         format_flag = -1;
 
     // Scan working_buffer for anything but these 5 characters.
     char *number = strtok( working_buffer, "(), @" );
 
     sscanf( number, "%lf", &first_part );
-    number = strtok( NULL, "(), @" );
-    if( number != NULL )
+    number = strtok( nullptr, "(), @" );
+    if( number != nullptr )
         sscanf( number, "%lf", &second_part );
     if( format_flag == 1 )
         return new ComplexEntity( first_part, second_part );
@@ -352,7 +352,7 @@ BinaryEntity *get_binary( const string &word )
     }
     if( error ) {
         error_message( "%s is not a legal binary in the selected base", word_buffer.c_str( ) );
-        return NULL;
+        return nullptr;
     }
     else
         return new BinaryEntity( value );
@@ -367,8 +367,8 @@ ListEntity *get_list( const string &word )
     string      workspace( word );
     string      word_buffer;
     ListEntity *new_object =  new ListEntity;
-    if( new_object == NULL )
-        return NULL;
+    if( new_object == nullptr )
+        return nullptr;
 
     workspace = workspace.substr( 1 );
     if( workspace.length( ) == 0 )
@@ -379,7 +379,7 @@ ListEntity *get_list( const string &word )
     while( word_buffer[0] != '}' ) {
         StringStream stream( word_buffer );
         Entity *list_element = get_entity( stream );
-        if( list_element != NULL )
+        if( list_element != nullptr )
             new_object->plus( list_element );
         word_buffer = global::word_source( ).next_word( );
     }
@@ -398,8 +398,8 @@ MatrixEntity *get_matrix( const string &word )
     bool   in_row       = false;
 
     MatrixEntity *new_object =  new MatrixEntity;
-    if( new_object == NULL )
-        return NULL;
+    if( new_object == nullptr )
+        return nullptr;
 
     workspace = workspace.substr( 1 );
     if( workspace.length( ) == 0 )
@@ -423,7 +423,7 @@ MatrixEntity *get_matrix( const string &word )
 // [The Matrix implementation is not mature enough to support adding items to a matrix.]
 //            StringStream stream( word_buffer );
 //            Entity *matrix_element = get_entity( stream );
-//            if( matrix_element != NULL )
+//            if( matrix_element != nullptr )
 //                new_object->install( matrix_element, row_count, column_count++ );
         }
         word_buffer = global::word_source( ).next_word( );

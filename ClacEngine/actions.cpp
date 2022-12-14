@@ -71,11 +71,11 @@ static VeryLong pop_int( Stack &the_stack )
     VeryLong return_value;
 
     Entity *temp = the_stack.pop( );
-    if( temp == NULL )
+    if( temp == nullptr )
         error_message( "Too few arguments" );
     else {
         IntegerEntity *integer_temp = static_cast<IntegerEntity *>( temp->to_integer( ) );
-        if( integer_temp == NULL ) {
+        if( integer_temp == nullptr ) {
             error_message( "Integer argument expected" );
             the_stack.push( temp );
         }
@@ -131,10 +131,10 @@ void do_dropn( Stack &the_stack )
 void do_dup( Stack &the_stack )
 {
     Entity *new_copy = the_stack.get( 0 );
-    if( new_copy != NULL ) {
+    if( new_copy != nullptr ) {
         new_copy = new_copy->duplicate( );
 
-        if( new_copy != NULL )
+        if( new_copy != nullptr )
             the_stack.push( new_copy );
     }
 }
@@ -147,10 +147,10 @@ void do_dupn( Stack &the_stack )
     if( count == 0 ) return;
     for( VeryLong i = 0; i < count; ++i ) {
         Entity *new_copy = the_stack.get( count - 1 );
-        if( new_copy != NULL ) {
+        if( new_copy != nullptr ) {
             new_copy = new_copy->duplicate( );
 
-            if( new_copy != NULL )
+            if( new_copy != nullptr )
                 the_stack.push( new_copy );
         }
     }
@@ -171,19 +171,19 @@ void do_eval( Stack &the_stack )
 {
     Entity *temp = the_stack.pop( );
 
-    if( temp == NULL ) {
+    if( temp == nullptr ) {
         error_message( "Too few arguments" );
         return;
     }
     StringEntity *file_name;
-    if( ( file_name = dynamic_cast<StringEntity *>( temp ) ) == NULL ) {
+    if( ( file_name = dynamic_cast<StringEntity *>( temp ) ) == nullptr ) {
       error_message( "String expected" );
       the_stack.push( temp );
       return;
     }
 
     FileStream *new_words = new FileStream( file_name->get_value( ).c_str( ) );
-    if( new_words != NULL ) {
+    if( new_words != nullptr ) {
       global::word_source( ).push( new_words );
     }
   }
@@ -234,12 +234,12 @@ void do_purge( Stack &the_stack )
 {
     Entity *temp = the_stack.pop( );
 
-    if( temp == NULL ) {
+    if( temp == nullptr ) {
         error_message( "Too few arguments" );
         return;
     }
     StringEntity *variable_name;
-    if( ( variable_name = dynamic_cast<StringEntity *>( temp ) ) == NULL ) {
+    if( ( variable_name = dynamic_cast<StringEntity *>( temp ) ) == nullptr ) {
         error_message( "String expected" );
         the_stack.push( temp );
         return;
@@ -296,12 +296,12 @@ void do_read( Stack &the_stack )
     Entity *temp = the_stack.pop( );
     ifstream in_file;
 
-    if( temp == NULL ) {
+    if( temp == nullptr ) {
         error_message( "Too few arguments" );
         return;
     }
     StringEntity *file_name;
-    if( ( file_name = dynamic_cast<StringEntity *>( temp ) ) == NULL ) {
+    if( ( file_name = dynamic_cast<StringEntity *>( temp ) ) == nullptr ) {
         error_message( "String expected" );
         the_stack.push( temp );
         return;
@@ -320,7 +320,7 @@ void do_read( Stack &the_stack )
     char type = -1;
     in_file.read( &type, 1 );
 
-    Entity *new_object = NULL;
+    Entity *new_object = nullptr;
     switch (type) {
     case BINARY:
         new_object = new BinaryEntity;
@@ -350,7 +350,7 @@ void do_read( Stack &the_stack )
         error_message( "Unknown object type in file" );
         break;
     }
-    if( new_object == NULL ) {
+    if( new_object == nullptr ) {
         delete file_name;
         in_file.close( );
         return;
@@ -391,12 +391,12 @@ void do_run( Stack &the_stack )
 {
     Entity *temp = the_stack.pop( );
 
-    if( temp == NULL ) {
+    if( temp == nullptr ) {
         error_message( "Too few arguments" );
         return;
     }
     StringEntity *file_name;
-    if( ( file_name = dynamic_cast<StringEntity *>( temp ) ) == NULL ) {
+    if( ( file_name = dynamic_cast<StringEntity *>( temp ) ) == nullptr ) {
         error_message( "String expected" );
         the_stack.push( temp );
         return;
@@ -404,7 +404,7 @@ void do_run( Stack &the_stack )
 
 #ifdef NEVER
     FWordStream *new_words = new FWordStream( (char *)*file_name );
-    if( new_words != NULL ) {
+    if( new_words != nullptr ) {
         global::word_source( ).push( new_words );
     }
 #endif
@@ -423,18 +423,18 @@ void do_store( Stack &the_stack )
 {
     Entity *temp = the_stack.pop( );
 
-    if( temp == NULL ) {
+    if( temp == nullptr ) {
         error_message( "Too few arguments" );
         return;
     }
     StringEntity *variable_name;
-    if( ( variable_name = dynamic_cast<StringEntity *>( temp ) ) == NULL ) {
+    if( ( variable_name = dynamic_cast<StringEntity *>( temp ) ) == nullptr ) {
         error_message( "String expected" );
         the_stack.push( temp );
         return;
     }
     Entity *object = the_stack.pop( );
-    if( object == NULL ) {
+    if( object == nullptr ) {
         error_message( "Too few arguments" );
         delete variable_name;
         return;
@@ -477,7 +477,7 @@ void do_swap( Stack &the_stack )
 void do_sys( Stack &the_stack )
 {
     Entity *command = the_stack.get( 0 );
-    if( command == NULL ) {
+    if( command == nullptr ) {
         underflow( );
     }
     else if( command->my_type( ) != STRING ) {
@@ -534,18 +534,18 @@ void do_write( Stack &the_stack )
     Entity *temp = the_stack.pop( );
     ofstream out_file;
 
-    if( temp == NULL ) {
+    if( temp == nullptr ) {
         error_message( "Too few arguments" );
         return;
     }
     StringEntity *file_name;
-    if( ( file_name = dynamic_cast<StringEntity *>( temp ) ) == NULL ) {
+    if( ( file_name = dynamic_cast<StringEntity *>( temp ) ) == nullptr ) {
         error_message( "String expected" );
         the_stack.push( temp );
         return;
     }
     Entity *object = the_stack.get( 0 );
-    if( object == NULL ) {
+    if( object == nullptr ) {
       error_message( "Too few arguments" );
       delete file_name;
       return;
