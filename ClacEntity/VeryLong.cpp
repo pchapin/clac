@@ -44,20 +44,24 @@ using namespace std;
 //           Internally Linked Helper Functions
 //-------------------------------------------------------
 
-//
-// int is_white( char )
-//
-// This function defines what "white space" means when doing I/O on VeryLong objects. Actually,
-// to insure consistency with the rest of the iostreams library, this issue should be handled
-// with the istream manipulator 'eatwhite'.
-//
-static int is_white( char ch )
-{
-    if( ch == ' '  || ch == '\t' || ch == '\n' ||
-        ch == '\f' || ch == '\r' || ch == '\v'    )
-        return 1;
+namespace {
 
-    return 0;
+    //
+    // int is_white( char )
+    //
+    // This function defines what "white space" means when doing I/O on VeryLong objects.
+    // Actually, to insure consistency with the rest of the iostreams library, this issue should
+    // be handled with the istream manipulator 'eatwhite'.
+    //
+    static int is_white( char ch )
+    {
+        if( ch == ' '  || ch == '\t' || ch == '\n' ||
+            ch == '\f' || ch == '\r' || ch == '\v'    )
+            return 1;
+        
+        return 0;
+    }
+
 }
 
 

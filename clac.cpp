@@ -50,13 +50,13 @@ void error_message( const char *message, ... )
 }
 
 /*!
- * This function is used to print information messages to the UI. Unlike the error message function,
- * it assumes the caller constructs the entire message. This choice was made on the assumption that
- * informational messages wouldn't normally need to print data values. That assumption may need to
- * be revisted at some point.
+ * This function is used to print information messages to the UI. Unlike the error message
+ * function, it assumes the caller constructs the entire message. This choice was made on the
+ * assumption that informational messages wouldn't normally need to print data values. That
+ * assumption may need to be revisted at some point.
  *
- * As with error_message, any code that makes use of Clac entities must provide an implementation of
- * this function that is application specific.
+ * As with error_message, any code that makes use of Clac entities must provide an
+ * implementation of this function that is application specific.
  */
 void info_message( const string &message )
 {
@@ -104,213 +104,219 @@ SetUp::~SetUp( )
 //           Generic Operation Functions
 //=================================================
 
-static void do_unary( ClacStack &the_stack, Entity *(Entity::*unary_operation)( ) const )
-{
-    // Get a pointer to the object on stack level zero.
-    Entity *thing = the_stack.get( 0 );
+namespace {
 
-    // If it didn't work, we have an error!
-    if( thing == nullptr ) underflow( );
-    else {
-        // Do the unary operation. If it works, we will get a pointer to a new object.
-        Entity *new_thing = ( thing->*unary_operation )( );
-        the_stack.put( new_thing );
+    void do_unary( ClacStack &the_stack, Entity *(Entity::*unary_operation)( ) const )
+    {
+        // Get a pointer to the object on stack level zero.
+        Entity *thing = the_stack.get( 0 );
+
+        // If it didn't work, we have an error!
+        if( thing == nullptr ) underflow( );
+        else {
+            // Do the unary operation. If it works, we will get a pointer to a new object.
+            Entity *new_thing = ( thing->*unary_operation )( );
+            the_stack.put( new_thing );
+        }
     }
-}
 
-static void do_binary( ClacStack &the_stack, Entity *(Entity::*binary_operation)( const Entity * ) const )
-{
-    Entity *left  = the_stack.get( 1 );
-    Entity *right = the_stack.get( 0 );
+    void do_binary( ClacStack &the_stack, Entity *(Entity::*binary_operation)( const Entity * ) const )
+    {
+        Entity *left  = the_stack.get( 1 );
+        Entity *right = the_stack.get( 0 );
 
-    if( left == nullptr || right == nullptr ) underflow( );
-    else {
-        Entity *(Entity::*conversion)( ) const =
-            convert_table[left->my_type( )][right->my_type( )];
+        if( left == nullptr || right == nullptr ) underflow( );
+        else {
+            Entity *(Entity::*conversion)( ) const =
+                convert_table[left->my_type( )][right->my_type( )];
 
-        if( conversion == nullptr ) {
-            error_message( "Required implicit conversion not implemented!" );
-            return;
+            if( conversion == nullptr ) {
+                error_message( "Required implicit conversion not implemented!" );
+                return;
+            }
+
+            unique_ptr<Entity> new_left( (left->*conversion)( ) );
+            unique_ptr<Entity> new_right( (right->*conversion)( ) );
+
+            Entity *T1 = new_left.get( );
+            Entity *T2 = new_right.get( );
+
+            Entity *new_thing = (T1->*binary_operation)( T2 );
+
+            Entity *old_level_zero = the_stack.pop( );
+            Entity *old_level_one  = the_stack.pop( );
+            delete old_level_zero;
+            delete old_level_one;
+            the_stack.push( new_thing );
+        }
+    }
+
+    struct BuiltinBinary {
+        const char  *word;
+        Entity *(Entity::*binary_operation)( const Entity * ) const;
+    };
+
+    struct BuiltinUnary {
+        const char  *word;
+        Entity *(Entity::*unary_operation)( ) const;
+    };
+
+    struct BuiltinAction {
+        const char  *word;
+        void (*operation)( ClacStack & );
+    };
+
+    BuiltinBinary binary_words[] = {
+        { "+",      &Entity::plus              },
+        { "-",      &Entity::minus             },
+        { "*",      &Entity::multiply          },
+        { "/",      &Entity::divide            },
+        { "==",     &Entity::is_equal          },
+        { "!=",     &Entity::is_notequal       },
+        { ">",      &Entity::is_greater        },
+        { ">=",     &Entity::is_greaterorequal },
+        { "<",      &Entity::is_less           },
+        { "<=",     &Entity::is_lessorequal    },
+        { "mod",    &Entity::modulo            },
+        { "^",      &Entity::power             },
+        { nullptr,   nullptr                   }
+    };
+
+    BuiltinUnary unary_words[] = {
+        { "abs",    &Entity::abs               },
+        { "acos",   &Entity::acos              },
+        { "alog",   &Entity::exp10             },
+        { "asin",   &Entity::asin              },
+        { "atan",   &Entity::atan              },
+        { "conj",   &Entity::complex_conjugate },
+        { "cos",    &Entity::cos               },
+        { "exp",    &Entity::exp               },
+        { "frac",   &Entity::fractional_part   },
+        { "im",     &Entity::imaginary_part    },
+        { "inv",    &Entity::inv               },
+        { "ln",     &Entity::ln                },
+        { "log",    &Entity::log               },
+        { "neg",    &Entity::neg               },
+        { "re",     &Entity::real_part         },
+        { "sgn",    &Entity::sign              },
+        { "sin",    &Entity::sin               },
+        { "sq",     &Entity::sq                },
+        { "sqrt",   &Entity::sqrt              },
+        { "tan",    &Entity::tan               },
+        
+        { ">bin",   &Entity::to_binary         },
+        { ">cmplx", &Entity::to_complex        },
+        { ">flt",   &Entity::to_float          },
+        { ">int",   &Entity::to_integer        },
+        { ">list",  &Entity::to_list           },
+        { ">mat",   &Entity::to_matrix         },
+        { ">rat",   &Entity::to_rational       },
+        { ">str",   &Entity::to_string         },
+        { nullptr,   nullptr                   }
+    };
+
+    BuiltinAction action_words[] = {
+        // Normal actions.
+        { "bin",    do_bin      },
+        { "clear",  do_clear    },
+        { "dec",    do_dec      },
+        { "deg",    do_deg      },
+        { "drop",   do_drop     },
+        { "dropn",  do_dropn    },
+        { "dup",    do_dup      },
+        { "dupn",   do_dupn     },
+        { "eng",    do_eng      },
+        { "eval",   do_eval     },
+        { "fix",    do_fix      },
+        { "grad",   do_grad     },
+        { "hex",    do_hex      },
+        { "info",   do_info     },
+        { "oct",    do_oct      },
+        { "polar",  do_polar    },
+        { "purge",  do_purge    },
+        { "rad",    do_rad      },
+        { "read",   do_read     },
+        { "rec",    do_rec      },
+        { "roll" ,  do_roll_up  },
+        { "rolld",  do_roll_down},
+        { "rot",    do_rot      },
+        { "run",    do_run      },
+        { "sci",    do_sci      },
+        { "sto",    do_store    },
+        { "stws",   do_stws     },
+        { "swap",   do_swap     },
+        //{ "sys",    do_sys      },
+        { "write",  do_write    },
+
+        // Unary actions.
+        { "sl",     do_shift_left   },
+        { "sr",     do_shift_right  },
+        //{ "asr",    do_ashift_right },
+
+        // Off. The other versions of "off" just produce a message telling the user to use the
+        // 'quit' command.
+        //
+        { "exit",   do_off },
+        { "off",    do_off },
+        { "quit",   do_off },
+        
+        { nullptr,  nullptr }
+    };
+
+    bool process_binary( ClacStack &the_stack, const string &word_buffer )
+    {
+        // Scan the list of builtin binary words.
+        BuiltinBinary *bin_op = binary_words;
+        while( bin_op->word != nullptr ) {
+            if( bin_op->word == word_buffer ) break;
+            bin_op++;
         }
 
-        unique_ptr<Entity> new_left( (left->*conversion)( ) );
-        unique_ptr<Entity> new_right( (right->*conversion)( ) );
-
-        Entity *T1 = new_left.get( );
-        Entity *T2 = new_right.get( );
-
-        Entity *new_thing = (T1->*binary_operation)( T2 );
-
-        Entity *old_level_zero = the_stack.pop( );
-        Entity *old_level_one  = the_stack.pop( );
-        delete old_level_zero;
-        delete old_level_one;
-        the_stack.push( new_thing );
+        // If we found it, do the operation.
+        if( bin_op->word != nullptr ) {
+            do_binary( the_stack, bin_op->binary_operation );
+            return true;
+        }
+        return false;
     }
+
+    
+    bool process_unary( ClacStack &the_stack, const string &word_buffer )
+    {
+        // Scan the list of built in unary words.
+        BuiltinUnary *unary_op = unary_words;
+        while( unary_op->word != nullptr ) {
+            if( unary_op->word == word_buffer ) break;
+            unary_op++;
+        }
+
+        // If we found it, do the operation.
+        if( unary_op->word != nullptr ) {
+            do_unary( the_stack, unary_op->unary_operation );
+            return true;
+        }
+        return false;
+    }
+
+    
+    bool process_action( ClacStack &the_stack, const string &word_buffer )
+    {
+        // Scan the list of builtin action words.
+        BuiltinAction *action_op = action_words;
+        while( action_op->word != nullptr ) {
+            if( action_op->word == word_buffer ) break;
+            action_op++;
+        }
+
+        // If we found it, do the operation.
+        if( action_op->word != nullptr ) {
+            action_op->operation( the_stack );
+            return true;
+        }
+        return false;
+    }
+
 }
-
-struct BuiltinBinary {
-    const char  *word;
-    Entity *(Entity::*binary_operation)( const Entity * ) const;
-};
-
-struct BuiltinUnary {
-    const char  *word;
-    Entity *(Entity::*unary_operation)( ) const;
-};
-
-struct BuiltinAction {
-    const char  *word;
-    void (*operation)( ClacStack & );
-};
-
-static BuiltinBinary binary_words[] = {
-    { "+",      &Entity::plus              },
-    { "-",      &Entity::minus             },
-    { "*",      &Entity::multiply          },
-    { "/",      &Entity::divide            },
-    { "==",     &Entity::is_equal          },
-    { "!=",     &Entity::is_notequal       },
-    { ">",      &Entity::is_greater        },
-    { ">=",     &Entity::is_greaterorequal },
-    { "<",      &Entity::is_less           },
-    { "<=",     &Entity::is_lessorequal    },
-    { "mod",    &Entity::modulo            },
-    { "^",      &Entity::power             },
-    { nullptr,   nullptr                   }
-};
-
-static BuiltinUnary unary_words[] = {
-    { "abs",    &Entity::abs               },
-    { "acos",   &Entity::acos              },
-    { "alog",   &Entity::exp10             },
-    { "asin",   &Entity::asin              },
-    { "atan",   &Entity::atan              },
-    { "conj",   &Entity::complex_conjugate },
-    { "cos",    &Entity::cos               },
-    { "exp",    &Entity::exp               },
-    { "frac",   &Entity::fractional_part   },
-    { "im",     &Entity::imaginary_part    },
-    { "inv",    &Entity::inv               },
-    { "ln",     &Entity::ln                },
-    { "log",    &Entity::log               },
-    { "neg",    &Entity::neg               },
-    { "re",     &Entity::real_part         },
-    { "sgn",    &Entity::sign              },
-    { "sin",    &Entity::sin               },
-    { "sq",     &Entity::sq                },
-    { "sqrt",   &Entity::sqrt              },
-    { "tan",    &Entity::tan               },
-
-    { ">bin",   &Entity::to_binary         },
-    { ">cmplx", &Entity::to_complex        },
-    { ">flt",   &Entity::to_float          },
-    { ">int",   &Entity::to_integer        },
-    { ">list",  &Entity::to_list           },
-    { ">mat",   &Entity::to_matrix         },
-    { ">rat",   &Entity::to_rational       },
-    { ">str",   &Entity::to_string         },
-    { nullptr,   nullptr                   }
-};
-
-static BuiltinAction action_words[] = {
-    // Normal actions.
-    { "bin",    do_bin      },
-    { "clear",  do_clear    },
-    { "dec",    do_dec      },
-    { "deg",    do_deg      },
-    { "drop",   do_drop     },
-    { "dropn",  do_dropn    },
-    { "dup",    do_dup      },
-    { "dupn",   do_dupn     },
-    { "eng",    do_eng      },
-    { "eval",   do_eval     },
-    { "fix",    do_fix      },
-    { "grad",   do_grad     },
-    { "hex",    do_hex      },
-    { "info",   do_info     },
-    { "oct",    do_oct      },
-    { "polar",  do_polar    },
-    { "purge",  do_purge    },
-    { "rad",    do_rad      },
-    { "read",   do_read     },
-    { "rec",    do_rec      },
-    { "roll" ,  do_roll_up  },
-    { "rolld",  do_roll_down},
-    { "rot",    do_rot      },
-    { "run",    do_run      },
-    { "sci",    do_sci      },
-    { "sto",    do_store    },
-    { "stws",   do_stws     },
-    { "swap",   do_swap     },
-    //{ "sys",    do_sys      },
-    { "write",  do_write    },
-
-    // Unary actions.
-    { "sl",     do_shift_left   },
-    { "sr",     do_shift_right  },
-    //{ "asr",    do_ashift_right },
-
-    // Off. The other versions of "off" just produce a message telling the user to use the
-    // 'quit' command.
-    //
-    { "exit",   do_off },
-    { "off",    do_off },
-    { "quit",   do_off },
-
-    { nullptr,  nullptr }
-};
-
-static bool process_binary( ClacStack &the_stack, const string &word_buffer )
-{
-    // Scan the list of builtin binary words.
-    BuiltinBinary *bin_op = binary_words;
-    while( bin_op->word != nullptr ) {
-        if( bin_op->word == word_buffer ) break;
-        bin_op++;
-    }
-
-    // If we found it, do the operation.
-    if( bin_op->word != nullptr ) {
-        do_binary( the_stack, bin_op->binary_operation );
-        return true;
-    }
-    return false;
-}
-
-static bool process_unary( ClacStack &the_stack, const string &word_buffer )
-{
-    // Scan the list of built in unary words.
-    BuiltinUnary *unary_op = unary_words;
-    while( unary_op->word != nullptr ) {
-        if( unary_op->word == word_buffer ) break;
-        unary_op++;
-    }
-
-    // If we found it, do the operation.
-    if( unary_op->word != nullptr ) {
-        do_unary( the_stack, unary_op->unary_operation );
-        return true;
-    }
-    return false;
-}
-
-static bool process_action( ClacStack &the_stack, const string &word_buffer )
-{
-    // Scan the list of builtin action words.
-    BuiltinAction *action_op = action_words;
-    while( action_op->word != nullptr ) {
-        if( action_op->word == word_buffer ) break;
-        action_op++;
-    }
-
-    // If we found it, do the operation.
-    if( action_op->word != nullptr ) {
-        action_op->operation( the_stack );
-        return true;
-    }
-    return false;
-  }
 
 
 //! Process the words on the master stream, executing them one at a time.

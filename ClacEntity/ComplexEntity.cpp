@@ -15,15 +15,21 @@
 
 using namespace std;
 
-static const std::complex< double > j( 0.0, 1.0 );
-  // Square root of -1. (We are electrical engineers)
+namespace {
+
+    // Square root of -1.
+    const complex< double > j( 0.0, 1.0 );
+
+}
+
 
 EntityType ComplexEntity::my_type( ) const
 {
     return COMPLEX;
 }
 
-std::string ComplexEntity::display( ) const
+
+string ComplexEntity::display( ) const
 {
     static char  buffer[128];    // Array to hold the resulting string.
     const char *format_string;   // Pointer to a "printf style" format string.
@@ -43,7 +49,7 @@ std::string ComplexEntity::display( ) const
             format_string = "INTERNAL ERROR: Bad display mode";
             break;
         }
-        std::sprintf( buffer, format_string,
+        sprintf( buffer, format_string,
             DisplayState::get_decimal_count( ), value.real( ),
             DisplayState::get_decimal_count( ), value.imag( ) );
     }
@@ -63,7 +69,7 @@ std::string ComplexEntity::display( ) const
             format_string = "INTERNAL ERROR: Bad display mode";
             break;
         }
-        std::sprintf( buffer, format_string,
+        sprintf( buffer, format_string,
             DisplayState::get_decimal_count( ), std::abs( value ),
             DisplayState::get_decimal_count( ), from_radians( std::arg( value ) ) );
     }
@@ -86,35 +92,42 @@ Entity *ComplexEntity::abs( ) const
     return new FloatEntity( std::abs( value ) );
 }
 
+
 Entity *ComplexEntity::complex_conjugate( ) const
 {
     return new ComplexEntity( std::conj( value ) );
 }
+
 
 Entity *ComplexEntity::cos( ) const
 {
     return new ComplexEntity( std::cos( value ) );
 }
 
+
 Entity *ComplexEntity::exp( ) const
 {
     return new ComplexEntity( std::exp( value ) );
 }
+
 
 Entity *ComplexEntity::exp10( ) const
 {
     return new ComplexEntity( std::pow( 10.0, value ) );
 }
 
+
 Entity *ComplexEntity::imaginary_part( ) const
 {
     return new FloatEntity( value.imag( ) );
 }
 
+
 Entity *ComplexEntity::inv( ) const
 {
     return new ComplexEntity( 1.0 / value );
 }
+
 
 Entity *ComplexEntity::ln( ) const
 {
@@ -123,6 +136,7 @@ Entity *ComplexEntity::ln( ) const
     return nullptr;
 }
 
+
 Entity *ComplexEntity::log( ) const
 {
     // TODO: Implement me!
@@ -130,15 +144,18 @@ Entity *ComplexEntity::log( ) const
     return nullptr;
 }
 
+
 Entity *ComplexEntity::neg( ) const
 {
     return new ComplexEntity( -value );
 }
 
+
 Entity *ComplexEntity::real_part( ) const
 {
     return new FloatEntity( value.real( ) );
 }
+
 
 Entity *ComplexEntity::sign( ) const
 {
@@ -147,15 +164,18 @@ Entity *ComplexEntity::sign( ) const
     return nullptr;
 }
 
+
 Entity *ComplexEntity::sin( ) const
 {
     return new ComplexEntity( std::sin( value ) );
 }
 
+
 Entity *ComplexEntity::sqrt( ) const
 {
     return new ComplexEntity( std::sqrt( value ) );
 }
+
 
 Entity *ComplexEntity::tan( ) const
 {
@@ -172,11 +192,13 @@ Entity *ComplexEntity::divide( const Entity *R ) const
     return new ComplexEntity( value / right->value );
 }
 
+
 Entity *ComplexEntity::minus( const Entity *R ) const
 {
     const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
     return new ComplexEntity( value - right->value );
 }
+
 
 Entity *ComplexEntity::multiply( const Entity *R ) const
 {
@@ -184,11 +206,13 @@ Entity *ComplexEntity::multiply( const Entity *R ) const
     return new ComplexEntity( value * right->value );
 }
 
+
 Entity *ComplexEntity::plus( const Entity *R ) const
 {
     const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
     return new ComplexEntity( value + right->value );
 }
+
 
 Entity *ComplexEntity::power( const Entity *R ) const
 {
@@ -196,7 +220,6 @@ Entity *ComplexEntity::power( const Entity *R ) const
     throw "ComplexEntity::power not implemented!";
     return nullptr;
 }
-
 
 //
 // Conversions from ComplexEntity
@@ -206,5 +229,3 @@ Entity *ComplexEntity::to_complex( ) const
 {
     return duplicate( );
 }
-
-

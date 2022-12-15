@@ -5,9 +5,11 @@
 
 #include "Entities.hpp"
 
+using namespace std;
+
 VectorEntity::~VectorEntity( )
 {
-    std::vector<Entity *>::iterator p;
+    vector<Entity *>::iterator p;
 
     for( p = value.begin( ); p != value.end( ); ++p ) {
         delete *p;
@@ -19,7 +21,7 @@ EntityType VectorEntity::my_type( ) const
     return VECTOR;
 }
 
-std::string VectorEntity::display( ) const
+string VectorEntity::display( ) const
 {
     return "VectorEntity::display( ) not implemented!";
 }

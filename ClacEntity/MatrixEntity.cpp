@@ -5,10 +5,12 @@
 
 #include "Entities.hpp"
 
+using namespace std;
+
 MatrixEntity::~MatrixEntity( )
 {
-    std::vector<row_type>::iterator p1;
-    std::vector<Entity *>::iterator p2;
+    vector<row_type>::iterator p1;
+    vector<Entity *>::iterator p2;
 
     for( p1 = value.begin( ); p1 != value.end( ); ++p1 ) {
         for( p2 = p1->begin( ); p2 != p1->end( ); ++p2 ) {
@@ -22,7 +24,7 @@ EntityType MatrixEntity::my_type( ) const
     return MATRIX;
 }
 
-std::string MatrixEntity::display( ) const
+string MatrixEntity::display( ) const
 {
     return "MatrixEntity::display( ) not implemented!";
 }

@@ -81,9 +81,9 @@ const char *WordStream::find_next_space( const char *string )
  * Find the next word in the encapsulated string. The value of current_point marks where to
  * start the search. Note that current_point is initialized by the constructor.
  */
-std::string StringStream::next_word( )
+string StringStream::next_word( )
 {
-    std::string word;
+    string word;
 
     // Find the start of the next word.
     current_point = find_next_word( current_point );
@@ -95,7 +95,7 @@ std::string StringStream::next_word( )
     const char *end_word = find_next_space( current_point );
 
     // Copy this word into the holding area.
-    word.assign( current_point, static_cast<std::string::size_type>( end_word - current_point) );
+    word.assign( current_point, static_cast<string::size_type>( end_word - current_point) );
 
     current_point = end_word;
     return word;
@@ -115,9 +115,9 @@ std::string StringStream::next_word( )
  *   This is an "unmatched quoted string
  *   These words are each separate" This is inside another string!
  */
-std::string FileStream::next_word( )
+string FileStream::next_word( )
 {
-    std::string word;
+    string word;
 
     // Keep looping until we can get a word.
     while( 1 ) {
@@ -141,7 +141,7 @@ std::string FileStream::next_word( )
     // Copy this word into the holding area.
     word.assign(
         current_point,
-        static_cast<std::string::size_type>( end_word - current_point )
+        static_cast<string::size_type>( end_word - current_point )
     );
 
     current_point = end_word;
@@ -171,9 +171,9 @@ MasterStream::~MasterStream( )
  * exhausted, the stack is popped and another attempt to get a word is made. This function only
  * returns an empty word if there are no more word streams to try.
  */
-std::string MasterStream::next_word( )
+string MasterStream::next_word( )
 {
-    std::string word;
+    string word;
 
     // Loop until we get a word (or bust).
     while( 1 ) {

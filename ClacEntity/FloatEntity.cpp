@@ -48,54 +48,59 @@ const double e  = 2.718281828459045235360287;
 //           Internally Linked Functions
 //=================================================
 
-//
-// The following function takes a floating point number and returns a mantissa and an exponent
-// such that number = mantissa * 10^(exponent). The returned exponent is an integer. This
-// function is used during the display of FloatEntities (particularly in engineering notation).
-//
-static double frexp10( double number, int *exp )
-{
-    int    int_num;  // Exponent of 2.
-    double flt_num;  // Mantissa that goes with the exponent of 2.
-    double temp;     // Raw exponent of 10.
-    double frac_part, int_part; // Parts of the raw exponent of 10.
-    double mantissa; // Mantissa that goes with the final exponent of 10.
+namespace {
 
-    // Compute number = flt_num * 2^(int_num). Note that some implementations have problems with
-    // this when number is 0.0.
     //
-    flt_num = frexp( number, &int_num );
+    // The following function takes a floating point number and returns a mantissa and an
+    // exponent such that number = mantissa * 10^(exponent). The returned exponent is an
+    // integer. This function is used during the display of FloatEntities (particularly in
+    // engineering notation).
+    //
+    double frexp10( double number, int *exp )
+    {
+        int    int_num;  // Exponent of 2.
+        double flt_num;  // Mantissa that goes with the exponent of 2.
+        double temp;     // Raw exponent of 10.
+        double frac_part, int_part; // Parts of the raw exponent of 10.
+        double mantissa; // Mantissa that goes with the final exponent of 10.
 
-    temp      = int_num * log10( 2.0 );           // Compute raw exponet of 10.
-    frac_part = modf( temp, &int_part );          // Find parts of raw exponent.
-    mantissa  = flt_num * pow( 10.0, frac_part ); // Get the final mantissa.
+        // Compute number = flt_num * 2^(int_num). Note that some implementations have problems
+        // with this when number is 0.0.
+        //
+        flt_num = frexp( number, &int_num );
 
-    // Normalize all mantissa into the range 1.0 -> 10.0
-    if( fabs( mantissa ) < 1.0 ) {
-        mantissa *= 10.0;
-        int_part -= 1.0;
+        temp      = int_num * log10( 2.0 );           // Compute raw exponet of 10.
+        frac_part = modf( temp, &int_part );          // Find parts of raw exponent.
+        mantissa  = flt_num * pow( 10.0, frac_part ); // Get the final mantissa.
+
+        // Normalize all mantissa into the range 1.0 -> 10.0
+        if( fabs( mantissa ) < 1.0 ) {
+            mantissa *= 10.0;
+            int_part -= 1.0;
+        }
+
+        // Return results.
+        *exp = static_cast< int >( int_part );
+        return mantissa;
     }
 
-    // Return results.
-    *exp = static_cast< int >( int_part );
-    return mantissa;
-}
 
+    //
+    // The following function adjusts the mantissa and exponent of a number so that it is in
+    // engineering notation. Normally numbers are displayed in the form: 3.141e5. But
+    // engineering notation requires an exponent that is a multiple of 3. Thus: 314.1e3.
+    //
+    void eng_adjust( double &mantissa, int &exponent )
+    {
+        // Loop until the exponent is evenly divisable by three.
+        while( abs( exponent ) % 3 != 0 ) {
 
-//
-// The following function adjusts the mantissa and exponent of a number so that it is in
-// engineering notation. Normally numbers are displayed in the form: 3.141e5. But engineering
-// notation requires an exponent that is a multiple of 3. Thus: 314.1e3.
-//
-static void eng_adjust( double &mantissa, int &exponent )
-{
-    // Loop until the exponent is evenly divisable by three.
-    while( abs( exponent ) % 3 != 0 ) {
-
-        // Shift mantissa over one place and adjust exponent.
-        mantissa *= 10.0;
-        exponent--;
+            // Shift mantissa over one place and adjust exponent.
+            mantissa *= 10.0;
+            exponent--;
+        }
     }
+
 }
 
 

@@ -28,63 +28,66 @@
 
 using namespace std;
 
+namespace {
 
-/*!
- * Adjusts the format of __DATE__. Puts a comma after the day of the month and purge leading
- * zeros or spaces from the day of the month.
- *
- * \param ANSI_Date The date in the format given by the __DATE__ macros. \return A pointer to a
- * statically allocated buffer (of size 13) holding the cleaned up date.
- */
-static char *AdjDate( const char *ANSI_Date )
-{
-    static char  buffer[13];
-           char *buffer_pointer;
+    /*!
+     * Adjusts the format of __DATE__. Puts a comma after the day of the month and purge leading
+     * zeros or spaces from the day of the month.
+     *
+     * \param ANSI_Date The date in the format given by the __DATE__ macros. \return A pointer
+     * to a statically allocated buffer (of size 13) holding the cleaned up date.
+     */
+    char *AdjDate( const char *ANSI_Date )
+    {
+        static char  buffer[13];
+               char *buffer_pointer;
 
-    // Make a working copy of the date as from the ANSI __DATE__ macro.
-    strcpy( buffer, ANSI_Date );
+        // Make a working copy of the date as from the ANSI __DATE__ macro.
+        strcpy( buffer, ANSI_Date );
 
-    // Open up space for the comma.
-    for( buffer_pointer  = strchr( buffer, '\0' );
-         buffer_pointer >= &buffer[6];
-         buffer_pointer-- ) {
-        *( buffer_pointer+1 ) = *buffer_pointer;
+        // Open up space for the comma.
+        for( buffer_pointer  = strchr( buffer, '\0' );
+             buffer_pointer >= &buffer[6];
+             buffer_pointer-- ) {
+            *( buffer_pointer+1 ) = *buffer_pointer;
+        }
+
+        // Put the comma in.
+        buffer[6] = ',';
+
+        // If this is a date from 1 to 9, close up the extra space.
+        if( buffer[4] == '0' || buffer[4] == ' ' ) {
+            for( buffer_pointer = &buffer[4]; *buffer_pointer; buffer_pointer++ ) {
+                *buffer_pointer = *( buffer_pointer + 1 );
+            }
+        }
+
+        // Return are result.
+        return buffer;
     }
 
-    // Put the comma in.
-    buffer[6] = ',';
 
-    // If this is a date from 1 to 9, close up the extra space.
-    if( buffer[4] == '0' || buffer[4] == ' ' ) {
-        for( buffer_pointer = &buffer[4]; *buffer_pointer; buffer_pointer++ ) {
-            *buffer_pointer = *( buffer_pointer + 1 );
-        }
-    }
+    VeryLong pop_int( ClacStack &the_stack )
+    {
+        VeryLong return_value;
 
-    // Return are result.
-    return buffer;
-}
-
-
-static VeryLong pop_int( ClacStack &the_stack )
-{
-    VeryLong return_value;
-
-    Entity *temp = the_stack.pop( );
-    if( temp == nullptr )
-        error_message( "Too few arguments" );
-    else {
-        IntegerEntity *integer_temp = static_cast<IntegerEntity *>( temp->to_integer( ) );
-        if( integer_temp == nullptr ) {
-            error_message( "Integer argument expected" );
-            the_stack.push( temp );
-        }
+        Entity *temp = the_stack.pop( );
+        if( temp == nullptr )
+            error_message( "Too few arguments" );
         else {
-            return_value = integer_temp->get_value( );
-            delete integer_temp;
+            IntegerEntity *integer_temp = static_cast<IntegerEntity *>( temp->to_integer( ) );
+            if( integer_temp == nullptr ) {
+                error_message( "Integer argument expected" );
+                the_stack.push( temp );
+            }
+            else {
+                return_value = integer_temp->get_value( );
+                delete integer_temp;
+            }
         }
+        return return_value;
     }
-    return return_value;
+
 }
 
 

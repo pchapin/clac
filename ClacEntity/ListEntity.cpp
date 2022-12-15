@@ -6,9 +6,11 @@
 #include <memory>
 #include "Entities.hpp"
 
+using namespace std;
+
 ListEntity::~ListEntity( )
 {
-    std::list<Entity *>::iterator p;
+    list<Entity *>::iterator p;
     for( p = value.begin( ); p != value.end( ); ++p ) {
         delete *p;
     }
@@ -19,10 +21,10 @@ EntityType ListEntity::my_type( ) const
     return LIST;
 }
 
-std::string ListEntity::display( ) const
+string ListEntity::display( ) const
 {
-    std::string workspace = "{ ";
-    std::list<Entity *>::const_iterator p;
+    string workspace = "{ ";
+    list<Entity *>::const_iterator p;
 
     for( p = value.begin( ); p != value.end( ); ++p ) {
         workspace.append( ( *p )->display( ) );
@@ -36,8 +38,8 @@ std::string ListEntity::display( ) const
 
 Entity *ListEntity::duplicate( ) const
 {
-    std::list<Entity *> new_value;
-    std::list<Entity *>::const_iterator p;
+    list<Entity *> new_value;
+    list<Entity *>::const_iterator p;
 
     for( p = value.begin( ); p != value.end( ); ++p ) {
 
@@ -57,9 +59,9 @@ Entity *ListEntity::duplicate( ) const
 Entity *ListEntity::plus( const Entity *R ) const
 {
     const ListEntity *right = dynamic_cast< const ListEntity * >( R );
-    std::list<Entity *>::const_iterator p;
+    list<Entity *>::const_iterator p;
 
-    std::unique_ptr<ListEntity> new_list( new ListEntity( value ) );
+    unique_ptr<ListEntity> new_list( new ListEntity( value ) );
     for( p = right->value.begin( ); p != right->value.end( ); ++p ) {
         new_list->value.push_back( *p );
     }

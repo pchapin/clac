@@ -149,10 +149,12 @@ EntityType BinaryEntity::my_type( ) const
     return BINARY;
 }
 
-std::string BinaryEntity::display( ) const
+
+string BinaryEntity::display( ) const
 {
     return "BinaryEntity::display( ) not implemented!";
 }
+
 
 Entity *BinaryEntity::duplicate( ) const
 {
@@ -169,11 +171,13 @@ Entity *BinaryEntity::abs( ) const
     return duplicate( );
 }
 
+
 Entity *BinaryEntity::acos( ) const
 {
     unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->acos( );
 }
+
 
 Entity *BinaryEntity::asin( ) const
 {
@@ -181,16 +185,19 @@ Entity *BinaryEntity::asin( ) const
     return converted->asin( );
 }
 
+
 Entity *BinaryEntity::atan( ) const
 {
     unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->atan( );
 }
 
+
 Entity *BinaryEntity::complex_conjugate( ) const
 {
     return duplicate( );
 }
+
 
 Entity *BinaryEntity::cos( ) const
 {
@@ -198,11 +205,13 @@ Entity *BinaryEntity::cos( ) const
     return converted->cos( );
 }
 
+
 Entity *BinaryEntity::exp( ) const
 {
     unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->exp( );
 }
+
 
 Entity *BinaryEntity::exp10( ) const
 {
@@ -210,20 +219,24 @@ Entity *BinaryEntity::exp10( ) const
     return converted->exp10( );
 }
 
+
 Entity *BinaryEntity::fractional_part( ) const
 {
     return new BinaryEntity( 0UL );
 }
+
 
 Entity *BinaryEntity::imaginary_part( ) const
 {
     return new BinaryEntity( 0UL );
 }
 
+
 Entity *BinaryEntity::integer_part( ) const
 {
     return duplicate( );
 }
+
 
 Entity *BinaryEntity::inv( ) const
 {
@@ -231,11 +244,13 @@ Entity *BinaryEntity::inv( ) const
     return converted->inv( );
 }
 
+
 Entity *BinaryEntity::ln( ) const
 {
     unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
     return converted->ln( );
 }
+
 
 Entity *BinaryEntity::log( ) const
 {
@@ -243,12 +258,14 @@ Entity *BinaryEntity::log( ) const
     return converted->log( );
 }
 
+
 Entity *BinaryEntity::logical_not( ) const
 {
     unsigned long new_value = ~value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
+
 
 Entity *BinaryEntity::neg( ) const
 {
@@ -271,6 +288,7 @@ Entity *BinaryEntity::divide( const Entity *R ) const
     return result;
 }
 
+
 Entity *BinaryEntity::logical_and( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
@@ -278,6 +296,7 @@ Entity *BinaryEntity::logical_and( const Entity *R ) const
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
+
 
 Entity *BinaryEntity::logical_or( const Entity *R ) const
 {
@@ -287,6 +306,7 @@ Entity *BinaryEntity::logical_or( const Entity *R ) const
     return result;
 }
 
+
 Entity *BinaryEntity::logical_xor( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
@@ -294,6 +314,7 @@ Entity *BinaryEntity::logical_xor( const Entity *R ) const
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
+
 
 Entity *BinaryEntity::minus( const Entity *R ) const
 {
@@ -303,6 +324,7 @@ Entity *BinaryEntity::minus( const Entity *R ) const
     return result;
 }
 
+
 Entity *BinaryEntity::multiply( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast< const BinaryEntity * >( R );
@@ -310,6 +332,7 @@ Entity *BinaryEntity::multiply( const Entity *R ) const
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
+
 
 Entity *BinaryEntity::plus( const Entity *R ) const
 {
@@ -329,15 +352,18 @@ Entity *BinaryEntity::to_binary( ) const
     return duplicate( );
 }
 
+
 Entity *BinaryEntity::to_complex( ) const
 {
     return new ComplexEntity( static_cast<double>( value ) );
 }
 
+
 Entity *BinaryEntity::to_float( ) const
 {
     return new FloatEntity( static_cast<double>( value ) );
 }
+
 
 Entity *BinaryEntity::to_integer( ) const
 {

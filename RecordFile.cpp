@@ -19,54 +19,58 @@ comments.
 
 using namespace std;
 
-static bool split_string(
-    char *buffer,                 // String to be split.
-    char *delimiters,             // String of delimiter characters.
-    char *strings[],              // Array to be filled with pntrs to substrings.
-    int   max_nmbr_of_strings,    // Maximum number of substrings allowed.
-    int  *actual_nmbr_of_strings  // Actual number of substrings found.
-)
-{
-    char *buffer_pointer;         // Temporary pointer into buffer.
-    bool  in_string = false;      // =false when *buf_ptr not pointing at str.
-    bool  return_code = true;     // Returns false if too many substrings.
+namespace {
 
-    // Initialize result and check for out of bounds input.
-    *actual_nmbr_of_strings = 0;
-    if( max_nmbr_of_strings < 0 ) return_code = false;
-    else {
+    bool split_string(
+        char *buffer,                 // String to be split.
+        char *delimiters,             // String of delimiter characters.
+        char *strings[],              // Array to be filled with pntrs to substrings.
+        int   max_nmbr_of_strings,    // Maximum number of substrings allowed.
+        int  *actual_nmbr_of_strings  // Actual number of substrings found.
+    )
+    {
+        char *buffer_pointer;         // Temporary pointer into buffer.
+        bool  in_string = false;      // =false when *buf_ptr not pointing at str.
+        bool  return_code = true;     // Returns false if too many substrings.
 
-        // Sweep down string until null byte reached.
-        buffer_pointer = buffer;
-        while( *buffer_pointer != '\0' ) {
+        // Initialize result and check for out of bounds input.
+        *actual_nmbr_of_strings = 0;
+        if( max_nmbr_of_strings < 0 ) return_code = false;
+        else {
 
-            // Try to process the current character only if no error so far.
-            if( return_code == true ) {
+            // Sweep down string until null byte reached.
+            buffer_pointer = buffer;
+            while( *buffer_pointer != '\0' ) {
 
-                // If delimiter found while scanning an argument...
-                if( ( strchr( delimiters, *buffer_pointer ) != nullptr ) && in_string ) {
-                    *buffer_pointer = '\0';
-                    in_string = false;
-                }
+                // Try to process the current character only if no error so far.
+                if( return_code == true ) {
 
-                // If non delimiter found while scanning "white" space...
-                else if( ( strchr(delimiters, *buffer_pointer ) == nullptr ) && !in_string ) {
-
-                    // Install only if space. If no space left set error flag.
-                    if( *actual_nmbr_of_strings < max_nmbr_of_strings ) {
-                        strings[*actual_nmbr_of_strings] = buffer_pointer;
-                        ( *actual_nmbr_of_strings )++;
-                        in_string = true;
+                    // If delimiter found while scanning an argument...
+                    if( ( strchr( delimiters, *buffer_pointer ) != nullptr ) && in_string ) {
+                        *buffer_pointer = '\0';
+                        in_string = false;
                     }
-                    else return_code = false;
+
+                    // If non delimiter found while scanning "white" space...
+                    else if( ( strchr(delimiters, *buffer_pointer ) == nullptr ) && !in_string ) {
+
+                        // Install only if space. If no space left set error flag.
+                        if( *actual_nmbr_of_strings < max_nmbr_of_strings ) {
+                            strings[*actual_nmbr_of_strings] = buffer_pointer;
+                            ( *actual_nmbr_of_strings )++;
+                            in_string = true;
+                        }
+                        else return_code = false;
+                    }
                 }
+                buffer_pointer++;
             }
-            buffer_pointer++;
         }
+
+        return return_code;
     }
 
-    return return_code;
-  }
+}
 
 
 /*----------------------------------------------------------------------------

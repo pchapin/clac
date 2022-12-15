@@ -5,9 +5,11 @@
 
 #include "Entities.hpp"
 
-DirectoryEntity::DirectoryEntity( const std::map< std::string, Entity * > &existing )
+using namespace std;
+
+DirectoryEntity::DirectoryEntity( const map< string, Entity * > &existing )
 {
-    std::map<std::string, Entity *>::const_iterator p;
+    map<string, Entity *>::const_iterator p;
 
     try {
         for( p = existing.begin( ); p != existing.end( ); ++p ) {
@@ -25,7 +27,7 @@ DirectoryEntity::DirectoryEntity( const std::map< std::string, Entity * > &exist
 
 DirectoryEntity::~DirectoryEntity( )
 {
-    std::map<std::string, Entity *>::iterator p;
+    map<string, Entity *>::iterator p;
     
     for( p = value.begin( ); p != value.end( ); ++p ) {
         delete p->second;
@@ -37,7 +39,7 @@ EntityType DirectoryEntity::my_type( ) const
     return DIRECTORY;
 }
 
-std::string DirectoryEntity::display( ) const
+string DirectoryEntity::display( ) const
 {
     return "DirectoryEntity::display( ) not implemented!";
 }

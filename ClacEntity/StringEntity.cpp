@@ -5,12 +5,14 @@
 
 #include "Entities.hpp"
 
+using namespace std;
+
 EntityType StringEntity::my_type( ) const
 {
     return STRING;
 }
 
-std::string StringEntity::display( ) const
+string StringEntity::display( ) const
 {
     return value;
 }
