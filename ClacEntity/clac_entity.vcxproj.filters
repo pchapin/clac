@@ -119,4 +119,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="clac_entity.ruleset" />
+  </ItemGroup>
 </Project>

@@ -147,7 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="actions.cpp" />
-    <ClCompile Include="cstack.cpp" />
+    <ClCompile Include="ClacStack.cpp" />
     <ClCompile Include="get.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="words.cpp" />
@@ -155,7 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actions.hpp" />
-    <ClInclude Include="cstack.hpp" />
+    <ClInclude Include="ClacStack.hpp" />
     <ClInclude Include="get.hpp" />
     <ClInclude Include="global.hpp" />
     <ClInclude Include="words.hpp" />

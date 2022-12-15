@@ -14,31 +14,31 @@ int                                DisplayState::decimal_count = 3;
 DisplayState::float_display_type   DisplayState::display_mode  = DisplayState::FIXED;
 
 
-void DisplayState::set_angle_mode( angle_display_type new_mode )
+void DisplayState::set_angle_mode( angle_display_type new_mode ) noexcept
 {
     angle_mode = new_mode;
 }
 
 
-void DisplayState::set_base( base_type new_base )
+void DisplayState::set_base( base_type new_base ) noexcept
 {
     bit_base = new_base;
 }
 
 
-void DisplayState::set_complex_mode( complex_display_type new_mode )
+void DisplayState::set_complex_mode( complex_display_type new_mode ) noexcept
 {
     complex_mode = new_mode;
 }
 
 
-void DisplayState::set_decimal_count( int number )
+void DisplayState::set_decimal_count( int number ) noexcept
 {
     decimal_count = number;
 }
 
 
-void DisplayState::set_display_mode( float_display_type new_mode )
+void DisplayState::set_display_mode( float_display_type new_mode ) noexcept
 {
     display_mode = new_mode;
 }

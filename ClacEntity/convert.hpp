@@ -8,7 +8,7 @@
 
 #include "Entity.hpp"
 
-const int type_count = 12;
+constexpr int type_count = 12;
 
 extern Entity *( Entity::*convert_table[type_count][type_count] )( ) const;
 

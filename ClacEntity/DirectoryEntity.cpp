@@ -34,7 +34,7 @@ DirectoryEntity::~DirectoryEntity( )
     }
 }
 
-EntityType DirectoryEntity::my_type( ) const
+EntityType DirectoryEntity::my_type( ) const noexcept
 {
     return DIRECTORY;
 }

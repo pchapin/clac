@@ -44,7 +44,7 @@ static unsigned long bit_mask[] = {
 };
 
 
-void BinaryEntity::normalize( )
+void BinaryEntity::normalize( ) noexcept
 {
     // value &= bit_mask[Global::get_bit_count( )];
     // What should be done about global settings in the entity library?
@@ -144,7 +144,7 @@ static char *format_binary( unsigned long number )
 }
 #endif
 
-EntityType BinaryEntity::my_type( ) const
+EntityType BinaryEntity::my_type( ) const noexcept
 {
     return BINARY;
 }
@@ -174,21 +174,21 @@ Entity *BinaryEntity::abs( ) const
 
 Entity *BinaryEntity::acos( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->acos( );
 }
 
 
 Entity *BinaryEntity::asin( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->asin( );
 }
 
 
 Entity *BinaryEntity::atan( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->atan( );
 }
 
@@ -201,21 +201,21 @@ Entity *BinaryEntity::complex_conjugate( ) const
 
 Entity *BinaryEntity::cos( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->cos( );
 }
 
 
 Entity *BinaryEntity::exp( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->exp( );
 }
 
 
 Entity *BinaryEntity::exp10( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->exp10( );
 }
 
@@ -240,28 +240,28 @@ Entity *BinaryEntity::integer_part( ) const
 
 Entity *BinaryEntity::inv( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->inv( );
 }
 
 
 Entity *BinaryEntity::ln( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->ln( );
 }
 
 
 Entity *BinaryEntity::log( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->log( );
 }
 
 
 Entity *BinaryEntity::logical_not( ) const
 {
-    unsigned long new_value = ~value;
+    const unsigned long new_value = ~value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
@@ -283,7 +283,7 @@ Entity *BinaryEntity::neg( ) const
 Entity *BinaryEntity::divide( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
-    unsigned long new_value = value / right->value;
+    const unsigned long new_value = value / right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
@@ -292,7 +292,7 @@ Entity *BinaryEntity::divide( const Entity *R ) const
 Entity *BinaryEntity::logical_and( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
-    unsigned long new_value = value & right->value;
+    const unsigned long new_value = value & right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
@@ -301,7 +301,7 @@ Entity *BinaryEntity::logical_and( const Entity *R ) const
 Entity *BinaryEntity::logical_or( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
-    unsigned long new_value = value | right->value;
+    const unsigned long new_value = value | right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
@@ -310,7 +310,7 @@ Entity *BinaryEntity::logical_or( const Entity *R ) const
 Entity *BinaryEntity::logical_xor( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
-    unsigned long new_value = value ^ right->value;
+    const unsigned long new_value = value ^ right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
@@ -319,7 +319,7 @@ Entity *BinaryEntity::logical_xor( const Entity *R ) const
 Entity *BinaryEntity::minus( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
-    unsigned long new_value = value - right->value;
+    const unsigned long new_value = value - right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
@@ -328,7 +328,7 @@ Entity *BinaryEntity::minus( const Entity *R ) const
 Entity *BinaryEntity::multiply( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast< const BinaryEntity * >( R );
-    unsigned long new_value = value * right->value;
+    const unsigned long new_value = value * right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }
@@ -337,7 +337,7 @@ Entity *BinaryEntity::multiply( const Entity *R ) const
 Entity *BinaryEntity::plus( const Entity *R ) const
 {
     const BinaryEntity *right = dynamic_cast<const BinaryEntity *>( R );
-    unsigned long new_value = value + right->value;
+    const unsigned long new_value = value + right->value;
     BinaryEntity *result = new BinaryEntity( new_value );
     return result;
 }

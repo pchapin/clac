@@ -45,18 +45,18 @@ private:
 
 public:
     // The following methods allow access to the display state variables.
-    static angle_display_type   get_angle_mode( )    { return angle_mode;    }
-    static base_type            get_base( )          { return bit_base;      }
-    static complex_display_type get_complex_mode( )  { return complex_mode;  }
-    static int                  get_decimal_count( ) { return decimal_count; }
-    static float_display_type   get_display_mode( )  { return display_mode;  }
+    static angle_display_type   get_angle_mode( )    noexcept { return angle_mode;    }
+    static base_type            get_base( )          noexcept { return bit_base;      }
+    static complex_display_type get_complex_mode( )  noexcept { return complex_mode;  }
+    static int                  get_decimal_count( ) noexcept { return decimal_count; }
+    static float_display_type   get_display_mode( )  noexcept { return display_mode;  }
 
     // The following methods allow modifications to the display state variables.
-    static void set_angle_mode    (angle_display_type   new_mode );
-    static void set_base          (base_type            new_base );
-    static void set_complex_mode  (complex_display_type new_mode );
-    static void set_decimal_count (int                  number   );
-    static void set_display_mode  (float_display_type   new_mode );
+    static void set_angle_mode    (angle_display_type   new_mode ) noexcept;
+    static void set_base          (base_type            new_base ) noexcept;
+    static void set_complex_mode  (complex_display_type new_mode ) noexcept;
+    static void set_decimal_count (int                  number   ) noexcept;
+    static void set_display_mode  (float_display_type   new_mode ) noexcept;
 };
 
 #endif

@@ -23,7 +23,7 @@ namespace {
 }
 
 
-EntityType ComplexEntity::my_type( ) const
+EntityType ComplexEntity::my_type( ) const noexcept
 {
     return COMPLEX;
 }

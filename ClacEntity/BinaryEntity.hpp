@@ -14,47 +14,47 @@ public:
     BinaryEntity( )  { value = 0UL; }
     BinaryEntity( unsigned long number ) { value = number; normalize( ); }
 
-    virtual EntityType my_type( ) const;
-    virtual std::string display( ) const;
-    virtual Entity *duplicate( ) const;
+    EntityType my_type( ) const noexcept override;
+    std::string display( ) const override;
+    Entity *duplicate( ) const override;
 
     // Unary operations.
-    virtual Entity *abs( ) const;
-    virtual Entity *acos( ) const;
-    virtual Entity *asin( ) const;
-    virtual Entity *atan( ) const;
-    virtual Entity *complex_conjugate( ) const;
-    virtual Entity *cos( ) const;
-    virtual Entity *exp( ) const;
-    virtual Entity *exp10( ) const;
-    virtual Entity *fractional_part( ) const;
-    virtual Entity *imaginary_part( ) const;
-    virtual Entity *integer_part( ) const;
-    virtual Entity *inv( ) const;
-    virtual Entity *ln( ) const;
-    virtual Entity *log( ) const;
-    virtual Entity *logical_not( ) const;
-    virtual Entity *neg( ) const;
+    Entity *abs( ) const override;
+    Entity *acos( ) const override;
+    Entity *asin( ) const override;
+    Entity *atan( ) const override;
+    Entity *complex_conjugate( ) const override;
+    Entity *cos( ) const override;
+    Entity *exp( ) const override;
+    Entity *exp10( ) const override;
+    Entity *fractional_part( ) const override;
+    Entity *imaginary_part( ) const override;
+    Entity *integer_part( ) const override;
+    Entity *inv( ) const override;
+    Entity *ln( ) const override;
+    Entity *log( ) const override;
+    Entity *logical_not( ) const override;
+    Entity *neg( ) const override;
 
     // Binary operations.
-    virtual Entity *divide( const Entity * ) const;
-    virtual Entity *logical_and( const Entity * ) const;
-    virtual Entity *logical_or( const Entity * ) const;
-    virtual Entity *logical_xor( const Entity * ) const;
-    virtual Entity *minus( const Entity * ) const;
-    virtual Entity *multiply( const Entity * ) const;
-    virtual Entity *plus( const Entity * ) const;
+    Entity *divide( const Entity * ) const override;
+    Entity *logical_and( const Entity * ) const override;
+    Entity *logical_or( const Entity * ) const override;
+    Entity *logical_xor( const Entity * ) const override;
+    Entity *minus( const Entity * ) const override;
+    Entity *multiply( const Entity * ) const override;
+    Entity *plus( const Entity * ) const override;
 
     // Conversions.
-    virtual Entity *to_binary( ) const;
-    virtual Entity *to_complex( ) const;
-    virtual Entity *to_float( ) const;
-    virtual Entity *to_integer( ) const;
+    Entity *to_binary( ) const override;
+    Entity *to_complex( ) const override;
+    Entity *to_float( ) const override;
+    Entity *to_integer( ) const override;
 
 private:
-    unsigned long value;  // The bits themselves.
-    void normalize( );    // Function to zero out most significant bits.
+    unsigned long value;         // The bits themselves.
 
+    void normalize( ) noexcept;  // Function to zero out most significant bits.
 };
 
 #endif
