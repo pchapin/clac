@@ -5,7 +5,7 @@
 
 #include "Entities.hpp"
 
-EntityType LabeledEntity::my_type( ) const
+EntityType LabeledEntity::my_type( ) const noexcept
 {
     return LABELED;
 }

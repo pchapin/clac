@@ -19,7 +19,7 @@ MatrixEntity::~MatrixEntity( )
     }
 }
 
-EntityType MatrixEntity::my_type( ) const
+EntityType MatrixEntity::my_type( ) const noexcept
 {
     return MATRIX;
 }

@@ -7,20 +7,23 @@
 
 using namespace std;
 
-EntityType StringEntity::my_type( ) const
+EntityType StringEntity::my_type( ) const noexcept
 {
     return STRING;
 }
+
 
 string StringEntity::display( ) const
 {
     return value;
 }
 
+
 Entity *StringEntity::duplicate( ) const
 {
     return new StringEntity( value );
 }
+
 
 Entity *StringEntity::plus( const Entity *R ) const
 {

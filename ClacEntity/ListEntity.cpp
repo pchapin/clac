@@ -16,7 +16,7 @@ ListEntity::~ListEntity( )
     }
 }
 
-EntityType ListEntity::my_type( ) const
+EntityType ListEntity::my_type( ) const noexcept
 {
     return LIST;
 }

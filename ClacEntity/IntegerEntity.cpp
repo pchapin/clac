@@ -18,7 +18,7 @@ IntegerEntity::IntegerEntity( const VeryLong &number ) :
   value( number )
   {  }
 
-EntityType IntegerEntity::my_type( ) const
+EntityType IntegerEntity::my_type( ) const noexcept
 {
     return INTEGER;
 }

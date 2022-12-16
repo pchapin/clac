@@ -14,9 +14,9 @@ class MatrixEntity : public Entity {
 public:
     ~MatrixEntity( );
 
-    virtual EntityType my_type( ) const;
-    virtual std::string display( ) const;
-    virtual Entity *duplicate( ) const;
+    EntityType  my_type( )   const noexcept override;
+    std::string display( )   const override;
+    Entity     *duplicate( ) const override;
 
 private:
 

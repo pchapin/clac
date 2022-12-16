@@ -16,15 +16,17 @@ VectorEntity::~VectorEntity( )
     }
 }
 
-EntityType VectorEntity::my_type( ) const
+EntityType VectorEntity::my_type( ) const noexcept
 {
     return VECTOR;
 }
+
 
 string VectorEntity::display( ) const
 {
     return "VectorEntity::display( ) not implemented!";
 }
+
 
 Entity *VectorEntity::duplicate( ) const
 {

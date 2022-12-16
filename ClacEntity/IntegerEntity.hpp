@@ -15,60 +15,59 @@ public:
     // For bulding an integer entity from its primitive.
     IntegerEntity( const VeryLong &number );
 
-    VeryLong get_value( )
+    VeryLong get_value( ) noexcept
       { return value; }
 
     // Functions for maintaining a member of the Entity family.
-    virtual EntityType my_type( ) const;
-    virtual std::string display( ) const;
-    virtual Entity *duplicate( ) const;
+    EntityType  my_type( )   const noexcept override;
+    std::string display( )   const override;
+    Entity     *duplicate( ) const override;
 
     // Unary operations.
-    virtual Entity *abs              ( ) const;
-    virtual Entity *acos             ( ) const;
-    virtual Entity *asin             ( ) const;
-    virtual Entity *atan             ( ) const;
-    virtual Entity *complex_conjugate( ) const;
-    virtual Entity *cos              ( ) const;
-    virtual Entity *exp              ( ) const;
-    virtual Entity *exp10            ( ) const;
-    virtual Entity *fractional_part  ( ) const;
-    virtual Entity *imaginary_part   ( ) const;
-    virtual Entity *integer_part     ( ) const;
-    virtual Entity *inv              ( ) const;
-    virtual Entity *ln               ( ) const;
-    virtual Entity *log              ( ) const;
-    virtual Entity *neg              ( ) const;
-    virtual Entity *real_part        ( ) const;
-    virtual Entity *sign             ( ) const;
-    virtual Entity *sin              ( ) const;
-    virtual Entity *sq               ( ) const;
-    virtual Entity *sqrt             ( ) const;
-    virtual Entity *tan              ( ) const;
+    Entity *abs              ( ) const override;
+    Entity *acos             ( ) const override;
+    Entity *asin             ( ) const override;
+    Entity *atan             ( ) const override;
+    Entity *complex_conjugate( ) const override;
+    Entity *cos              ( ) const override;
+    Entity *exp              ( ) const override;
+    Entity *exp10            ( ) const override;
+    Entity *fractional_part  ( ) const override;
+    Entity *imaginary_part   ( ) const override;
+    Entity *integer_part     ( ) const override;
+    Entity *inv              ( ) const override;
+    Entity *ln               ( ) const override;
+    Entity *log              ( ) const override;
+    Entity *neg              ( ) const override;
+    Entity *real_part        ( ) const override;
+    Entity *sign             ( ) const override;
+    Entity *sin              ( ) const override;
+    Entity *sq               ( ) const override;
+    Entity *sqrt             ( ) const override;
+    Entity *tan              ( ) const override;
 
     // Conversion operations.
-    virtual Entity *to_float   ( ) const;
-    virtual Entity *to_integer ( ) const;
+    Entity *to_float   ( ) const override;
+    Entity *to_integer ( ) const override;
 
     // Binary operations.
-    virtual Entity *divide   ( const Entity * ) const;
-    virtual Entity *minus    ( const Entity * ) const;
-    virtual Entity *modulo   ( const Entity * ) const;
-    virtual Entity *multiply ( const Entity * ) const;
-    virtual Entity *plus     ( const Entity * ) const;
-    virtual Entity *power    ( const Entity * ) const;
+    Entity *divide   ( const Entity * ) const override;
+    Entity *minus    ( const Entity * ) const override;
+    Entity *modulo   ( const Entity * ) const override;
+    Entity *multiply ( const Entity * ) const override;
+    Entity *plus     ( const Entity * ) const override;
+    Entity *power    ( const Entity * ) const override;
 
     // Relational operations.
-    virtual Entity *is_equal          ( const Entity * ) const;
-    virtual Entity *is_notequal       ( const Entity * ) const;
-    virtual Entity *is_less           ( const Entity * ) const;
-    virtual Entity *is_lessorequal    ( const Entity * ) const;
-    virtual Entity *is_greater        ( const Entity * ) const;
-    virtual Entity *is_greaterorequal ( const Entity * ) const;
+    Entity *is_equal          ( const Entity * ) const override;
+    Entity *is_notequal       ( const Entity * ) const override;
+    Entity *is_less           ( const Entity * ) const override;
+    Entity *is_lessorequal    ( const Entity * ) const override;
+    Entity *is_greater        ( const Entity * ) const override;
+    Entity *is_greaterorequal ( const Entity * ) const override;
 
 private:
     VeryLong value;
-
 };
 
 #endif

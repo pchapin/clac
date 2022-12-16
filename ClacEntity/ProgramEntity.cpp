@@ -5,7 +5,7 @@
 
 #include "Entities.hpp"
 
-EntityType ProgramEntity::my_type( ) const
+EntityType ProgramEntity::my_type( ) const noexcept
 {
     return PROGRAM;
 }

@@ -40,7 +40,7 @@ public:
     Entity *tan( )               const override;
 
     // Conversion functions.
-    Entity *to_complex( ) const;
+    Entity *to_complex( ) const override;
 
     // Binary operations.
     Entity *divide   ( const Entity * ) const override;

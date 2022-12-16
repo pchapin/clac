@@ -18,15 +18,15 @@ public:
     std::string get_value( )
       { return value; }
 
-    virtual EntityType my_type( ) const;
-    virtual std::string display( ) const;
-    virtual Entity *duplicate( ) const;
+    EntityType  my_type( )   const noexcept override;
+    std::string display( )   const override;
+    Entity     *duplicate( ) const override;
 
     // Conversion functions.
-    virtual Entity *to_string( ) const;
+    Entity *to_string( ) const override;
 
     // Binary operations.
-    virtual Entity *plus( const Entity * ) const;
+    Entity *plus( const Entity * ) const override;
 
 private:
     std::string value;
