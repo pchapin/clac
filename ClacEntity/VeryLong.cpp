@@ -11,25 +11,23 @@
  *
  * This implementation uses a "signed magnitude" representation and not a two's complement
  * representation. This is significant when individual bits are accessed, but should not be
- * noticable for other, higher level operations. This implementation ensures that there is no
+ * noticeable for other, higher level operations. This implementation ensures that there is no
  * negative zero. Thus two zero values generated in different ways will compare equal.
  *
- * TODO:
+ * + TODO: The I/O operations should be modified so that they don't depend on ASCII and they
+ *   should honor formatting flags in the stream objects they are given. Also the handling of
+ *   white space on input should be done by the standard 'eatwhite' manipulator. Support for I/O
+ *   in bases other than 10 should be added.
  *
- * + The I/O operations should be modified so that they don't depend on ASCII and they should
- *   honor formatting flags in the stream objects they are given. Also the handling of white
- *   space on input should be done by the standard 'eatwhite' manipulator. Support for I/O in
- *   bases other than 10 should be added.
+ * + TODO: The multiplication code runs in O(n^2) where n is the number of digits in the two
+ *   numbers. This can be improved.
  *
- * + The multiplication code runs in O(n^2) where n is the number of digits in the two numbers.
- *   This can be improved.
+ * + TODO: The technique used to do division and modulus is a hack I worked up myself. It is
+ *   probably both buggy and inefficient. I should probably implement "Algorithm D" in Knuth.
  *
- * + The technique used to do division and modulus is a hack I worked up myself. It is probably
- *   both buggy and inefficient. I should probably implement "Algorithm D" in Knuth.
+ * + TODO: The code should be reviewed for thread safety.
  *
- * + The code should be reviewed for thread safety.
- *
- * + Support should be added for overloaded bit manipulation operators.
+ * + TODO: Support should be added for overloaded bit manipulation operators.
 */
 
 #include <algorithm>

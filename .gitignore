@@ -4,21 +4,13 @@
 *.toc
 *.pdf
 
-# Open Watcom generated files.
-*.bak
-*.err
-*.obj
-*.lib
-*.exe
-*.map
-
 # Visual Studio generated files.
 .vs
 *.sdf
 clac.VC.db
 Debug
 Release
-clac.vcxproj.user
+*.user
 
 # Code::Blocks generated files.
 *.layout
@@ -50,4 +42,3 @@ build
 
 # Android generated files.
 gen
-*.user
