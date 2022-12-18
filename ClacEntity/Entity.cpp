@@ -373,7 +373,7 @@ Entity *Entity::is_greaterorequal( const Entity * ) const
 // This should be made abstract eventually. Doing so now will cause problems for Entity classes
 // that have not yet gotten around to implementing it.
 //
-long Entity::file_size( ) const
+long Entity::file_size( ) const noexcept
 {
     return 0;
 }

@@ -13,7 +13,8 @@
 class DirectoryEntity : public Entity {
 public:
     DirectoryEntity( ) noexcept { }
-
+    DirectoryEntity( const DirectoryEntity & ) = delete;
+    DirectoryEntity &operator=( const DirectoryEntity & ) = delete;
     virtual ~DirectoryEntity( );
 
     EntityType my_type( ) const noexcept override;

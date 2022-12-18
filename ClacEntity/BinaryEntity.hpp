@@ -11,8 +11,8 @@
 
 class BinaryEntity : public Entity {
 public:
-    BinaryEntity( )  { value = 0UL; }
-    BinaryEntity( unsigned long number ) { value = number; normalize( ); }
+    BinaryEntity( ) noexcept { value = 0UL; }
+    BinaryEntity( unsigned long number ) noexcept { value = number; normalize( ); }
 
     EntityType my_type( ) const noexcept override;
     std::string display( ) const override;

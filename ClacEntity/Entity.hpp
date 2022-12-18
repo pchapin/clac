@@ -139,7 +139,7 @@ public:
     // can't read a proper object. Neither function closes the file, instead they leave the file
     // ready for the next operation.
 
-    virtual long    file_size( ) const;
+    virtual long    file_size( ) const noexcept;
     virtual void    write( std::ofstream & ) const;
     static  Entity *read( std::ifstream & );
 };

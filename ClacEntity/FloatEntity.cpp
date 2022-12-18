@@ -244,7 +244,7 @@ Entity *FloatEntity::exp10( ) const
 
 Entity *FloatEntity::fractional_part( ) const
 {
-    double dummy;
+    double dummy;   // We don't care about the integer part.
     return new FloatEntity( std::modf( value, &dummy ) );
 }
 
@@ -258,7 +258,8 @@ Entity *FloatEntity::imaginary_part( ) const
 Entity *FloatEntity::integer_part( ) const
 {
     double result;
-    std::modf( value, &result );
+    double dummy;   // We don't care about the fractional part.
+    dummy = std::modf( value, &result );
     return new FloatEntity( result );
 }
 

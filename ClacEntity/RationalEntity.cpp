@@ -76,21 +76,21 @@ Entity *RationalEntity::abs( ) const
 
 Entity *RationalEntity::acos( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->acos( );
 }
 
 
 Entity *RationalEntity::asin( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return  converted->asin( );
 }
 
 
 Entity *RationalEntity::atan( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->atan( );
 }
 
@@ -103,21 +103,21 @@ Entity *RationalEntity::complex_conjugate( ) const
 
 Entity *RationalEntity::cos( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->cos( );
 }
 
 
 Entity *RationalEntity::exp() const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->exp( );
 }
 
 
 Entity *RationalEntity::exp10( ) const
 {
-    unique_ptr<FloatEntity> converted( static_cast<FloatEntity *>( to_float( ) ) );
+    unique_ptr<FloatEntity> converted( dynamic_cast<FloatEntity *>( to_float( ) ) );
     return converted->exp10( );
 }
 

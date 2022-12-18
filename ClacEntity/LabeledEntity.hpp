@@ -13,7 +13,8 @@ class LabeledEntity : public Entity {
 public:
     LabeledEntity( Entity *thing, const std::string &name ) :
       object( thing ), label( name ) {}
-
+    LabeledEntity( const LabeledEntity & ) = delete;
+    LabeledEntity &operator=( const LabeledEntity & ) = delete;
     virtual ~LabeledEntity( ) { delete object; }
 
     EntityType  my_type( )   const noexcept override;

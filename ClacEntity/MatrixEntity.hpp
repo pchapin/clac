@@ -12,7 +12,10 @@
 
 class MatrixEntity : public Entity {
 public:
-    ~MatrixEntity( );
+    MatrixEntity( ) noexcept { }
+    MatrixEntity( const MatrixEntity & ) = delete;
+    MatrixEntity &operator=( const MatrixEntity & ) = delete;
+   ~MatrixEntity( );
 
     EntityType  my_type( )   const noexcept override;
     std::string display( )   const override;

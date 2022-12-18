@@ -30,7 +30,7 @@ Entity *type_mismatch( Entity *, Entity * )
 }
 
 
-double to_radians( double number )
+double to_radians( double number ) noexcept
 {
     switch( DisplayState::get_angle_mode( ) ) {
 
@@ -47,7 +47,7 @@ double to_radians( double number )
 }
 
 
-double from_radians( double number )
+double from_radians( double number ) noexcept
 {
     switch( DisplayState::get_angle_mode( ) ) {
 
@@ -64,7 +64,7 @@ double from_radians( double number )
 }
 
 
-int stricmp( char *A, char *B )
+int stricmp( char *A, char *B ) noexcept
 {
     while( *A && *B ) {
         if( toupper( *A ) != toupper( *B ) ) return 1;

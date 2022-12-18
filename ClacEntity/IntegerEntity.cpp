@@ -80,14 +80,14 @@ Entity *IntegerEntity::complex_conjugate( ) const
 
 Entity *IntegerEntity::cos( ) const
 {
-    unique_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->cos( );
 }
 
 
 Entity *IntegerEntity::exp( ) const
 {
-    unique_ptr< Entity > converted( to_float( ) );
+    unique_ptr<Entity> converted( to_float( ) );
     return converted->exp( );
 }
 
@@ -182,7 +182,7 @@ Entity *IntegerEntity::sin( ) const
 
 Entity *IntegerEntity::sq( ) const
 {
-    unique_ptr<IntegerEntity> temp( static_cast< IntegerEntity * >( duplicate( ) ) );
+    unique_ptr<IntegerEntity> temp( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
     temp->value *= value;
     return temp.release( );
 }
@@ -208,8 +208,8 @@ Entity *IntegerEntity::tan( ) const
 
 Entity *IntegerEntity::divide( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    unique_ptr<IntegerEntity> copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
+    unique_ptr<IntegerEntity> copy( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
     copy->value /= right->value;
     return copy.release( );
 }
@@ -217,8 +217,8 @@ Entity *IntegerEntity::divide( const Entity *R ) const
 
 Entity *IntegerEntity::minus( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    unique_ptr<IntegerEntity> copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
+    unique_ptr<IntegerEntity> copy( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
     copy->value -= right->value;
     return copy.release( );
 }
@@ -226,8 +226,8 @@ Entity *IntegerEntity::minus( const Entity *R ) const
 
 Entity *IntegerEntity::modulo( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    unique_ptr<IntegerEntity> copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
+    unique_ptr<IntegerEntity> copy( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
     copy->value %= right->value;
     return copy.release( );
 }
@@ -235,8 +235,8 @@ Entity *IntegerEntity::modulo( const Entity *R ) const
 
 Entity *IntegerEntity::multiply( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    unique_ptr< IntegerEntity > copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
+    unique_ptr< IntegerEntity > copy( dynamic_cast< IntegerEntity *>( duplicate( ) ) );
     copy->value *= right->value;
     return copy.release( );
 }
@@ -244,8 +244,8 @@ Entity *IntegerEntity::multiply( const Entity *R ) const
 
 Entity *IntegerEntity::plus( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
-    unique_ptr< IntegerEntity > copy( static_cast< IntegerEntity * >( duplicate( ) ) );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
+    unique_ptr< IntegerEntity > copy( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
     copy->value += right->value;
     return copy.release( );
 }
@@ -259,7 +259,7 @@ Entity *IntegerEntity::plus( const Entity *R ) const
 //
 Entity *IntegerEntity::power( const Entity *R ) const
 {
-  const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
+  const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
   unique_ptr< IntegerEntity > result( new IntegerEntity( VeryLong::one ) );
   VeryLong exponent( right->value );
 
@@ -291,42 +291,42 @@ Entity *IntegerEntity::power( const Entity *R ) const
 
 Entity *IntegerEntity::is_equal( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
     return new IntegerEntity( value == right->value );
 }
 
 
 Entity *IntegerEntity::is_notequal( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
     return new IntegerEntity( value != right->value );
 }
 
 
 Entity *IntegerEntity::is_less( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
     return new IntegerEntity( value < right->value );
 }
 
 
 Entity *IntegerEntity::is_lessorequal( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
     return new IntegerEntity( value <= right->value );
 }
 
 
 Entity *IntegerEntity::is_greater( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
     return new IntegerEntity( value > right->value );
 }
 
 
 Entity *IntegerEntity::is_greaterorequal( const Entity *R ) const
 {
-    const IntegerEntity *right = dynamic_cast< const IntegerEntity * >( R );
+    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
     return new IntegerEntity( value >= right->value );
 }
 
@@ -337,7 +337,7 @@ Entity *IntegerEntity::is_greaterorequal( const Entity *R ) const
 
 Entity *IntegerEntity::to_float( ) const
 {
-    VeryLong::size_type bit_count = value.number_bits( );
+    const VeryLong::size_type bit_count = value.number_bits( );
     double result = 0.0;
 
     for( VeryLong::size_type i = 0; i < bit_count; i++ ) {
