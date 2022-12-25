@@ -7,9 +7,9 @@
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",
-            "cStandard": "c17",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "linux-gcc-x64",
+            "cStandard": "c99",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "${default}",
             "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],

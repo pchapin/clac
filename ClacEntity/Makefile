@@ -3,7 +3,7 @@
 #
 
 CXX=g++
-CXXFLAGS=-c -g -std=c++17 -Wall
+CXXFLAGS=-c -g -std=c++20 -Wall
 LINK=ar
 LINKFLAGS=-r -c
 SOURCES=BinaryEntity.cpp    \
