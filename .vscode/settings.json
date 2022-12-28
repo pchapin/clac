@@ -11,5 +11,12 @@
         "pdflatex"
     ],
     "C_Cpp.default.cppStandard": "c++20",
-    "C_Cpp.default.cStandard": "c99"
+    "C_Cpp.default.cStandard": "c99",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/peter/Projects/Clac",
+            "binaryPath": "/home/peter/Projects/Clac/clac",
+            "binaryArgs": []
+        }
+    ]
 }
