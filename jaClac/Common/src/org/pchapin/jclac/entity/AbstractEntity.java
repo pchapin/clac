@@ -1,4 +1,4 @@
-package edu.vtc.jclac.entity;
+package org.pchapin.jclac.entity;
 
 public abstract class AbstractEntity implements Entity {
 

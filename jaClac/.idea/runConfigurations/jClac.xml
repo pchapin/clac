@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="jClac" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org.pchapin.jclac.Main" />
+    <module name="jClac" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

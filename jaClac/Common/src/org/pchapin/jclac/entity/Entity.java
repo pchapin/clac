@@ -1,4 +1,4 @@
-package edu.vtc.jclac.entity;
+package org.pchapin.jclac.entity;
 
 /**
  * Interface to Clac entities. Each entity type is intended to be immutable. The various operations always return a

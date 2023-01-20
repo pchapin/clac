@@ -1,8 +1,8 @@
-package edu.vtc.jclac;
+package org.pchapin.jclac;
 
-import edu.vtc.jclac.entity.Entity;
-import edu.vtc.jclac.entity.IntegerEntity;
-import edu.vtc.jclac.entity.OperationNotImplementedException;
+import org.pchapin.jclac.entity.Entity;
+import org.pchapin.jclac.entity.IntegerEntity;
+import org.pchapin.jclac.entity.OperationNotImplementedException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

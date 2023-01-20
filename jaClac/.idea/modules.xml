@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aClac/aClac.iml" filepath="$PROJECT_DIR$/aClac/aClac.iml" />
       <module fileurl="file://$PROJECT_DIR$/jClac/jClac.iml" filepath="$PROJECT_DIR$/jClac/jClac.iml" />
     </modules>
   </component>
 </project>
-
