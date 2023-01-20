@@ -1,7 +1,7 @@
 /*! \file    UnitTestManager.cpp
-    \brief   Implementation of the unit test manager abstract object.
-    \author  Peter C. Chapin <PChapin@vtc.vsc.edu>
-*/
+ *  \brief   Implementation of the unit test manager abstract object.
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
 
 #include <cstdlib>
 #include <iostream>

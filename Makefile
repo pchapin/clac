@@ -21,7 +21,7 @@ all:	$(EXECUTABLE)
 # recursive make is supposedly bad. Note that Miller's example is a crazy way of organizing
 # a multi-module project, and so we regard Miller's article as something of a straw man. 
 #################
-COMPONENTS = ClacEntity ClacEngine
+COMPONENTS = ClacEntity ClacEngine check
 
 .PHONY:	components $(COMPONENTS)
 components:	$(COMPONENTS)
@@ -60,6 +60,7 @@ RecordFile.o:	RecordFile.cpp RecordFile.hpp
 ##################
 .PHONY:	clean
 clean:
+	$(MAKE) -C check clean
 	$(MAKE) -C ClacEngine clean
 	$(MAKE) -C ClacEntity clean
 	rm -f *.bc *.bc1 *.bc2 *.o $(EXECUTABLE) *.s *.ll *~

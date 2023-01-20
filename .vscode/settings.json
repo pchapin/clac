@@ -18,5 +18,8 @@
             "binaryPath": "/home/peter/Projects/Clac/clac",
             "binaryArgs": []
         }
-    ]
+    ],
+    "files.associations": {
+        "cstdarg": "cpp"
+    }
 }

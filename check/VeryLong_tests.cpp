@@ -1,4 +1,9 @@
 
+/*! \file    VeryLong_tests.cpp
+ *  \brief   Code to test class VeryLong
+ *  \author  Peter Chapin <chapinp@proton.me>
+ */
+
 #include <string>
 #include <sstream>
 #include "VeryLong.hpp"
@@ -32,9 +37,9 @@ void check_io( )
     VeryLong object_D( raw_digits );
 
 // The helper macro just makes the tests a bit less tedious to type.
-#define CHECK_FORMAT(num, result)                \
-            std::ostringstream formatter_ ## num;     \
-            formatter_ ## num << object_ ## num; \
+#define CHECK_FORMAT(num, result)                  \
+            std::ostringstream formatter_ ## num;  \
+            formatter_ ## num << object_ ## num;   \
             UNIT_CHECK(formatter_ ## num.str() == result)
 
     CHECK_FORMAT(1, "12345678900000987654321");
