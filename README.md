@@ -5,19 +5,15 @@ Clac is a programmable calculator inspired by the HP48 series of calculators. It
 emulation of the HP48. It lacks many of the features of the HP48, but it also has several unique
 features of its own.
 
-The primary implementation is in C++ and has three components. The ClacEntity library is a
+The primary implementation is in C++ 2020 and has three components. The ClacEntity library is a
 library of calculator (mostly numeric) data types. The ClacEngine library provides the execution
 engine that interprets calculator input and coordinates the computations. The top level code
 defines the user interface. In theory other programs could make use of Clac's entity library and
 execution engine while using a different user interface.
 
-In addition, there is a completely independent implementation of Clac written in Java in the
-jaClac folder. This implementation does not currently share any code with the C++ version. See
-the README in that folder for more information.
-
-Finally, there is a lightweight version of Clac written in Java in the Clacky folder. This
-version is independent of both the C++ version and of jaClac. It is suitable for study by novice
-programming students using Java.
+In addition, there is a completely independent implementation of Clac for Android written in
+Kotlin in the aClac folder. This implementation does not currently share any code with the C++
+version. See the README in that folder for more information.
 
 
 Building
