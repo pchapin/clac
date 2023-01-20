@@ -15,7 +15,16 @@ use the same Common folder but have its own UI folder.
 *NOTE* The Java version(s) of Clac are immature and not maintained. They were never more than
 skeletons. They are being retained in the hope that they may be developed more in the future.
 
-The versions of Clac here use IntelliJ IDE as their build environment.
+The jClac project uses IntelliJ IDE as its build environment (open the jClac folder). The aClac
+project uses Android Studio as its build environment (open the aClac folder).
+
+TODO
+----
+
+Android Studio uses Gradle as its build system and it can't (currently) import the Common module
+since that module is not a Gradle-based build. Probably what needs to happen is the jClac
+project needs to migrate to Gradle, including the Common module, and then the Common module may
+be importable into aClac. Until then aClac is seriously broken.
 
 Peter Chapin  
 chapinp@proton.me  
