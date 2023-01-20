@@ -77,10 +77,9 @@ Developer Notes
 ---------------
 
 Makefile dependencies are maintained using a tool named `depend` that can be [found on
-GitHub](https://github.com/pchapin/yeditor) (look in the `tools` folder of the Y editor
-project). This tool takes a list of source files and crawls over the includes to generate
-dependency lists suitable for `make`. The tool is *not* needed to build Clac, but it may be
-useful when updating Makefiles.
+GitHub](https://github.com/pchapin/tools). This tool takes a list of source files and crawls
+over the includes to generate dependency lists suitable for `make`. The tool is *not* needed to
+build Clac, but it may be useful when updating Makefiles.
 
 In each folder containing C++ source files, you will find a file `depend.dep` that contains a
 list of .cpp files that should be built. The shell script `depend.sh` runs the `depend` tool on
