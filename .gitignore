@@ -35,6 +35,7 @@ api
 # Executables
 clac
 u_tests
+*.exe
 
 # IntelliJ generated files.
 workspace.xml

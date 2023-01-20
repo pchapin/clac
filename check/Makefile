@@ -3,9 +3,9 @@
 #
 
 CXX=g++
-CXXFLAGS=-std=c++11 -c -g -I../ClacEntity -I../ClacEngine
+CXXFLAGS=-std=c++20 -c -g -I../ClacEntity -I../ClacEngine
 LINK=g++
-LINKFLAGS=-lncurses
+LINKFLAGS=
 SOURCES=u_tests.cpp             \
     VeryLong_tests.cpp          \
 	UnitTestManager.cpp
