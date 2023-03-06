@@ -11,7 +11,7 @@
 
 class StringEntity : public Entity {
 public:
-    StringEntity( ) { }
+    StringEntity( ) noexcept { }
     StringEntity( const std::string &incoming ) : value( incoming ) { }
 
     // It might be nice to do without this at some point.
