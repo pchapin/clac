@@ -1,6 +1,6 @@
 /*! \file    clac.cpp
  *  \brief   Clac main program.
- *  \author  Peter C. Chapin <chapinp@proton.me> and Peter Nikolaidis
+ *  \author  Peter Chapin <chapinp@proton.me> and Peter Nikolaidis
  */
 
 #include <cstdarg>
@@ -143,10 +143,12 @@ namespace {
 
             Entity *new_thing = (T1->*binary_operation)( T2 );
 
+            // TODO: Shouldn't there be a method in the stack class that deletes the top element?
             Entity *old_level_zero = the_stack.pop( );
             Entity *old_level_one  = the_stack.pop( );
             delete old_level_zero;
             delete old_level_one;
+
             the_stack.push( new_thing );
         }
     }
@@ -404,7 +406,8 @@ int Main( int argc, char **argv )
         }
     }
 
-    return 0;
+    // Clac always "succeeds" unless there is an unhandled exception (see below).
+    return EXIT_SUCCESS;
 }
 
 //===================================

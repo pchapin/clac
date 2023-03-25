@@ -95,39 +95,39 @@ size_t ClacStack::height( )  // Depth of the stack.
 }
 
 
-void ClacStack::roll_down( const VeryLong &C )
+void ClacStack::roll_down( const VeryLong &count )
 {
-    size_t count = static_cast<size_t>( C.to_long( ) );
-    if( count == 0 ) count = 1;
-    if( count > height( ) )
+    size_t raw_count = static_cast<size_t>( count.to_long( ) );
+    if( raw_count == 0 ) raw_count = 1;
+    if( raw_count > height( ) )
         error_message( "Stack not high enough to roll" );
     else {
         Entity *temp  = data[0];
-        for( size_t i = 0; i < count - 1; i++ ) {
-            data[i] = data[i+1];
+        for( size_t i = 0; i < raw_count - 1; i++ ) {
+            data[i] = data[i + 1];
         }
-        data[count-1] = temp;
+        data[raw_count - 1] = temp;
     }
 }
 
 
-void ClacStack::roll_up( const VeryLong &C )
+void ClacStack::roll_up( const VeryLong &count )
 {
-    size_t count = static_cast<size_t>( C.to_long( ) );
-    if( count == 0 ) count = 1;
-    if( count > height( ) )
+    size_t raw_count = static_cast<size_t>( count.to_long( ) );
+    if( raw_count == 0 ) raw_count = 1;
+    if( raw_count > height( ) )
         error_message( "Stack not high enough to roll" );
     else {
-        Entity *temp  = data[count-1];
-        for( size_t i = count-1; i > 0; i-- ) {
-            data[i] = data[i-1];
+        Entity *temp  = data[raw_count - 1];
+        for( size_t i = raw_count - 1; i > 0; i-- ) {
+            data[i] = data[i - 1];
         }
         data[0] = temp;
     }
 }
 
 
-void ClacStack::rotate( )    // Perform a 3 Roll_Up.
+void ClacStack::rotate( )
 {
     if( data[0] != nullptr && data[1] != nullptr && data[2] != nullptr ) {
         Entity *temp = data[2];
@@ -141,7 +141,7 @@ void ClacStack::rotate( )    // Perform a 3 Roll_Up.
 }
 
 
-void ClacStack::swap( )    // Perform a swap of levels 1 and 2.
+void ClacStack::swap( )
 {
     if( data[0] != nullptr && data[1] != nullptr ) {
         Entity *temp = data[0];
