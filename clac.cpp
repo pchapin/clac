@@ -11,6 +11,7 @@
 #include <ctype.h>
 #include <iostream>
 #include <iomanip>
+#include <map>
 #include <memory>
 
 // ClacEntity library.
@@ -374,6 +375,13 @@ int Main( int argc, char **argv )
 {
     bool use_debugger = false;
 
+    // Map entity types to names for the UI.
+    map<EntityType, string> type_abbreviation = {
+        { BINARY,  "BIN" }, { COMPLEX,  "CPX" }, { DIRECTORY, "DIR" }, { FLOAT,  "FLT" },
+        { INTEGER, "INT" }, { LABELED,  "LBL" }, { LIST,      "LST" }, { MATRIX, "MAT" },
+        { PROGRAM, "PGM" }, { RATIONAL, "RAT" }, { STRING,    "STR" }, { VECTOR, "VEC" }
+    };
+
     // Command line analysis.
     // TODO: Improve and generalize the handling of the command line.
     for( int i = 1; i < argc; ++i ) {
@@ -385,6 +393,19 @@ int Main( int argc, char **argv )
 
     bool done = false;
     while( !done ) {
+        // Display the top eight items on the stack.
+        // TODO: The number of stack levels displayed here should be configurable.
+        for( int i = 7; i >= 0; i-- ) {
+            cout << setw( 2 ) << i + 1 << ": ";
+            Entity *stack_item = global::the_stack( ).get( i );
+            if( stack_item == nullptr ) {
+                cout << "--- : " << endl;
+            }
+            else {
+                EntityType stack_item_type = stack_item->my_type( );
+                cout << type_abbreviation[stack_item_type] << " : " << stack_item->display( ) << endl;
+            }
+        }
         cout << "=> ";
         getline( cin, command_text );
 
@@ -393,16 +414,6 @@ int Main( int argc, char **argv )
         global::word_source( ).push( words );
         if( process_words( ) == false ) {
             done = true;
-        }
-        else {
-            // Display the top item on the stack after each line of command text is processed.
-            Entity *stack_0 = global::the_stack( ).get( 0 );
-            if( stack_0 == nullptr ) {
-                cout << "parameter stack emtpy" << endl;
-            }
-            else {
-                cout << stack_0->display( ) << endl;
-            }
         }
     }
 
