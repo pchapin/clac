@@ -207,14 +207,14 @@ namespace {
         { "sqrt",   &Entity::sqrt              },
         { "tan",    &Entity::tan               },
         
-        { ">bin",   &Entity::to_binary         },
-        { ">cmplx", &Entity::to_complex        },
-        { ">flt",   &Entity::to_float          },
-        { ">int",   &Entity::to_integer        },
-        { ">list",  &Entity::to_list           },
-        { ">mat",   &Entity::to_matrix         },
-        { ">rat",   &Entity::to_rational       },
-        { ">str",   &Entity::to_string         },
+        { ">BIN",   &Entity::to_binary         },
+        { ">CPX",   &Entity::to_complex        },
+        { ">FLT",   &Entity::to_float          },
+        { ">INT",   &Entity::to_integer        },
+        { ">LST",   &Entity::to_list           },
+        { ">MAT",   &Entity::to_matrix         },
+        { ">RAT",   &Entity::to_rational       },
+        { ">STR",   &Entity::to_string         },
         { nullptr,   nullptr                   }
     };
 
