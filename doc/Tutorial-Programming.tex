@@ -21,7 +21,7 @@ nature. If you think in terms of the stack, programming \CLAC\ becomes very stra
   (default extension = .cpg) with the ``run'' command. For example
 
 \begin{verbatim}
-          => "myprog" run
+    => "myprog" run
 \end{verbatim}
   
   will execute the program in the file ``myprog.cpg'' Notice that the quotes around ``myprog''
@@ -34,10 +34,10 @@ nature. If you think in terms of the stack, programming \CLAC\ becomes very stra
   command. For example
 
 \begin{verbatim}
-          => "pi *" eval
+    => "pi *" eval
 \end{verbatim}
 
-     will execute the program contained in the string ``pi *''
+will execute the program contained in the string ``pi *''
 
 \end{description}
 
@@ -50,7 +50,7 @@ Suppose you wanted to calculate the sum of the first 100 integers. You would use
 course.
 
 \begin{verbatim}
-     => 0 1 100 for I + next
+    => 0 1 100 for I + next
 \end{verbatim}
 
 The first zero is the accumulator. The next two numbers represent the loop's range. In this
@@ -75,7 +75,7 @@ Suppose you wanted to calculate
 No problem.
 
 \begin{verbatim}
-     => fraction 0 1 99 for I I 1 + / + next
+    => 0 1 99 for I I 1 + / + next
 \end{verbatim}
 
 It looks strange. But it works.
@@ -84,7 +84,7 @@ Suppose you wanted to calculate the above series often, but with different bound
 put the meaty part of the program into a string.
 
 \begin{verbatim}
-     => "for I I + / + next" Series sto
+    => "for I I + / + next" Series sto
 \end{verbatim}
 
 Now you can evaluate for various bounds like this
@@ -100,4 +100,4 @@ limits of the for loop. Notice that it's still necessary to put an initial zero 
 outside of the evaluated string. All the eval effectively does is expand the string so that the
 sequence of words \CLAC\ sees includes the words in that string.
 
-You can thus use strings for storing quick and dirty programs.
+Thus, you can use strings for storing quick and dirty programs.
