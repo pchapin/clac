@@ -8,12 +8,14 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <numbers>
 #include <string>
 
 #include "Rational.hpp"
 
 #include "BinaryEntity.hpp"
 #include "ComplexEntity.hpp"
+#include "DisplayState.hpp"
 #include "FloatEntity.hpp"
 #include "IntegerEntity.hpp"
 #include "LabeledEntity.hpp"
@@ -63,10 +65,10 @@ namespace {
     {
         Entity *result = nullptr;
         if( word == "pi" ) {
-            result = new FloatEntity( 3.141592653589793238462643 );
+            result = new FloatEntity( numbers::pi );
         }
         else if( word == "e" ) {
-            result = new FloatEntity( 2.718281828459045235360287 );
+            result = new FloatEntity( numbers::e );
         }
         else if( word == "i" ) {
             result = new ComplexEntity( 0.0, 1.0 );
@@ -93,21 +95,21 @@ namespace {
         else
             word_buffer = workspace;
 
-        global::BaseType input_base = global::get_base( );
+        DisplayState::BaseType input_base = DisplayState::get_base( );
 
         string::size_type trailing = word_buffer.length( ) - 1;
         switch( word_buffer[trailing] ) {
         case 'h':
-            input_base = global::HEX;
+            input_base = DisplayState::HEX;
             break;
         case 'b':
-            input_base = global::BINARY;
+            input_base = DisplayState::BINARY;
             break;
         case 'd':
-            input_base = global::DECIMAL;
+            input_base = DisplayState::DECIMAL;
             break;
         case 'o': case 'q':
-            input_base = global::OCTAL;
+            input_base = DisplayState::OCTAL;
             break;
         }
         unsigned long value = 0UL;
@@ -117,7 +119,7 @@ namespace {
         bool error = false;
         while( *pointer && !error ) {
             switch( input_base ) {
-            case global::DECIMAL:
+            case DisplayState::DECIMAL:
                 if( !isdigit( *pointer ) )
                     error = true;
                 else {
@@ -125,7 +127,8 @@ namespace {
                     value += *pointer - '0';
                 }
                 break;
-            case global::BINARY:
+
+            case DisplayState::BINARY:
                 if( !( *pointer == '0' || *pointer == '1' ) )
                     error = true;
                 else {
@@ -133,7 +136,8 @@ namespace {
                     value += *pointer - '0';
                 }
                 break;
-            case global::OCTAL:
+
+            case DisplayState::OCTAL:
                 if( !isdigit( *pointer ) || *pointer == '8' || *pointer == '9' )
                     error = true;
                 else {
@@ -141,7 +145,8 @@ namespace {
                     value += *pointer - '0';
                 }
                 break;
-            case global::HEX:
+
+            case DisplayState::HEX:
                 if( !( isdigit( *pointer ) || ( *pointer >= 'A' && *pointer <= 'F' ) ) )
                     error = true;
                 else {

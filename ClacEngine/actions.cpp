@@ -12,6 +12,7 @@
 
 #include "BinaryEntity.hpp"
 #include "ComplexEntity.hpp"
+#include "DisplayState.hpp"
 #include "Entity.hpp"
 #include "FloatEntity.hpp"
 #include "IntegerEntity.hpp"
@@ -93,7 +94,7 @@ namespace {
 
 void do_bin( ClacStack & )
 {
-    global::set_base( global::BINARY );
+    DisplayState::set_base( DisplayState::BINARY );
 }
 
 
@@ -105,13 +106,13 @@ void do_clear( ClacStack &the_stack )
 
 void do_dec( ClacStack & )
 {
-    global::set_base( global::DECIMAL );
+    DisplayState::set_base( DisplayState::DECIMAL );
 }
 
 
 void do_deg( ClacStack & )
 {
-    global::set_angle_mode( global::DEG );
+    DisplayState::set_angle_mode( DisplayState::DEG );
 }
 
 
@@ -165,8 +166,8 @@ void do_eng( ClacStack &the_stack )
     VeryLong count = pop_int( the_stack );
 
     if( count == 0 ) return;
-    global::set_decimal_count( count );
-    global::set_display_mode( global::ENGINEERING );
+    DisplayState::set_decimal_count( count.to_long( ) );
+    DisplayState::set_display_mode( DisplayState::ENGINEERING );
 }
 
 
@@ -195,20 +196,20 @@ void do_eval( ClacStack &the_stack )
 void do_fix( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
-    global::set_decimal_count( count );
-    global::set_display_mode( global::FIXED );
+    DisplayState::set_decimal_count( count.to_long( ) );
+    DisplayState::set_display_mode( DisplayState::FIXED );
 }
 
 
 void do_grad( ClacStack & )
 {
-    global::set_angle_mode( global::GRAD );
+    DisplayState::set_angle_mode( DisplayState::GRAD );
 }
 
 
 void do_hex( ClacStack & )
 {
-    global::set_base( global::HEX );
+    DisplayState::set_base( DisplayState::HEX );
 }
 
 
@@ -216,20 +217,20 @@ void do_info( ClacStack & )
 {
     info_message(
       string("CLAC Version 0.00a  Compiled: ") + AdjDate( __DATE__ ) + '\n' +
-             "(C) Copyright 2022 by Peter Chapin and Peter Nikolaidis" );
+             "(C) Copyright 2023 by Peter Chapin and Peter Nikolaidis" );
 
 }
 
 
 void do_oct( ClacStack & )
 {
-    global::set_base( global::OCTAL );
+    DisplayState::set_base( DisplayState::OCTAL );
 }
 
 
 void do_polar( ClacStack & )
 {
-    global::set_complex_mode( global::POLAR );
+    DisplayState::set_complex_mode( DisplayState::POLAR );
 }
 
 
@@ -255,13 +256,13 @@ void do_purge( ClacStack &the_stack )
 
 void do_rad( ClacStack & )
 {
-    global::set_angle_mode( global::RAD );
+    DisplayState::set_angle_mode( DisplayState::RAD );
 }
 
 
 void do_rec( ClacStack & )
 {
-    global::set_complex_mode( global::RECTANGULAR );
+    DisplayState::set_complex_mode( DisplayState::RECTANGULAR );
 }
 
 
@@ -417,8 +418,8 @@ void do_run( ClacStack &the_stack )
 void do_sci( ClacStack &the_stack )
 {
     VeryLong count = pop_int( the_stack );
-    global::set_decimal_count( count );
-    global::set_display_mode( global::SCIENTIFIC );
+    DisplayState::set_decimal_count( count.to_long( ) );
+    DisplayState::set_display_mode( DisplayState::SCIENTIFIC );
 }
 
 

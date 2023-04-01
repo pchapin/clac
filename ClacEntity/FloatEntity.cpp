@@ -33,6 +33,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
+#include <numbers>
 
 #include "Entities.hpp"
 #include "DisplayState.hpp"
@@ -41,8 +42,8 @@
 using namespace std;
 
 // These two constants are fundamental.
-constexpr double pi = 3.141592653589793238462643;
-constexpr double e  = 2.718281828459045235360287;
+constexpr double pi = numbers::pi;
+constexpr double e  = numbers::e;
 
 //=================================================
 //           Internally Linked Functions

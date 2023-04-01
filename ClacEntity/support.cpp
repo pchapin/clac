@@ -4,6 +4,7 @@
  */
 
 #include <cctype>
+#include <numbers>
 
 #include "DisplayState.hpp"
 #include "support.hpp"
@@ -34,14 +35,14 @@ double to_radians( double number ) noexcept
 {
     switch( DisplayState::get_angle_mode( ) ) {
 
-    case DisplayState::DEGREES:
-        return number * 3.141592653589793 / 180.0;
+    case DisplayState::DEG:
+        return number * numbers::pi / 180.0;
 
-    case DisplayState::RADIANS:
+    case DisplayState::RAD:
         return number;
 
-    case DisplayState::GRADIANS:
-        return number * 3.141592653589793 / 200.0;
+    case DisplayState::GRAD:
+        return number * numbers::pi / 200.0;
     }
     return number;
 }
@@ -51,14 +52,14 @@ double from_radians( double number ) noexcept
 {
     switch( DisplayState::get_angle_mode( ) ) {
 
-    case DisplayState::DEGREES:
-        return number * 180.0 / 3.141592653589793;
+    case DisplayState::DEG:
+        return ( number / numbers::pi ) * 180.0;
 
-    case DisplayState::RADIANS:
+    case DisplayState::RAD:
         return number;
 
-    case DisplayState::GRADIANS:
-        return number * 200.0 / 3.141592653589793;
+    case DisplayState::GRAD:
+        return ( number / numbers::pi ) * 200.0;
     }
     return number;
 }
