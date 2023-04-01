@@ -23,7 +23,7 @@
 #include "VeryLong.hpp"
 
 #include "actions.hpp"
-#include "global.hpp"
+#include "Global.hpp"
 #include "support.hpp"
 #include "WordStream.hpp"
 
@@ -188,7 +188,7 @@ void do_eval( ClacStack &the_stack )
 
     FileStream *new_words = new FileStream( file_name->get_value( ).c_str( ) );
     if( new_words != nullptr ) {
-      global::word_source( ).push( new_words );
+      Global::word_source( ).push( new_words );
     }
   }
 
@@ -465,7 +465,7 @@ void do_stws( ClacStack &the_stack )
         error_message( "Word size must be no more than 32 bits" );
     }
     else {
-        global::set_bit_count( count );
+        Global::set_bit_count( count );
     }
 }
 

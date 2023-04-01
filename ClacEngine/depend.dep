@@ -1,6 +1,6 @@
 actions.cpp
 ClacStack.cpp
 get.cpp
-global.cpp
+Global.cpp
 words.cpp
 WordStream.cpp

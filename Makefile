@@ -45,13 +45,13 @@ $(EXECUTABLE):	components $(OBJECTS) $(LIBENGINE) $(LIBENTITY)
 # File Dependencies
 ###################
 
-# Module dependencies -- Produced with 'depend' on Tue Jan 14 20:16:06 2020
+# Module dependencies -- Produced with 'depend' on Sat Apr  1 10:21:07 2023
 
 
 clac.o:	clac.cpp ClacEntity/BinaryEntity.hpp ClacEntity/Entity.hpp ClacEntity/FloatEntity.hpp \
 	ClacEntity/IntegerEntity.hpp ClacEntity/VeryLong.hpp ClacEntity/StringEntity.hpp ClacEntity/convert.hpp \
-	ClacEntity/support.hpp ClacEngine/actions.hpp ClacEngine/ClacStack.hpp ClacEngine/get.hpp ClacEngine/WordStream.hpp \
-	ClacEngine/global.hpp ClacEngine/words.hpp 
+	ClacEntity/support.hpp ClacEngine/actions.hpp ClacEngine/ClacStack.hpp ClacEngine/get.hpp \
+	ClacEngine/WordStream.hpp ClacEngine/Global.hpp ClacEngine/words.hpp 
 
 RecordFile.o:	RecordFile.cpp RecordFile.hpp 
 

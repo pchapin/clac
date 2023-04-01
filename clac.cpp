@@ -25,7 +25,7 @@
 // ClacEngine library.
 #include "actions.hpp"
 #include "get.hpp"
-#include "global.hpp"
+#include "Global.hpp"
 #include "words.hpp"
 
 using namespace std;
@@ -334,14 +334,14 @@ bool process_words( )
 {
     while( 1 ) {
         try {
-            string new_word( global::word_source( ).next_word( ) );
+            string new_word( Global::word_source( ).next_word( ) );
 
             // The master stream is exhausted.
             if( new_word.length( ) == 0 ) return true;
 
             // See if we got the null word. [Can this ever happen?]
             if( new_word[0] == '\0' ) {
-                do_dup( global::the_stack( ) );
+                do_dup( Global::the_stack( ) );
                 continue;
             }
 
@@ -349,14 +349,14 @@ bool process_words( )
             if( new_word == "quit" ) return false;
 
             // See if it is a built in word.
-            if( process_binary( global::the_stack( ), new_word) ) continue;
-            if( process_unary ( global::the_stack( ), new_word) ) continue;
-            if( process_action( global::the_stack( ), new_word) ) continue;
+            if( process_binary( Global::the_stack( ), new_word) ) continue;
+            if( process_unary ( Global::the_stack( ), new_word) ) continue;
+            if( process_action( Global::the_stack( ), new_word) ) continue;
 
             StringStream stream( new_word );
             Entity *new_object = get_entity( stream );
             if( new_object != nullptr )
-                global::the_stack( ).push( new_object );
+                Global::the_stack( ).push( new_object );
         }
         catch( const char *the_message ) {
             error_message( "Exception: %s", the_message );
@@ -397,7 +397,7 @@ int Main( int argc, char **argv )
         // TODO: The number of stack levels displayed here should be configurable.
         for( int i = 7; i >= 0; i-- ) {
             cout << setw( 2 ) << i + 1 << ": ";
-            Entity *stack_item = global::the_stack( ).get( i );
+            Entity *stack_item = Global::the_stack( ).get( i );
             if( stack_item == nullptr ) {
                 cout << "--- : " << endl;
             }
@@ -411,7 +411,7 @@ int Main( int argc, char **argv )
 
         // Push the command text onto the master stream as a string of Clac command words.
         StringStream *words = new StringStream( command_text );
-        global::word_source( ).push( words );
+        Global::word_source( ).push( words );
         if( process_words( ) == false ) {
             done = true;
         }

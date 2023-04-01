@@ -1,4 +1,4 @@
-/*! \file    global.hpp
+/*! \file    Global.hpp
  *  \brief   This file contains the interface to clac's global state.
  *  \author  Peter Chapin <chapinp@proton.me>
  */
@@ -11,7 +11,7 @@
 #include "ClacStack.hpp"
 #include "WordStream.hpp"
 
-namespace global {
+namespace Global {
 
     void set_bit_count( const VeryLong &new_bit_count );
 

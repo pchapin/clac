@@ -1,11 +1,11 @@
-/*! \file    global.cpp
+/*! \file    Global.cpp
  *  \brief   This file contains the implementation of clac's global state.
  *  \author  Peter Chapin <chapinp@proton.me>
 */
 
-#include "global.hpp"
+#include "Global.hpp"
 
-namespace global {
+namespace Global {
 
     // The global variables themselves.
     VeryLong      current_bit_count;

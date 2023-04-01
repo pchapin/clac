@@ -26,7 +26,7 @@
 #include "support.hpp"
 
 #include "get.hpp"
-#include "global.hpp"
+#include "Global.hpp"
 #include "words.hpp"
 
 using namespace std;
@@ -90,7 +90,7 @@ namespace {
 
         workspace = workspace.substr( 1 );         // Skip the '#'.
         if( workspace.length( ) == 0 ) {
-            word_buffer = global::word_source( ).next_word( );
+            word_buffer = Global::word_source( ).next_word( );
         }
         else
             word_buffer = workspace;
@@ -182,7 +182,7 @@ namespace {
         while( strchr( working_buffer, ')' ) == nullptr ) {
             string word_buffer;
 
-            word_buffer = global::word_source( ).next_word( );
+            word_buffer = Global::word_source( ).next_word( );
             strcat( working_buffer, " " );
             strcat( working_buffer, word_buffer.c_str( ) );
         }
@@ -262,7 +262,7 @@ namespace {
 
         workspace = workspace.substr( 1 );
         if( workspace.length( ) == 0 )
-            word_buffer = global::word_source( ).next_word( );
+            word_buffer = Global::word_source( ).next_word( );
         else
             word_buffer = workspace;
 
@@ -271,7 +271,7 @@ namespace {
             Entity *list_element = get_entity( stream );
             if( list_element != nullptr )
                 new_object->plus( list_element );
-            word_buffer = global::word_source( ).next_word( );
+            word_buffer = Global::word_source( ).next_word( );
         }
         return new_object;
     }
@@ -293,7 +293,7 @@ namespace {
 
         workspace = workspace.substr( 1 );
         if( workspace.length( ) == 0 )
-            word_buffer = global::word_source( ).next_word( );
+            word_buffer = Global::word_source( ).next_word( );
         else
             word_buffer = workspace;
 
@@ -316,7 +316,7 @@ namespace {
                 //    if( matrix_element != nullptr )
                 //        new_object->install( matrix_element, row_count, column_count++ );
             }
-            word_buffer = global::word_source( ).next_word( );
+            word_buffer = Global::word_source( ).next_word( );
         }
         return new_object;
     }
