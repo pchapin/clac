@@ -35,19 +35,19 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
+			<Add option="-std=c++20" />
 			<Add directory="../ClacEntity" />
 		</Compiler>
 		<Unit filename="ClacStack.cpp" />
 		<Unit filename="ClacStack.hpp" />
+		<Unit filename="Global.cpp" />
+		<Unit filename="Global.hpp" />
 		<Unit filename="WordStream.cpp" />
 		<Unit filename="WordStream.hpp" />
 		<Unit filename="actions.cpp" />
 		<Unit filename="actions.hpp" />
 		<Unit filename="get.cpp" />
 		<Unit filename="get.hpp" />
-		<Unit filename="global.cpp" />
-		<Unit filename="global.hpp" />
 		<Unit filename="words.cpp" />
 		<Unit filename="words.hpp" />
 		<Extensions />
