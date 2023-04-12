@@ -11,9 +11,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="global.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="words.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -29,15 +26,15 @@
     <ClCompile Include="ClacStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="get.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="global.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="words.hpp">
@@ -47,6 +44,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ClacStack.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
