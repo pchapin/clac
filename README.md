@@ -12,8 +12,9 @@ defines the user interface. In theory other programs could make use of Clac's en
 execution engine while using a different user interface.
 
 In addition, there is a completely independent implementation of Clac for Android written in
-Kotlin in the aClac folder. This implementation does not currently share any code with the C++
-version. See the README in that folder for more information.
+Kotlin in the [aClac](https://github.com/pchapin/aclac) repository. That implementation does not
+currently share any code with the C++ version. See the README in that repository for more
+information.
 
 
 Building
