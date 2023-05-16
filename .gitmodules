@@ -1,0 +1,3 @@
+[submodule "Scr"]
+	path = Scr
+	url = https://github.com/pchapin/scr.git
