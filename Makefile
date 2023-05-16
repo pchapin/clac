@@ -3,7 +3,7 @@
 #
 
 CXX=g++
-CXXFLAGS=-c -g -std=c++20 -Wall -IClacEntity -IClacEngine
+CXXFLAGS=-c -g -std=c++20 -Wall -IClacEntity -IClacEngine -IScr
 LINK=g++
 SOURCES=clac.cpp              \
 	RecordFile.cpp
@@ -11,6 +11,7 @@ OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=clac
 LIBENTITY=ClacEntity/libClacEntity.a
 LIBENGINE=ClacEngine/libClacEngine.a
+LIBSCR=Scr/libScr.a
 
 .PHONY:	all
 all:	$(EXECUTABLE)
@@ -21,7 +22,7 @@ all:	$(EXECUTABLE)
 # recursive make is supposedly bad. Note that Miller's example is a crazy way of organizing
 # a multi-module project, and so we regard Miller's article as something of a straw man. 
 #################
-COMPONENTS = ClacEntity ClacEngine check
+COMPONENTS = ClacEntity ClacEngine Scr check
 
 .PHONY:	components $(COMPONENTS)
 components:	$(COMPONENTS)
@@ -38,8 +39,8 @@ ClacEngine:	ClacEntity
 %.o:	%.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-$(EXECUTABLE):	components $(OBJECTS) $(LIBENGINE) $(LIBENTITY)
-	$(CXX) $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LINKFLAGS) -o $@
+$(EXECUTABLE):	components $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LIBSCR)
+	$(CXX) $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LIBSCR) -lcurses $(LINKFLAGS) -o $@
 
 
 # File Dependencies
@@ -61,6 +62,7 @@ RecordFile.o:	RecordFile.cpp RecordFile.hpp
 .PHONY:	clean
 clean:
 	$(MAKE) -C check clean
+	$(MAKE) -C Scr clean
 	$(MAKE) -C ClacEngine clean
 	$(MAKE) -C ClacEntity clean
 	rm -f *.bc *.bc1 *.bc2 *.o $(EXECUTABLE) *.s *.ll *~

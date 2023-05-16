@@ -28,6 +28,10 @@
 #include "Global.hpp"
 #include "words.hpp"
 
+// Scr library.
+#include "debug.hpp"
+#include "scr.hpp"
+
 using namespace std;
 
 //=====================================
@@ -79,7 +83,8 @@ private:
 
 SetUp::SetUp( bool use_debugger ) : debugging_on( false )
 {
-    // TODO: Do other program-wide initializations as required.
+    // TODO: Check the result of screen initialization and abort if it fails.
+    scr::initialize( );
 
     // The value of 'use_debugger' is intended to select if the runtime debugging environment is
     // active. The Scr library had such a facility that used Scr. It might be a nice project to
@@ -87,6 +92,7 @@ SetUp::SetUp( bool use_debugger ) : debugging_on( false )
 
     if( use_debugger ) {
         debugging_on = true;
+        scr::initialize_debugging( DBG_TOP );
     }
     // TODO: Reload the calculator state (if there's a saved one to be found).
 }
@@ -96,9 +102,9 @@ SetUp::~SetUp( )
 {
     // TODO: Save the calculator state.
     if( debugging_on ) {
-        // Do something?
+        scr::terminate_debugging( );
     }
-    // TODO: Program-wide clean-up actions.
+    scr::terminate( );
 }
 
 //=================================================
@@ -373,7 +379,7 @@ bool process_words( )
 
 int Main( int argc, char **argv )
 {
-    bool use_debugger = false;
+    bool use_debugger = true;
 
     // Map entity types to names for the UI.
     map<EntityType, string> type_abbreviation = {
