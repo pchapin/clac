@@ -29,6 +29,7 @@
 #include "words.hpp"
 
 // Scr library.
+#include "CommandWindow.hpp"
 #include "debug.hpp"
 #include "scr.hpp"
 
@@ -49,8 +50,8 @@ void error_message( const char *message, ... )
     va_list ap;
 
     va_start( ap, message );
-    char message_buffer[128+1];
-    vsprintf( message_buffer, message, ap );
+    char message_buffer[128 + 1];
+    vsnprintf( message_buffer, 128 + 1, message, ap );
     cout << message_buffer << endl;
 }
 
@@ -68,44 +69,6 @@ void info_message( const string &message )
     cout << message << endl;
 }
 
-//===========================================
-//           Program Initialization
-//===========================================
-
-class SetUp {
-public:
-    SetUp( bool use_debugger );
-   ~SetUp( );
-private:
-    bool debugging_on;
-};
-
-
-SetUp::SetUp( bool use_debugger ) : debugging_on( false )
-{
-    // TODO: Check the result of screen initialization and abort if it fails.
-    scr::initialize( );
-
-    // The value of 'use_debugger' is intended to select if the runtime debugging environment is
-    // active. The Scr library had such a facility that used Scr. It might be a nice project to
-    // build a similar facility that is 100% command line.
-
-    if( use_debugger ) {
-        debugging_on = true;
-        scr::initialize_debugging( DBG_TOP );
-    }
-    // TODO: Reload the calculator state (if there's a saved one to be found).
-}
-
-
-SetUp::~SetUp( )
-{
-    // TODO: Save the calculator state.
-    if( debugging_on ) {
-        scr::terminate_debugging( );
-    }
-    scr::terminate( );
-}
 
 //=================================================
 //           Generic Operation Functions
@@ -379,7 +342,8 @@ bool process_words( )
 
 int Main( int argc, char **argv )
 {
-    bool use_debugger = true;
+    // The value of 'use_debugger' selects if the runtime debugging environment is active.
+    bool use_debugger = false;
 
     // Map entity types to names for the UI.
     map<EntityType, string> type_abbreviation = {
@@ -388,39 +352,56 @@ int Main( int argc, char **argv )
         { PROGRAM, "PGM" }, { RATIONAL, "RAT" }, { STRING,    "STR" }, { VECTOR, "VEC" }
     };
 
-    // Command line analysis.
+    // Command line analysis. Note that the windowing system is not yet running.
     // TODO: Improve and generalize the handling of the command line.
     for( int i = 1; i < argc; ++i ) {
         if( strcmp( argv[i], "-d" ) == 0 ) use_debugger = true;
     }
 
-    SetUp  the_program( use_debugger );
-    string command_text;
+    // Start the windowing system.
+    scr::Manager window_manager{ };
+    scr::CommandWindow command_window{ &window_manager, 0, 0, 80, 1 };
+    command_window.set_prompt( "=> " );
+    if( use_debugger ) {
+        scr::initialize_debugging( DBG_TOP );
+    }
 
-    bool done = false;
-    while( !done ) {
-        // Display the top eight items on the stack.
-        // TODO: The number of stack levels displayed here should be configurable.
-        for( int i = 7; i >= 0; i-- ) {
-            cout << setw( 2 ) << i + 1 << ": ";
-            Entity *stack_item = Global::the_stack( ).get( i );
-            if( stack_item == nullptr ) {
-                cout << "--- : " << endl;
-            }
-            else {
-                EntityType stack_item_type = stack_item->my_type( );
-                cout << type_abbreviation[stack_item_type] << " : " << stack_item->display( ) << endl;
-            }
-        }
-        cout << "=> ";
-        getline( cin, command_text );
+    // TODO: Reload the calculator state (if there's a saved one to be found).
 
-        // Push the command text onto the master stream as a string of Clac command words.
-        StringStream *words = new StringStream( command_text );
-        Global::word_source( ).push( words );
-        if( process_words( ) == false ) {
-            done = true;
-        }
+    window_manager.input_loop( );
+
+    //string command_text;
+    //
+    //bool done = false;
+    //while( !done ) {
+    //    // Display the top eight items on the stack.
+    //    // TODO: The number of stack levels displayed here should be configurable.
+    //    for( int i = 7; i >= 0; i-- ) {
+    //        cout << setw( 2 ) << i + 1 << ": ";
+    //        Entity *stack_item = Global::the_stack( ).get( i );
+    //        if( stack_item == nullptr ) {
+    //            cout << "--- : " << endl;
+    //        }
+    //        else {
+    //            EntityType stack_item_type = stack_item->my_type( );
+    //            cout << type_abbreviation[stack_item_type] << " : " << stack_item->display( ) << endl;
+    //        }
+    //    }
+    //    cout << "=> ";
+    //    getline( cin, command_text );
+    //
+    //    // Push the command text onto the master stream as a string of Clac command words.
+    //    StringStream *words = new StringStream( command_text );
+    //    Global::word_source( ).push( words );
+    //    if( process_words( ) == false ) {
+    //       done = true;
+    //    }
+    //}
+
+    // TODO: Save the calculator state.
+
+    if( use_debugger ) {
+        scr::terminate_debugging( );
     }
 
     // Clac always "succeeds" unless there is an unhandled exception (see below).

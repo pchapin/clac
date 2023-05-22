@@ -3,7 +3,6 @@
     "cSpell.words": [
         "Chapin",
         "Clac",
-        "Clacky",
         "CLACSTACK",
         "Cygwin",
         "DISPLAYSTATE",
@@ -24,5 +23,10 @@
     ],
     "files.associations": {
         "cstdarg": "cpp"
-    }
+    },
+    "cppbuild.isEnabled": false,
+    "editor.wordWrapColumn": 96,
+    "rewrap.wholeComment": false,
+    "rewrap.wrappingColumn": 96,
+    "rewrap.reformat": false
 }
