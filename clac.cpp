@@ -359,7 +359,7 @@ int Main( int argc, char **argv )
     }
 
     // Start the windowing system.
-    scr::Manager window_manager{ };
+    scr::Manager window_manager;
     scr::CommandWindow command_window{ &window_manager, 0, 0, 80, 1 };
     command_window.set_prompt( "=> " );
     if( use_debugger ) {
