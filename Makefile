@@ -49,20 +49,18 @@ $(EXECUTABLE):	components $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LIBSCR)
 # File Dependencies
 ###################
 
-# Module dependencies -- Produced with 'depend' on Mon Jun 26 13:51:24 2023
+# Module dependencies -- Produced with 'depend' on Mon Jun 26 14:19:31 2023
 
 
-clac.o:	clac.cpp ClacEntity/BinaryEntity.hpp ClacEntity/Entity.hpp ClacEntity/FloatEntity.hpp \
-	ClacEntity/IntegerEntity.hpp ClacEntity/VeryLong.hpp ClacEntity/StringEntity.hpp ClacEntity/convert.hpp \
-	ClacEntity/support.hpp ClacEngine/actions.hpp ClacEngine/ClacStack.hpp ClacEngine/get.hpp \
-	ClacEngine/WordStream.hpp ClacEngine/Global.hpp ClacEngine/words.hpp Scr/CommandWindow.hpp \
-	Scr/ImageBuffer.hpp Scr/scr.hpp Scr/Manager.hpp Scr/Window.hpp Scr/debug.hpp Scr/TextWindow.hpp \
-	Scr/MessageWindow.hpp Scr/Shadow.hpp ClacCommandWindow.hpp DirectoryWindow.hpp ClacEntity/DirectoryEntity.hpp \
-	StackWindow.hpp 
+clac.o:	clac.cpp Scr/debug.hpp Scr/scr.hpp Scr/TextWindow.hpp Scr/Window.hpp Scr/ImageBuffer.hpp \
+	Scr/MessageWindow.hpp Scr/Shadow.hpp ClacEngine/Global.hpp ClacEntity/VeryLong.hpp ClacEngine/ClacStack.hpp \
+	ClacEntity/Entity.hpp ClacEngine/WordStream.hpp ClacCommandWindow.hpp Scr/CommandWindow.hpp \
+	Scr/Manager.hpp DirectoryWindow.hpp ClacEntity/DirectoryEntity.hpp StackWindow.hpp 
 
-ClacCommandWindow.o:	ClacCommandWindow.cpp ClacCommandWindow.hpp Scr/CommandWindow.hpp Scr/ImageBuffer.hpp \
-	Scr/scr.hpp Scr/Manager.hpp Scr/Window.hpp ClacEngine/Global.hpp ClacEntity/VeryLong.hpp \
-	ClacEngine/ClacStack.hpp ClacEntity/Entity.hpp ClacEngine/WordStream.hpp 
+ClacCommandWindow.o:	ClacCommandWindow.cpp ClacEntity/convert.hpp ClacEntity/Entity.hpp ClacEntity/support.hpp \
+	ClacEngine/actions.hpp ClacEngine/ClacStack.hpp ClacEntity/VeryLong.hpp ClacEngine/get.hpp \
+	ClacEngine/WordStream.hpp ClacEngine/Global.hpp ClacCommandWindow.hpp Scr/CommandWindow.hpp \
+	Scr/ImageBuffer.hpp Scr/scr.hpp Scr/Manager.hpp Scr/Window.hpp 
 
 DirectoryWindow.o:	DirectoryWindow.cpp Scr/scr.hpp ClacEntity/LabeledEntity.hpp ClacEntity/Entity.hpp \
 	DirectoryWindow.hpp Scr/ImageBuffer.hpp Scr/Manager.hpp Scr/Window.hpp ClacEntity/DirectoryEntity.hpp \
@@ -71,7 +69,7 @@ DirectoryWindow.o:	DirectoryWindow.cpp Scr/scr.hpp ClacEntity/LabeledEntity.hpp 
 StackWindow.o:	StackWindow.cpp Scr/scr.hpp ClacEntity/Entity.hpp StackWindow.hpp Scr/ImageBuffer.hpp \
 	Scr/Manager.hpp Scr/Window.hpp ClacEngine/ClacStack.hpp ClacEntity/VeryLong.hpp 
 
-RecordFile.o:	RecordFile.cpp RecordFile.hpp 
+RecordFile.o:	RecordFile.cpp RecordFile.hpp
 
 
 # Additional Rules

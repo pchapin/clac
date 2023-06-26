@@ -39,9 +39,5 @@ clac
 u_tests
 *.exe
 
-# IntelliJ generated files.
-workspace.xml
-build
-
-# Android generated files.
-gen
+# macOS
+.DS_Store

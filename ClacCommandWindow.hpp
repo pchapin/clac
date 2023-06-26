@@ -14,6 +14,12 @@ public:
       scr::CommandWindow( my_manager, row, column, width, height )
       { }
 
+    //! Process Clac commands.
+    /*!
+     * Normal keystrokes are passed to `scr::CommandWindow` for handling. When a K_RETURN is
+     * seen, this method executes the given command string and does not return until all
+     * processing is complete.
+     */
     bool process_keystroke( int &key_code ) override;
 };
 

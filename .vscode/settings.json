@@ -13,7 +13,8 @@
         "Nikolaidis",
         "pdflatex",
         "STACKWINDOW",
-        "subexpression"
+        "subexpression",
+        "WORDSTREAM"
     ],
     "C_Cpp.default.cppStandard": "c++20",
     "C_Cpp.default.cStandard": "c99",
