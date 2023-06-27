@@ -26,8 +26,8 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
-					<Add option="-Wall" />
 					<Add option="-O2" />
+					<Add option="-Wall" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -35,7 +35,7 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++20" />
+			<Add option="-std=c++2a" />
 		</Compiler>
 		<Unit filename="BinaryEntity.cpp" />
 		<Unit filename="BinaryEntity.hpp" />

@@ -35,7 +35,7 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++20" />
+			<Add option="-std=c++2a" />
 			<Add directory="../ClacEntity" />
 		</Compiler>
 		<Unit filename="ClacStack.cpp" />

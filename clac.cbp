@@ -17,6 +17,7 @@
 				<Linker>
 					<Add library="ClacEngine/bin/Debug/libClacEngine.a" />
 					<Add library="ClacEntity/bin/Debug/libClacEntity.a" />
+					<Add library="Scr/bin/Debug/libScr.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -31,18 +32,24 @@
 					<Add option="-s" />
 					<Add library="ClacEngine/bin/Release/libClacEngine.a" />
 					<Add library="ClacEntity/bin/Release/libClacEntity.a" />
+					<Add library="Scr/bin/Release/libScr.a" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-std=c++20" />
-			<Add option="-fexceptions" />
+			<Add option="-std=c++2a" />
 			<Add directory="ClacEntity" />
 			<Add directory="ClacEngine" />
 		</Compiler>
+		<Unit filename="ClacCommandWindow.cpp" />
+		<Unit filename="ClacCommandWindow.hpp" />
+		<Unit filename="DirectoryWindow.cpp" />
+		<Unit filename="DirectoryWindow.hpp" />
 		<Unit filename="RecordFile.cpp" />
 		<Unit filename="RecordFile.hpp" />
+		<Unit filename="StackWindow.cpp" />
+		<Unit filename="StackWindow.hpp" />
 		<Unit filename="clac.cpp" />
 		<Extensions />
 	</Project>

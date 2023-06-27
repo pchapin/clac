@@ -37,7 +37,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-std=c++20" />
-			<Add option="-fexceptions" />
 			<Add directory="../ClacEntity" />
 			<Add directory="../ClacEngine" />
 		</Compiler>

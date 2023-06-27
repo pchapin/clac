@@ -62,7 +62,11 @@ built in the following ways:
   Windows is by using Visual Studio.
   
 + Using Code::Blocks and the provided `clac.workspace` file. This build configuration is not
-  tested regularly, and may need some adjustments before it will work.
+  tested regularly, and may need some adjustments before it will work. Note that the version of
+  g++ that is bundled with Code::Blocks 20.03 is too old to work. Clac makes use of several
+  modern C++ 2020 features. However, you could reconfigure Code::Blocks to use a newer compiler,
+  for example in the Cygwin distribution. It is hoped that a future version of Code::Blocks will
+  ship with a newer C++ compiler.
   
 ### macOS
 
@@ -71,7 +75,8 @@ built in the following ways:
 ### Linux
 
 + Using Code::Blocks and the provided `clac.workspace` file. This build configuration is not
-  tested regularly, and may need some adjustments before it will work.
+  tested regularly, and may need some adjustments before it will work. Also see the comments
+  about Code::Blocks in the Windows subsection above.
 
 
 Developer Notes
