@@ -5,8 +5,9 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clac", "clac.vcxproj", "{1F6B2C7F-CC55-40A1-B957-CC7CDA42427B}"
 	ProjectSection(ProjectDependencies) = postProject
-		{D285CC4C-A458-496A-8761-B8464F4F62A5} = {D285CC4C-A458-496A-8761-B8464F4F62A5}
 		{623EC45F-2C80-4934-8C92-AB0E07EE9550} = {623EC45F-2C80-4934-8C92-AB0E07EE9550}
+		{D285CC4C-A458-496A-8761-B8464F4F62A5} = {D285CC4C-A458-496A-8761-B8464F4F62A5}
+		{E8020C9E-D7F0-4156-B4D9-0230053C70B6} = {E8020C9E-D7F0-4156-B4D9-0230053C70B6}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clac_engine", "ClacEngine\clac_engine.vcxproj", "{623EC45F-2C80-4934-8C92-AB0E07EE9550}"
@@ -15,6 +16,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clac_engine", "ClacEngine\c
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clac_entity", "ClacEntity\clac_entity.vcxproj", "{D285CC4C-A458-496A-8761-B8464F4F62A5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scr", "Scr\scr.vcxproj", "{E8020C9E-D7F0-4156-B4D9-0230053C70B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +51,14 @@ Global
 		{D285CC4C-A458-496A-8761-B8464F4F62A5}.Release|Win32.Build.0 = Release|Win32
 		{D285CC4C-A458-496A-8761-B8464F4F62A5}.Release|x64.ActiveCfg = Release|x64
 		{D285CC4C-A458-496A-8761-B8464F4F62A5}.Release|x64.Build.0 = Release|x64
+		{E8020C9E-D7F0-4156-B4D9-0230053C70B6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E8020C9E-D7F0-4156-B4D9-0230053C70B6}.Debug|Win32.Build.0 = Debug|Win32
+		{E8020C9E-D7F0-4156-B4D9-0230053C70B6}.Debug|x64.ActiveCfg = Debug|x64
+		{E8020C9E-D7F0-4156-B4D9-0230053C70B6}.Debug|x64.Build.0 = Debug|x64
+		{E8020C9E-D7F0-4156-B4D9-0230053C70B6}.Release|Win32.ActiveCfg = Release|Win32
+		{E8020C9E-D7F0-4156-B4D9-0230053C70B6}.Release|Win32.Build.0 = Release|Win32
+		{E8020C9E-D7F0-4156-B4D9-0230053C70B6}.Release|x64.ActiveCfg = Release|x64
+		{E8020C9E-D7F0-4156-B4D9-0230053C70B6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
