@@ -93,10 +93,16 @@ built in the following ways:
   often, and should be working at all times. The recommended way of doing Clac development on
   Windows is by using Visual Studio.
   
++ Using Visual Stdio Code.
+  
 + Using Eclipse for C/C++ Programmers (Eclipse with the CDT). The project files for this
   development environment assume the Cygwin C++ tool chain. If you want to use Eclipse on a
   Unix-like system, you will likely need to make adjustments. Note that the Eclipse project is
   configured to use the provided Makefile to do the actual build.
+  
++ Using CLion from JetBrains. The project files for this development environment assume the
+  Cygwin tool chain. I'm not sure what is involved in generalizing this so the same profile
+  files can be used on other platforms.
   
 + Using Code::Blocks and the provided `clac.workspace` file. This build configuration is not
   tested regularly, and may need some adjustments before it will work. Note that the version of
@@ -107,9 +113,13 @@ built in the following ways:
   
 ### macOS
 
++ Using Visual Stdio Code.
+
 + Using XCode and the provided ... (*Finish Me!*)
 
 ### Linux
+
++ Using Visual Studio Code.
 
 + Using Code::Blocks and the provided `clac.workspace` file. This build configuration is not
   tested regularly, and may need some adjustments before it will work. Also see the comments
