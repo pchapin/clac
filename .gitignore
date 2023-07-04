@@ -1,10 +1,9 @@
-# LaTeX generated files.
-*.aux
-*.bbl
-*.blg
-*.log
-*.toc
-*.pdf
+# gcc/LLVM/clang generated files.
+*.bc
+*.bc1
+*.bc2
+*.o
+*.a
 
 # Visual Studio generated files.
 .vs
@@ -14,21 +13,30 @@ Debug
 Release
 *.user
 
+# Eclipse files.
+
+# There is controversy about this file. It includes a hash of the environment that
+# is unique to each developer's system. However, it also includes some items that
+# probably should be shared between developers. See:
+# https://www.eclipse.org/forums/index.php/t/1074031/
+.settings/language.settings.xml
+
 # Code::Blocks generated files.
 *.layout
 *.depend
 bin
 obj
 
-# gcc/LLVM/clang generated files.
-*.bc
-*.bc1
-*.bc2
-*.o
-*.a
-
 # depend generated files.
 *.out
+
+# LaTeX generated files.
+*.aux
+*.bbl
+*.blg
+*.log
+*.toc
+*.pdf
 
 # Doxygen generated files.
 internal
@@ -41,3 +49,4 @@ u_tests
 
 # macOS
 .DS_Store
+/build/
