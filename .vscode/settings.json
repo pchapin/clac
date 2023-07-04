@@ -32,6 +32,5 @@
     "editor.wordWrapColumn": 96,
     "rewrap.wholeComment": false,
     "rewrap.wrappingColumn": 96,
-    "rewrap.reformat": false,
-    "C_Cpp.default.compilerPath": "/usr/bin/clang++"
+    "rewrap.reformat": false
 }
