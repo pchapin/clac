@@ -11,7 +11,7 @@ execution engine that interprets calculator input and coordinates the computatio
 level code defines the user interface. In theory other programs could make use of Clac's entity
 library and execution engine while using a different user interface.
 
-Currenty the user interface of Clac makes use of a cross-platform screen handling library named
+Currently the user interface of Clac makes use of a cross-platform screen handling library named
 Scr. The [Scr library](https://github.com/pchapin/scr) is available on GitHub, but is included
 here as a Git submodule. Note that Scr is only used by the user interface code. It is not used
 by the ClacEntity library or by the ClacEngine library. Other programs using those libraries do
@@ -140,4 +140,4 @@ this file, putting the result in `depend.out`. That output file can be copied an
 the Makefile to update dependency information.
   
 Peter Chapin  
-chapinp@proton.me  
+spicacality@kelseymountain.org  

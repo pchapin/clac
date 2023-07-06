@@ -1,6 +1,6 @@
 /*! \file    ComplexEntity.cpp
- *  \brief   Implementation of the clac numeric type ComplexEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Implementation of the Clac numeric type ComplexEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include <cmath>

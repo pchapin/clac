@@ -1,6 +1,6 @@
 /*! \file    UnitTestManager.cpp
  *  \brief   Implementation of the unit test manager abstract object.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include <cstdlib>
@@ -23,9 +23,9 @@ namespace UnitTestManager {
         void output_head( std::ostream &test_output )
         {
             test_output << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-            test_output << "<TestOutput xmlns=\"http://vortex.cis.vtc.edu/xml/UnitTestManager_0.0\"\n"
+            test_output << "<TestOutput xmlns=\"http://www.kelseymountain.org/xml/UnitTestManager_0.0\"\n"
                         << "            xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
-                        << "            xsi:schemaLocation=\"http://vortex.cis.vtc.edu/xml/UnitTestManager_0.0 UnitTestManager.xsd\">\n";
+                        << "            xsi:schemaLocation=\"http://www.kelseymountain.org/xml/UnitTestManager_0.0 UnitTestManager.xsd\">\n";
 
         }
 

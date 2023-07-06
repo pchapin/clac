@@ -1,6 +1,6 @@
 /*! \file    convert.hpp
  *  \brief   Interface to the entity conversion table.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef CONVERT_HPP

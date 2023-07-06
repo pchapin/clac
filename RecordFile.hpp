@@ -1,14 +1,8 @@
-/***************************************************************************
-FILE          : RecordFile.hpp
-LAST REVISION : 2005-12-22
-SUBJECT       : Interface to a "record file" class.
+/*! \file    RecordFile.cpp
+ *  \brief   Implementation of a "record file" class.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
+ */
 
-(C) Copyright 2006 by Peter Chapin and Peter Nikolaidis
-
---**--
-[Put comments here]
---**--
-***************************************************************************/
 #ifndef RECORDFILE_HPP
 #define RECORDFILE_HPP
 

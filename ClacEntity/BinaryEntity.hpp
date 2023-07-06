@@ -1,6 +1,6 @@
 /*! \file    BinaryEntity.hpp
- *  \brief   Interface to the clac numeric type BinaryEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Interface to the Clac numeric type BinaryEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
 */
 
 #ifndef BINARYENTITY_HPP

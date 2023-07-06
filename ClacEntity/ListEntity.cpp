@@ -1,6 +1,6 @@
 /*! \file    ListEntity.cpp
- *  \brief   Implementation of the clac numeric type ListEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Implementation of the Clac numeric type ListEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include <memory>

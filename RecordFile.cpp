@@ -1,18 +1,12 @@
-/***************************************************************************
-FILE          : RecordFile.cpp
-LAST REVISION : 2005-12-22
-SUBJECT       : Implementation of a "record file" class.
-
-(C) Copyright 2006 by Peter Chapin and Peter Nikolaidis
-
---**--
-This file contains the implementation of class RecordFile. Objects from this
-class support easy reading of text files which are organized as several lines
-where each line contains a record consisting of several fields. The record
-files supported can have a variable number of fields per line and can contain
-comments.
---**--
-***************************************************************************/
+/*! \file    RecordFile.cpp
+ *  \brief   Implementation of a "record file" class.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
+ *
+ * This file contains the implementation of class RecordFile. Objects from this class support
+ * easy reading of text files which are organized as several lines where each line contains a
+ * record consisting of several fields. The record files supported can have a variable number of
+ * fields per line and can contain comments.
+ */
 
 #include <cstring>
 #include "RecordFile.hpp"

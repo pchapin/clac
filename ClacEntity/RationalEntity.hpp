@@ -1,6 +1,6 @@
 /*! \file    RationalEntity.hpp
- *  \brief   Interface to the clac numeric type RationalEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Interface to the Clac numeric type RationalEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef RATIONALENTITY_HPP

@@ -1,6 +1,6 @@
 /*! \file    RationalEntity.cpp
- *  \brief   Implementation of the clac numeric type RationalEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Implementation of the Clac numeric type RationalEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include <memory>

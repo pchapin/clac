@@ -1,6 +1,6 @@
 /*! \file    u_tests.cpp
  *  \brief   Main unit test driver program for the Clac system.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include <cstdarg>

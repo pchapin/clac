@@ -1,6 +1,6 @@
 /*! \file    DirectoryEntity.cpp
- *  \brief   Implementation of the clac numeric type DirectoryEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Implementation of the Clac numeric type DirectoryEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include "Entities.hpp"

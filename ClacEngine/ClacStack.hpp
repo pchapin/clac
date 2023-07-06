@@ -1,6 +1,6 @@
 /*! \file    ClacStack.cpp
  *  \brief   This file contains the interface to class ClacStack.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef CLACSTACK_HPP

@@ -1,6 +1,6 @@
 /*! \file    ClacStack.cpp
  *  \brief   This file contains...
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include "ClacStack.hpp"

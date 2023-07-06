@@ -1,5 +1,5 @@
 #
-# Makefile for the clac entity library.
+# Makefile for the Clac entity library.
 #
 
 CXX=g++

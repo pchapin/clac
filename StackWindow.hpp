@@ -1,6 +1,6 @@
 /*! \file    StackWindow.hpp
  *  \brief   Definition of the StackWindow class.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountian.org>
  *
  * Objects of this class manage the display of a Stack object.
  */

@@ -1,6 +1,6 @@
 /*! \file    DisplayState.hpp
  *  \brief   Interface to clac's display state variables.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  *
  * Namespace DisplayState is a wrapper around all of clac's display state variables. Such
  * variables specify how certain objects are to be displayed. Having all the display state

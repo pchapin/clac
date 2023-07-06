@@ -1,6 +1,6 @@
 /*! \file    ListEntity.hpp
- *  \brief   Interface to the clac numeric type ListEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Interface to the Clac numeric type ListEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef LISTENTITY_HPP

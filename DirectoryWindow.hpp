@@ -1,6 +1,6 @@
 /*! \file    DirectoryWindow.hpp
  *  \brief   Definition of the DirectoryWindow class.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  *
  * Objects of this class manage the display of a DirectoryEntity.
  */

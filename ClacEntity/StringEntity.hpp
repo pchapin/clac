@@ -1,6 +1,6 @@
 /*! \file    StringEntity.hpp
- *  \brief   Interface to the clac numeric type StringEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Interface to the Clac numeric type StringEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef STRINGENTITY_HPP

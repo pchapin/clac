@@ -1,7 +1,7 @@
 
 /*! \file    VeryLong_tests.cpp
  *  \brief   Code to test class VeryLong
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include <string>

@@ -1,6 +1,6 @@
 /*! \file    StackWindow.cpp
  *  \brief   Implementation of the StackWindow class.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include <cstdio>

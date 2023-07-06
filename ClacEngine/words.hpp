@@ -1,6 +1,6 @@
 /*! \file    words.hpp
  *  \brief   This file contains functions that recognize numeric literals.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef WORDS_HPP

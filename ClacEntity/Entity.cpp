@@ -1,6 +1,6 @@
 /*! \file    Entity.cpp
  *  \brief   Implementation of the abstract base class Entity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  *
  * The functions in this file provide default behavior for the operations that an Entity classes
  * doesn't wish to provide. These functions mostly just produce errors by throwing an

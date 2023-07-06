@@ -1,6 +1,6 @@
 /*! \file    VeryLong.cpp
  *  \brief   Implementation of an arbitrary precision integer class.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  *
  * VeryLong integers are implemented as vectors of "long digits". Each long digit contains
  * several (generally 16 or 32) bits; the exact number depends on the capacity of the system's

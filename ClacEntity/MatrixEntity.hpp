@@ -1,6 +1,6 @@
 /*! \file    MatrixEntity.hpp
- *  \brief   Interface to the clac numeric type MatrixEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Interface to the Clac numeric type MatrixEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef MATRIXENTITY_HPP

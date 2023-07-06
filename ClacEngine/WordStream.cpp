@@ -1,6 +1,6 @@
 /*! \file    WordStream.cpp
  *  \brief   This file contains the implementation of various word stream classes.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include <cstring>

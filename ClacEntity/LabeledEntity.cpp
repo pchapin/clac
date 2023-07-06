@@ -1,6 +1,6 @@
 /*! \file    LabeledEntity.cpp
- *  \brief   Implementation of the clac numeric type LabeledEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Implementation of the Clac numeric type LabeledEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #include "Entities.hpp"

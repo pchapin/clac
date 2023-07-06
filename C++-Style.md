@@ -7,10 +7,10 @@ C++ Style Guide
 This document describes the style used for the C++ code in the Clac project. This document is,
 of course, subject to discussion, change, and evolution.
 
-The intent of this style guide is to promote a consistent, readible style, and to reduce the
+The intent of this style guide is to promote a consistent, readable style, and to reduce the
 chances for errors. Exceptions to this style should be made with those primary goals in mind.
 Exceptions are expected and are not considered problematic, particularly if they enhance local
-readibility, unless the exceptions become commonplace. In that situation, either the code or the
+readability, unless the exceptions become commonplace. In that situation, either the code or the
 style guide should be reviewed and modified.
 
 In this document "shall" is intended to define a requirement of this guide, "should" is intended
@@ -117,7 +117,7 @@ to define a recommendation, and "may" is intended to define an option.
           { return ( a > b ) ? a : b; }
 
 + The `else` of a conditional statement and `catch` clauses of exception handlers shall be the
-  first non-white space character of a line (no preceeding '}').
+  first non-white space character of a line (no preceding '}').
   
       try {
           if( a < b ) {
@@ -150,7 +150,7 @@ to define a recommendation, and "may" is intended to define an option.
 
 + There should be no space after the reserved words `if`, `for`, or `while`.
 
-+ There should be no space after '<' or before '>' in a template argument or paramter list.
++ There should be no space after '<' or before '>' in a template argument or parameter list.
 
       template<typename T>
 

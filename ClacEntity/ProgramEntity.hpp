@@ -1,6 +1,6 @@
 /*! \file    ProgramEntity.hpp
- *  \brief   Interface to the clac numeric type ProgramEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Interface to the Clac numeric type ProgramEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef PROGRAMENTITY_HPP

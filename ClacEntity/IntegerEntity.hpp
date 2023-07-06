@@ -1,6 +1,6 @@
 /*! \file    IntegerEntity.hpp
- *  \brief   Interface to the clac numeric type IntegerEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Interface to the Clac numeric type IntegerEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef INTEGERENTITY_HPP

@@ -1,6 +1,6 @@
 /*! \file    u_tests.hpp
  *  \brief   Interface to the Clac unit tests.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
 #ifndef U_TESTS_HPP

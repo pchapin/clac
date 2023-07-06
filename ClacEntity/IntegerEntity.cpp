@@ -1,6 +1,6 @@
 /*! \file    IntegerEntity.cpp
- *  \brief   Implementation of the clac numeric type IntegerEntity.
- *  \author  Peter Chapin <chapinp@proton.me>
+ *  \brief   Implementation of the Clac numeric type IntegerEntity.
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
  *
  * TODO
  *

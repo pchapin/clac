@@ -1,6 +1,6 @@
 /*! \file    clac.cpp
  *  \brief   Clac main program.
- *  \author  Peter Chapin <chapinp@proton.me> and Peter Nikolaidis
+ *  \author  Peter Chapin <spicacality@kelseymountain.org> and Peter Nikolaidis
  */
 
 #include <cstdarg>

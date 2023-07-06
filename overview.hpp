@@ -1,7 +1,7 @@
 /*! \file    overview.hpp
  *  \brief   Overview documentation of Clac's internal design.
- *  \author  Peter Chapin <chapinp@proton.me>
-*/
+ *  \author  Peter Chapin <spicacality@kelseymountain.org>
+ */
 
 /*!
 
