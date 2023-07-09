@@ -30,6 +30,7 @@
 #include "words.hpp"
 
 using namespace std;
+using namespace spica;  // TODO: Remove this using directive.
 
 namespace {
 

@@ -9,6 +9,8 @@
 #include "VeryLong.hpp"
 #include "UnitTestManager.hpp"
 
+using namespace spica;
+
 void check_constructor( )
 {
     VeryLong object;

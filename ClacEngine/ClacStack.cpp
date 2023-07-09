@@ -7,6 +7,7 @@
 #include "support.hpp"
 
 using namespace std;
+using namespace spica;  // TODO: Remove this using directive.
 
 ClacStack::ClacStack( )
 {

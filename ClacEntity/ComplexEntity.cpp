@@ -17,8 +17,10 @@ using namespace std;
 
 namespace {
 
+
+    // TODO: This is currently unused. Should it be?
     // Square root of -1.
-    const complex< double > j( 0.0, 1.0 );
+    //const complex<double> j( 0.0, 1.0 );
 
 }
 
@@ -31,8 +33,8 @@ EntityType ComplexEntity::my_type( ) const noexcept
 
 string ComplexEntity::display( ) const
 {
-    static char  buffer[128];    // Array to hold the resulting string.
-    const char *format_string;   // Pointer to a "printf style" format string.
+    static char  buffer[128 + 1];    // Array to hold the resulting string.
+    const char *format_string;       // Pointer to a "printf style" format string.
 
     // Check the complex mode.
     if( DisplayState::get_complex_mode( ) == DisplayState::RECTANGULAR ) {
@@ -49,7 +51,7 @@ string ComplexEntity::display( ) const
             format_string = "INTERNAL ERROR: Bad display mode";
             break;
         }
-        sprintf( buffer, format_string,
+        snprintf( buffer, 128 + 1, format_string,
             DisplayState::get_decimal_count( ), value.real( ),
             DisplayState::get_decimal_count( ), value.imag( ) );
     }
@@ -69,7 +71,7 @@ string ComplexEntity::display( ) const
             format_string = "INTERNAL ERROR: Bad display mode";
             break;
         }
-        sprintf( buffer, format_string,
+        snprintf( buffer, 128 + 1, format_string,
             DisplayState::get_decimal_count( ), std::abs( value ),
             DisplayState::get_decimal_count( ), from_radians( std::arg( value ) ) );
     }

@@ -10,6 +10,7 @@
 #include "Entities.hpp"
 
 using namespace std;
+using namespace spica;   // TODO: Remove this using directive.
 
 //
 // The constructor allows a rational entity to be initialized with a Rational object.

@@ -52,7 +52,7 @@ public:
     Entity *pop( );
 
     //! Get a copy of an entity from the stack. Return nullptr if index out of bounds.
-    Entity *get( const VeryLong &index );
+    Entity *get( const spica::VeryLong &index );
 
     //! Put a copy of the argument into stack level zero. The old object, if present, is deleted.
     void put( Entity *new_object );
@@ -65,16 +65,16 @@ public:
 
     // TODO: Implement ClacStack::dup.
     //! Make a copy of the entity at 'level' and push it onto level 0. Return false on error.
-    bool dup( const VeryLong &level = 0 );
+    bool dup( const spica::VeryLong &level = 0 );
 
     //! Return the total height of the stack.
     size_t height( );
 
     //! Rotates the top 'count' levels "down" (meaning toward lower level numbers).
-    void roll_down( const VeryLong &count );
+    void roll_down( const spica::VeryLong &count );
 
     //! Rotates the top 'count' levels "up" (meaning toward higher level numbers).
-    void roll_up( const VeryLong &count );
+    void roll_up( const spica::VeryLong &count );
 
     //! Equivalent to "3 roll_up".
     void rotate( );

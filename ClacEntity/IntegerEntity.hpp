@@ -12,10 +12,10 @@
 class IntegerEntity : public Entity {
 public:
 
-    // For bulding an integer entity from its primitive.
-    IntegerEntity( const VeryLong &number );
+    // For building an integer entity from its primitive.
+    IntegerEntity( const spica::VeryLong &number );
 
-    VeryLong get_value( ) noexcept
+    spica::VeryLong get_value( ) noexcept
       { return value; }
 
     // Functions for maintaining a member of the Entity family.
@@ -67,7 +67,7 @@ public:
     Entity *is_greaterorequal ( const Entity * ) const override;
 
 private:
-    VeryLong value;
+    spica::VeryLong value;
 };
 
 #endif

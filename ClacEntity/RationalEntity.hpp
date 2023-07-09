@@ -12,7 +12,7 @@
 
 class RationalEntity : public Entity {
 public:
-    RationalEntity( const Rational<VeryLong> & );
+    RationalEntity( const spica::Rational<spica::VeryLong> & );
 
     EntityType  my_type( )   const noexcept override;
     std::string display( )   const override;
@@ -59,7 +59,7 @@ public:
     Entity *is_greaterorequal ( const Entity * ) const override;
 
 private:
-    Rational<VeryLong> value;
+    spica::Rational<spica::VeryLong> value;
 };
 
 #endif

@@ -3,7 +3,7 @@
 #
 
 CXX=g++
-CXXFLAGS=-c -g -std=c++20 -Wall -IClacEntity -IClacEngine -IScr
+CXXFLAGS=-c -g -std=c++20 -Wall -IClacEntity -IClacEngine -IScr -ISpicaCpp
 LINK=g++
 SOURCES=clac.cpp          \
 	ClacCommandWindow.cpp \
@@ -15,6 +15,7 @@ EXECUTABLE=clac
 LIBENTITY=ClacEntity/libClacEntity.a
 LIBENGINE=ClacEngine/libClacEngine.a
 LIBSCR=Scr/libScr.a
+LIBSPICACPP=SpicaCpp/libSpicaCpp.a
 
 .PHONY:	all
 all:	$(EXECUTABLE)
@@ -25,7 +26,7 @@ all:	$(EXECUTABLE)
 # recursive make is supposedly bad. Note that Miller's example is a crazy way of organizing
 # a multi-module project, and so we regard Miller's article as something of a straw man. 
 #################
-COMPONENTS = ClacEntity ClacEngine Scr check
+COMPONENTS = check ClacEngine ClacEntity Scr SpicaCpp
 
 .PHONY:	components $(COMPONENTS)
 components:	$(COMPONENTS)
@@ -33,8 +34,12 @@ components:	$(COMPONENTS)
 $(COMPONENTS):
 	$(MAKE) -C $@
 
-# In general, the engine depends on the entity library so build them in the right order.
-ClacEngine:	ClacEntity
+
+# Component Dependencies
+########################
+
+check:	ClacEngine ClacEntity SpicaCpp
+
 
 # Top-Level Rules and Dependencies
 ###################################
@@ -42,8 +47,8 @@ ClacEngine:	ClacEntity
 %.o:	%.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-$(EXECUTABLE):	components $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LIBSCR)
-	$(CXX) $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LIBSCR) -lcurses $(LINKFLAGS) -o $@
+$(EXECUTABLE):	components $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LIBSCR) $(LIBSPICACPP)
+	$(CXX) $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LIBSCR) $(LIBSPICACPP) -lcurses $(LINKFLAGS) -o $@
 
 
 # File Dependencies
@@ -53,12 +58,12 @@ $(EXECUTABLE):	components $(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LIBSCR)
 
 
 clac.o:	clac.cpp Scr/debug.hpp Scr/scr.hpp Scr/TextWindow.hpp Scr/Window.hpp Scr/ImageBuffer.hpp \
-	Scr/MessageWindow.hpp Scr/Shadow.hpp ClacEngine/Global.hpp ClacEntity/VeryLong.hpp ClacEngine/ClacStack.hpp \
+	Scr/MessageWindow.hpp Scr/Shadow.hpp ClacEngine/Global.hpp SpicaCpp/VeryLong.hpp ClacEngine/ClacStack.hpp \
 	ClacEntity/Entity.hpp ClacEngine/WordStream.hpp ClacCommandWindow.hpp Scr/CommandWindow.hpp \
 	Scr/Manager.hpp DirectoryWindow.hpp ClacEntity/DirectoryEntity.hpp StackWindow.hpp 
 
 ClacCommandWindow.o:	ClacCommandWindow.cpp ClacEntity/convert.hpp ClacEntity/Entity.hpp ClacEntity/support.hpp \
-	ClacEngine/actions.hpp ClacEngine/ClacStack.hpp ClacEntity/VeryLong.hpp ClacEngine/get.hpp \
+	ClacEngine/actions.hpp ClacEngine/ClacStack.hpp SpicaCpp/VeryLong.hpp ClacEngine/get.hpp \
 	ClacEngine/WordStream.hpp ClacEngine/Global.hpp ClacCommandWindow.hpp Scr/CommandWindow.hpp \
 	Scr/ImageBuffer.hpp Scr/scr.hpp Scr/Manager.hpp Scr/Window.hpp 
 
@@ -67,7 +72,7 @@ DirectoryWindow.o:	DirectoryWindow.cpp Scr/scr.hpp ClacEntity/LabeledEntity.hpp 
 	
 
 StackWindow.o:	StackWindow.cpp Scr/scr.hpp ClacEntity/Entity.hpp StackWindow.hpp Scr/ImageBuffer.hpp \
-	Scr/Manager.hpp Scr/Window.hpp ClacEngine/ClacStack.hpp ClacEntity/VeryLong.hpp 
+	Scr/Manager.hpp Scr/Window.hpp ClacEngine/ClacStack.hpp SpicaCpp/VeryLong.hpp 
 
 RecordFile.o:	RecordFile.cpp RecordFile.hpp
 
@@ -77,7 +82,8 @@ RecordFile.o:	RecordFile.cpp RecordFile.hpp
 .PHONY:	clean
 clean:
 	$(MAKE) -C check clean
-	$(MAKE) -C Scr clean
 	$(MAKE) -C ClacEngine clean
 	$(MAKE) -C ClacEntity clean
+	$(MAKE) -C Scr clean
+	$(MAKE) -C SpicaCpp clean
 	rm -f *.bc *.bc1 *.bc2 *.o $(EXECUTABLE) *.s *.ll *~

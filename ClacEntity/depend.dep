@@ -14,4 +14,3 @@ RationalEntity.cpp
 StringEntity.cpp
 support.cpp
 VectorEntity.cpp
-VeryLong.cpp

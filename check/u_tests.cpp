@@ -27,8 +27,8 @@ void error_message( const char *message, ... )
     va_list ap;
 
     va_start( ap, message );
-    char message_buffer[128+1];
-    vsprintf( message_buffer, message, ap );
+    char message_buffer[128 + 1];
+    vsnprintf( message_buffer, 128 + 1, message, ap );
     cout << message_buffer << endl;
 }
 

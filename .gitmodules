@@ -1,3 +1,6 @@
 [submodule "Scr"]
 	path = Scr
 	url = https://github.com/pchapin/scr.git
+[submodule "SpicaCpp"]
+	path = SpicaCpp
+	url = https://github.com/pchapin/spicacpp.git

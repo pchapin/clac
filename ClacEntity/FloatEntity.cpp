@@ -127,15 +127,15 @@ EntityType FloatEntity::my_type( ) const noexcept
 //
 std::string FloatEntity::display( ) const
 {
-    static char buffer[128];
+    static char buffer[128 + 1];
 
     switch( DisplayState::get_display_mode( ) ) {
     case DisplayState::FIXED:
-        sprintf( buffer, "%.*f", DisplayState::get_decimal_count( ), value );
+        snprintf( buffer, 128 + 1, "%.*f", DisplayState::get_decimal_count( ), value );
         break;
 
     case DisplayState::SCIENTIFIC:
-        sprintf( buffer, "%.*E", DisplayState::get_decimal_count( ), value );
+        snprintf( buffer, 128 + 1, "%.*E", DisplayState::get_decimal_count( ), value );
         break;
 
     case DisplayState::ENGINEERING: {
@@ -150,14 +150,14 @@ std::string FloatEntity::display( ) const
         if( mantissa_decimals < 0 ) mantissa_decimals = 0;
 
         if( exponent < 0 )
-            sprintf( buffer, "%.*fE%+02d", mantissa_decimals, mantissa, exponent );
+            snprintf( buffer, 128 + 1, "%.*fE%+02d", mantissa_decimals, mantissa, exponent );
         else
-            sprintf( buffer, "%.*fE%+03d", mantissa_decimals, mantissa, exponent );
+            snprintf( buffer, 128 + 1, "%.*fE%+03d", mantissa_decimals, mantissa, exponent );
     }
     break;
 
     default:
-        sprintf( buffer, "INTERNAL ERROR: Bad display mode" );
+        snprintf( buffer, 128 + 1, "INTERNAL ERROR: Bad display mode" );
         break;
     }
     return buffer;

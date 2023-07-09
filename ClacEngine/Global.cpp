@@ -5,6 +5,7 @@
 
 #include "Global.hpp"
 
+using namespace spica;  // TODO: Remove this using directive.
 namespace Global {
 
     // The global variables themselves.

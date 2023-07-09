@@ -13,6 +13,7 @@
 #include "Entities.hpp"
 
 using namespace std;
+using namespace spica;   // TODO: Remove this using directive.
 
 IntegerEntity::IntegerEntity( const VeryLong &number ) :
   value( number )
