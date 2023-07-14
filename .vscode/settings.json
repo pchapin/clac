@@ -9,6 +9,8 @@
         "DIRECTORYWINDOW",
         "DISPLAYSTATE",
         "doxygen",
+        "FLOATENTITY",
+        "INTEGERENTITY",
         "Makefiles",
         "Nikolaidis",
         "pdflatex",

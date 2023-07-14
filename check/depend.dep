@@ -1,2 +1,3 @@
 u_tests.cpp
-VeryLong_tests.cpp
+IntegerEntity_tests.cpp
+FloatEntity_tests.cpp

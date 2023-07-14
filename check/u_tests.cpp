@@ -60,9 +60,10 @@ int main( int argc, char **argv )
         output = &output_file;
     }
 
-    UnitTestManager::register_test( VeryLong_tests, "VeryLong" );
+    UnitTestManager::register_suite( IntegerEntity_tests, "IntegerEntity" );
+    UnitTestManager::register_suite( FloatEntity_tests,   "FloatEntity"   );
 
-    UnitTestManager::execute_tests( *output, "Clac Unit Tests" );
+    UnitTestManager::execute_suites( *output, "Clac Unit Tests" );
     return UnitTestManager::test_status( );
 }
 

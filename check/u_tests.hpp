@@ -6,7 +6,8 @@
 #ifndef U_TESTS_HPP
 #define U_TESTS_HPP
 
-extern bool VeryLong_tests( );
+extern bool IntegerEntity_tests( );
+extern bool FloatEntity_tests( );
 
 #endif
 

@@ -6,8 +6,9 @@ CXX=g++
 CXXFLAGS=-std=c++20 -c -g -I../ClacEntity -I../ClacEngine -I../SpicaCpp
 LINK=g++
 LINKFLAGS=
-SOURCES=u_tests.cpp    \
-    VeryLong_tests.cpp
+SOURCES=u_tests.cpp          \
+	IntegerEntity_tests.cpp  \
+	FloatEntity_tests.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=u_tests
 LIBENTITY=../ClacEntity/libClacEntity.a
@@ -24,12 +25,16 @@ $(EXECUTABLE):	$(OBJECTS) $(LIBENGINE) $(LIBENTITY) $(LIBSPICACPP)
 # File Dependencies
 ###################
 
-# Module dependencies -- Produced with 'depend' on Thu May 27 17:11:15 2021
+# Module dependencies -- Produced with 'depend' on Fri Jul 14 10:56:17 2023
 
 
 u_tests.o:	u_tests.cpp u_tests.hpp ../SpicaCpp/UnitTestManager.hpp 
 
-VeryLong_tests.o:	VeryLong_tests.cpp ../SpicaCpp/VeryLong.hpp 
+IntegerEntity_tests.o:	IntegerEntity_tests.cpp ../SpicaCpp/VeryLong.hpp ../SpicaCpp/UnitTestManager.hpp ../ClacEntity/IntegerEntity.hpp \
+	../ClacEntity/Entity.hpp u_tests.hpp 
+
+FloatEntity_tests.o:	FloatEntity_tests.cpp ../SpicaCpp/UnitTestManager.hpp ../ClacEntity/FloatEntity.hpp \
+	../ClacEntity/Entity.hpp u_tests.hpp 
 
 
 # Additional Rules
