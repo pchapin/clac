@@ -59,9 +59,6 @@
     <ClCompile Include="VectorEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VeryLong.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinaryEntity.hpp">
@@ -100,9 +97,6 @@
     <ClInclude Include="ProgramEntity.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rational.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RationalEntity.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -113,9 +107,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VectorEntity.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VeryLong.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
