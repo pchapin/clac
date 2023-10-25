@@ -9,41 +9,27 @@
 using namespace std;
 using namespace spica;  // TODO: Remove this using directive.
 
-ClacStack::ClacStack( )
-{
-    for( size_t i = 0; i < STACK_SIZE; i++ ) {
-        data[i] = nullptr;
-    }
-}
-
-
 ClacStack::~ClacStack( )
 {
-    for( size_t i = 0; i < STACK_SIZE; i++ ) {
-        delete data[i];
+    for( Entity *item_pointer : data ) {
+        delete item_pointer;
     }
 }
 
 
 bool ClacStack::push( Entity *item )
 {
-    delete data[STACK_SIZE-1];
-    for( size_t i = STACK_SIZE-1; i > 0; i-- ) {
-        data[i] = data[i-1];
-    }
-    data[0] = item;
+    data.push_front( item );
     return true;
 }
 
 
 Entity *ClacStack::pop( )
 {
-    Entity *return_value = data[0];
+    if( data.empty( ) ) return nullptr;
 
-    for( size_t i = 0; i < STACK_SIZE-1; i++ ) {
-        data[i] = data[i+1];
-    }
-    data[STACK_SIZE-1] = nullptr;
+    Entity *return_value = data.front( );
+    data.pop_front( );
     return return_value;
 }
 
@@ -52,7 +38,7 @@ Entity *ClacStack::get( const VeryLong &index )
 {
     Entity *return_value = nullptr;
 
-    if( index < STACK_SIZE ) {
+    if( index < data.size( ) ) {
         return_value = data[index.to_long( )];
     }
     return return_value;
@@ -61,44 +47,42 @@ Entity *ClacStack::get( const VeryLong &index )
 
 void ClacStack::put( Entity *new_object )
 {
+    if( data.empty() ) {
+        data.push_front( new_object );
+        return;
+    }
     delete data[0];
     data[0] = new_object;
 }
 
 
-void ClacStack::clear( )      // Drop everything from the stack.
+void ClacStack::clear( )
 {
-    size_t i;
-    for( i = 0; i <= STACK_SIZE && data[i] != nullptr; i++ ) {
-        delete data[i];
-        data[i] = nullptr;
+    for( Entity *item_pointer : data ) {
+        delete item_pointer;
     }
+    data.clear( );
 }
 
 
-void ClacStack::drop( )       // Discard level 1 of the stack.
+void ClacStack::drop( )
 {
-    Entity *temp = pop( );    // pop item off of the stack.
+    Entity *temp = pop( );
     if( temp == nullptr )
         error_message( "Can't drop from an empty stack" );
     delete temp;
 }
 
 
-size_t ClacStack::height( )  // Depth of the stack.
+size_t ClacStack::height( )
 {
-    size_t C = 0;
-    for( size_t i = 0; i < STACK_SIZE-1; i++ ) {
-        if( data[i] != nullptr )
-            C++;
-    }
-    return C;
+    return data.size( );
 }
 
 
 void ClacStack::roll_down( const VeryLong &count )
 {
-    size_t raw_count = static_cast<size_t>( count.to_long( ) );
+    auto raw_count = static_cast<size_t>( count.to_long( ) );
     if( raw_count == 0 ) raw_count = 1;
     if( raw_count > height( ) )
         error_message( "Stack not high enough to roll" );
@@ -114,7 +98,7 @@ void ClacStack::roll_down( const VeryLong &count )
 
 void ClacStack::roll_up( const VeryLong &count )
 {
-    size_t raw_count = static_cast<size_t>( count.to_long( ) );
+    auto raw_count = static_cast<size_t>( count.to_long( ) );
     if( raw_count == 0 ) raw_count = 1;
     if( raw_count > height( ) )
         error_message( "Stack not high enough to roll" );
@@ -130,26 +114,24 @@ void ClacStack::roll_up( const VeryLong &count )
 
 void ClacStack::rotate( )
 {
-    if( data[0] != nullptr && data[1] != nullptr && data[2] != nullptr ) {
-        Entity *temp = data[2];
+    if( height( ) < 3 )
+        error_message( "Stack not high enough to rotate" );
+    else {
+        Entity *temp  = data[2];
         data[2] = data[1];
         data[1] = data[0];
         data[0] = temp;
-    }
-    else {
-        error_message( "Too few arguments" );
     }
 }
 
 
 void ClacStack::swap( )
 {
-    if( data[0] != nullptr && data[1] != nullptr ) {
-        Entity *temp = data[0];
-        data[0] = data[1];
-        data[1] = temp;
-    }
+    if( height( ) < 2 )
+        error_message( "Stack not high enough to swap" );
     else {
-        error_message( "Too few arguments" );
+        Entity *temp  = data[1];
+        data[1] = data[0];
+        data[0] = temp;
     }
 }

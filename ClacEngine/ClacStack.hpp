@@ -6,6 +6,7 @@
 #ifndef CLACSTACK_HPP
 #define CLACSTACK_HPP
 
+#include <deque>
 #include "Entity.hpp"
 #include "VeryLong.hpp"
 
@@ -17,26 +18,19 @@
  * type to hold command parameters. Multiple Clac stacks could potentially be created to support
  * additional features in a future version of Clac. However, the life cycle methods would need
  * to be implemented first.
- * 
+ *
  * Note that the first level of the stack (the "top" of the stack) is level zero. Stack index
  * values are represented using VeryLong because those values typically come from entities on
  * the parameter stack. It is recognized, however, that the type VeryLong is extreme overkill
  * and potentially inefficient to use in this way.
- * 
- * \todo Currently ClacStack objects are limited to holding at most 100 Entity values. This
- * limitation should be lifted in the future. It is expected that recursive Clac scripts might
- * need a lot of parameter stack space.
  */
 class ClacStack {
 private:
-    enum { STACK_SIZE = 100 };
-
-    // TODO: Modify this class to allow a stack of arbitrary size.
-    Entity *data[STACK_SIZE];
+    std::deque<Entity *> data;
 
 public:
     //! Initialize the ClacStack to an empty state.
-    ClacStack( );
+    ClacStack( ) = default;
 
     //! Delete all objects in the ClacStack before cleaning up the stack itself.
    ~ClacStack( );
@@ -84,4 +78,3 @@ public:
 };
 
 #endif
-
