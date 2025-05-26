@@ -11,16 +11,9 @@ execution engine that interprets calculator input and coordinates the computatio
 level code defines the user interface. In theory other programs could make use of Clac's entity
 library and execution engine while using a different user interface.
 
-Currently the user interface of Clac makes use of a cross-platform screen handling library named
-Scr. The [Scr library](https://github.com/pchapin/scr) is available on GitHub, but is included
-here as a Git submodule. Note that Scr is only used by the user interface code. It is not used
-by the ClacEntity library or by the ClacEngine library. Other programs using those libraries do
-not need to involve Scr at all.
-
-In addition, there is a completely independent implementation of Clac for Android written in
-Kotlin in the [aClac](https://github.com/pchapin/aclac) repository. That implementation does not
-currently share any code with the C++ version. See the README in that repository for more
-information.
+There is a completely independent implementation of Clac for Android written in Kotlin in the
+[aClac](https://github.com/pchapin/aclac) repository. That implementation does not currently
+share any code with the C++ version. See the README in that repository for more information.
 
 
 Cloning

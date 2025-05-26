@@ -1,5 +1,2 @@
 clac.cpp
-ClacCommandWindow.cpp
-DirectoryWindow.cpp
-StackWindow.cpp
 RecordFile.cpp

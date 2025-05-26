@@ -2,4 +2,4 @@
 
 # This shell script runs the depend tool to produce output suitable for the Makefile.
 
-depend '-IClacEntity;ClacEngine;Scr' depend.dep depend.out
+depend '-IClacEntity;ClacEngine' depend.dep depend.out

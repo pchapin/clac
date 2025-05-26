@@ -56,8 +56,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>ClacEntity;ClacEngine;Scr;SpicaCpp</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SCR_DIRECT;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>ClacEntity;ClacEngine;SpicaCpp</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -67,7 +67,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Debug\clac_entity.lib;Debug\clac_engine.lib;Scr\Debug\scr.lib;SpicaCpp\Debug\SpicaCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Debug\clac_entity.lib;Debug\clac_engine.lib;SpicaCpp\Debug\SpicaCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -77,7 +77,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>ClacEntity;ClacEngine;Scr;SpicaCpp</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ClacEntity;ClacEngine;SpicaCpp</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -94,15 +94,12 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <AdditionalDependencies>Release\clac_entity.lib;Release\clac_engine.lib;Scr\Release\scr.lib;SpicaCpp\Release\SpicaCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Release\clac_entity.lib;Release\clac_engine.lib;SpicaCpp\Release\SpicaCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="clac.cpp" />
-    <ClCompile Include="ClacCommandWindow.cpp" />
-    <ClCompile Include="DirectoryWindow.cpp" />
     <ClCompile Include="RecordFile.cpp" />
-    <ClCompile Include="StackWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClacCommandWindow.hpp" />
