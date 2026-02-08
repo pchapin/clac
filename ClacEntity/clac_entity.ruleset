@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Rules for clac_entity" Description="Code analysis rules for clac_entity.vcxproj." ToolsVersion="17.0">
-  <IncludeAll Action="Warning" />
-  <Rules AnalyzerId="Microsoft.Analyzers.NativeCodeAnalysis" RuleNamespace="Microsoft.Rules.Native">
-    <Rule Id="C26400" Action="None" />
-    <Rule Id="C26409" Action="None" />
-    <Rule Id="C26446" Action="None" />
-  </Rules>
-</RuleSet>
