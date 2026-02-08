@@ -11,7 +11,7 @@
 #include <numbers>
 #include <string>
 
-#include "Rational.hpp"
+#include <spicacpp/Rational.hpp>
 
 #include "BinaryEntity.hpp"
 #include "ComplexEntity.hpp"
@@ -376,7 +376,7 @@ namespace {
 
         return new StringEntity( workspace );
     }
-    
+
 }
 
 

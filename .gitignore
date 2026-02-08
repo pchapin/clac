@@ -1,34 +1,10 @@
-# gcc/LLVM/clang generated files.
-*.bc
-*.bc1
-*.bc2
-*.o
-*.a
+build/
 
-# Visual Studio generated files.
-.vs
-*.sdf
-clac.VC.db
-Debug
-Release
-*.user
+# Visual Studio.
+.vs/
 
-# Eclipse files.
-
-# There is controversy about this file. It includes a hash of the environment that
-# is unique to each developer's system. However, it also includes some items that
-# probably should be shared between developers. See:
-# https://www.eclipse.org/forums/index.php/t/1074031/
-.settings/language.settings.xml
-
-# Code::Blocks generated files.
-*.layout
-*.depend
-bin
-obj
-
-# depend generated files.
-*.out
+# CLion.
+.idea/
 
 # LaTeX generated files.
 *.aux
@@ -39,14 +15,8 @@ obj
 *.pdf
 
 # Doxygen generated files.
-internal
-api
-
-# Executables
-clac
-u_tests
-*.exe
+internal/
+api/
 
 # macOS
 .DS_Store
-/build/

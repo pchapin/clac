@@ -6,7 +6,7 @@
 #ifndef GLOBAL_HPP
 #define GLOBAL_HPP
 
-#include "VeryLong.hpp"
+#include <spicacpp/VeryLong.hpp>
 
 #include "ClacStack.hpp"
 #include "WordStream.hpp"

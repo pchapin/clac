@@ -6,8 +6,8 @@
 #ifndef RATIONALENTITY_HPP
 #define RATIONALENTITY_HPP
 
-#include "Rational.hpp"
-#include "VeryLong.hpp"
+#include <spicacpp/Rational.hpp>
+#include <spicacpp/VeryLong.hpp>
 #include "Entity.hpp"
 
 class RationalEntity : public Entity {

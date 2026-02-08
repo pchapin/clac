@@ -8,7 +8,7 @@
 
 #include <deque>
 #include "Entity.hpp"
-#include "VeryLong.hpp"
+#include <spicacpp/VeryLong.hpp>
 
 /*! A class holding a stack of Entity values used during computations.
  *

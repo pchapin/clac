@@ -7,7 +7,7 @@
 #define INTEGERENTITY_HPP
 
 #include "Entity.hpp"
-#include "VeryLong.hpp"
+#include <spicacpp/VeryLong.hpp>
 
 class IntegerEntity : public Entity {
 public:
@@ -71,4 +71,3 @@ private:
 };
 
 #endif
-

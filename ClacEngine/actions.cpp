@@ -20,7 +20,7 @@
 #include "MatrixEntity.hpp"
 #include "RationalEntity.hpp"
 #include "StringEntity.hpp"
-#include "VeryLong.hpp"
+#include <spicacpp/VeryLong.hpp>
 
 #include "actions.hpp"
 #include "Global.hpp"
