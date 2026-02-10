@@ -13,110 +13,99 @@
 #include "Entities.hpp"
 
 using namespace std;
-using namespace spica;   // TODO: Remove this using directive.
+using namespace spica; // TODO: Remove this using directive.
 
-IntegerEntity::IntegerEntity( const VeryLong &number ) :
-  value( number )
-  {  }
+IntegerEntity::IntegerEntity(const VeryLong& number) : value(number)
+{
+}
 
-EntityType IntegerEntity::my_type( ) const noexcept
+EntityType IntegerEntity::my_type() const noexcept
 {
     return INTEGER;
 }
 
-std::string IntegerEntity::display( ) const
+std::string IntegerEntity::display() const
 {
     std::ostringstream formatter;
 
     formatter << value;
-    return formatter.str( );
+    return formatter.str();
 }
 
-
-Entity *IntegerEntity::duplicate( ) const
+Entity* IntegerEntity::duplicate() const
 {
-    return new IntegerEntity( *this );
+    return new IntegerEntity(*this);
 }
-
 
 //
 // Unary operations.
 //
 
-Entity *IntegerEntity::abs( ) const
+Entity* IntegerEntity::abs() const
 {
-    IntegerEntity *result;
-    if( value < VeryLong::zero ) result = new IntegerEntity( -value );
-        else result = new IntegerEntity( value );
+    IntegerEntity* result;
+    if (value < VeryLong::zero)
+        result = new IntegerEntity(-value);
+    else
+        result = new IntegerEntity(value);
     return result;
 }
 
-
-Entity *IntegerEntity::acos() const
+Entity* IntegerEntity::acos() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->acos( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->acos();
 }
 
-
-Entity *IntegerEntity::asin( ) const
+Entity* IntegerEntity::asin() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->asin( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->asin();
 }
 
-
-Entity *IntegerEntity::atan( ) const
+Entity* IntegerEntity::atan() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->atan( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->atan();
 }
 
-
-Entity *IntegerEntity::complex_conjugate( ) const
+Entity* IntegerEntity::complex_conjugate() const
 {
-    return duplicate( );
+    return duplicate();
 }
 
-
-Entity *IntegerEntity::cos( ) const
+Entity* IntegerEntity::cos() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->cos( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->cos();
 }
 
-
-Entity *IntegerEntity::exp( ) const
+Entity* IntegerEntity::exp() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->exp( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->exp();
 }
 
-
-Entity *IntegerEntity::exp10( ) const
+Entity* IntegerEntity::exp10() const
 {
-    unique_ptr<IntegerEntity> base( new IntegerEntity( VeryLong::ten ) );
-    return base->power( this );
+    unique_ptr<IntegerEntity> base(new IntegerEntity(VeryLong::ten));
+    return base->power(this);
 }
 
-
-Entity *IntegerEntity::fractional_part( ) const
+Entity* IntegerEntity::fractional_part() const
 {
-    return new IntegerEntity( VeryLong::zero );
+    return new IntegerEntity(VeryLong::zero);
 }
 
-
-Entity *IntegerEntity::imaginary_part( ) const
+Entity* IntegerEntity::imaginary_part() const
 {
-    return new IntegerEntity( VeryLong::zero );
+    return new IntegerEntity(VeryLong::zero);
 }
 
-
-Entity *IntegerEntity::integer_part( ) const
+Entity* IntegerEntity::integer_part() const
 {
-    return duplicate( );
+    return duplicate();
 }
-
 
 //
 // Would it be better to have inv return a RationalEntity? My guess is no. I think Rationals
@@ -124,133 +113,118 @@ Entity *IntegerEntity::integer_part( ) const
 // want 1/x to become a floating value when x is an integer. Perhaps this is something that
 // could eventually be controlled by a setting.
 //
-Entity *IntegerEntity::inv( ) const
+Entity* IntegerEntity::inv() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->inv( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->inv();
 }
 
-
-Entity *IntegerEntity::ln( ) const
+Entity* IntegerEntity::ln() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->ln( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->ln();
 }
 
-
-Entity *IntegerEntity::log( ) const
+Entity* IntegerEntity::log() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->log( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->log();
 }
 
-
-Entity *IntegerEntity::neg( ) const
+Entity* IntegerEntity::neg() const
 {
-    return new IntegerEntity( -value );
+    return new IntegerEntity(-value);
 }
 
-
-Entity *IntegerEntity::real_part( ) const
+Entity* IntegerEntity::real_part() const
 {
-    return duplicate( );
+    return duplicate();
 }
 
-
-Entity *IntegerEntity::sign( ) const
+Entity* IntegerEntity::sign() const
 {
-    IntegerEntity *result;
+    IntegerEntity* result;
 
-    if( value == VeryLong::zero )
-        result = new IntegerEntity( VeryLong::zero );
+    if (value == VeryLong::zero)
+        result = new IntegerEntity(VeryLong::zero);
 
-    else if( value > VeryLong::zero )
-        result = new IntegerEntity( VeryLong::one );
+    else if (value > VeryLong::zero)
+        result = new IntegerEntity(VeryLong::one);
 
-    else  /* value < 0 */
-        result = new IntegerEntity( VeryLong::negative_one );
+    else /* value < 0 */
+        result = new IntegerEntity(VeryLong::negative_one);
 
     return result;
 }
 
-
-Entity *IntegerEntity::sin( ) const
+Entity* IntegerEntity::sin() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->sin( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->sin();
 }
 
-
-Entity *IntegerEntity::sq( ) const
+Entity* IntegerEntity::sq() const
 {
-    unique_ptr<IntegerEntity> temp( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
+    unique_ptr<IntegerEntity> temp(dynamic_cast<IntegerEntity*>(duplicate()));
     temp->value *= value;
-    return temp.release( );
+    return temp.release();
 }
 
-
-Entity *IntegerEntity::sqrt( ) const
+Entity* IntegerEntity::sqrt() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->sqrt( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->sqrt();
 }
 
-
-Entity *IntegerEntity::tan( ) const
+Entity* IntegerEntity::tan() const
 {
-    unique_ptr<Entity> converted( to_float( ) );
-    return converted->tan( );
+    unique_ptr<Entity> converted(to_float());
+    return converted->tan();
 }
-
 
 //
 // Binary operations.
 //
 
-Entity *IntegerEntity::divide( const Entity *R ) const
+Entity* IntegerEntity::divide(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    unique_ptr<IntegerEntity> copy( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    unique_ptr<IntegerEntity> copy(dynamic_cast<IntegerEntity*>(duplicate()));
     copy->value /= right->value;
-    return copy.release( );
+    return copy.release();
 }
 
-
-Entity *IntegerEntity::minus( const Entity *R ) const
+Entity* IntegerEntity::minus(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    unique_ptr<IntegerEntity> copy( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    unique_ptr<IntegerEntity> copy(dynamic_cast<IntegerEntity*>(duplicate()));
     copy->value -= right->value;
-    return copy.release( );
+    return copy.release();
 }
 
-
-Entity *IntegerEntity::modulo( const Entity *R ) const
+Entity* IntegerEntity::modulo(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    unique_ptr<IntegerEntity> copy( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    unique_ptr<IntegerEntity> copy(dynamic_cast<IntegerEntity*>(duplicate()));
     copy->value %= right->value;
-    return copy.release( );
+    return copy.release();
 }
 
-
-Entity *IntegerEntity::multiply( const Entity *R ) const
+Entity* IntegerEntity::multiply(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    unique_ptr< IntegerEntity > copy( dynamic_cast< IntegerEntity *>( duplicate( ) ) );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    unique_ptr<IntegerEntity> copy(dynamic_cast<IntegerEntity*>(duplicate()));
     copy->value *= right->value;
-    return copy.release( );
+    return copy.release();
 }
 
-
-Entity *IntegerEntity::plus( const Entity *R ) const
+Entity* IntegerEntity::plus(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    unique_ptr< IntegerEntity > copy( dynamic_cast<IntegerEntity *>( duplicate( ) ) );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    unique_ptr<IntegerEntity> copy(dynamic_cast<IntegerEntity*>(duplicate()));
     copy->value += right->value;
-    return copy.release( );
+    return copy.release();
 }
-
 
 //
 // There is a faster way of computing a power using recursion than the method I'm using here.
@@ -258,99 +232,93 @@ Entity *IntegerEntity::plus( const Entity *R ) const
 // Since VeryLongs can be large, I should probably change this function someday to use the more
 // efficient method. It might make a difference for some applications.
 //
-Entity *IntegerEntity::power( const Entity *R ) const
+Entity* IntegerEntity::power(const Entity* R) const
 {
-  const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-  unique_ptr< IntegerEntity > result( new IntegerEntity( VeryLong::one ) );
-  VeryLong exponent( right->value );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    unique_ptr<IntegerEntity> result(new IntegerEntity(VeryLong::one));
+    VeryLong exponent(right->value);
 
-  // If we are using a negative exponent, compute the appropriate power and then invert it. Note
-  // that inv currently returns a (pointer to a) FloatEntity. Most likely this is what the user
-  // wants when applying a negative exponent to an integer anyway.
-  //
-  if( exponent < VeryLong::zero ) {
-    while( exponent < VeryLong::zero ) {
-      result->value *= value;
-      ++exponent;
+    // If we are using a negative exponent, compute the appropriate power and then invert it. Note
+    // that inv currently returns a (pointer to a) FloatEntity. Most likely this is what the user
+    // wants when applying a negative exponent to an integer anyway.
+    //
+    if (exponent < VeryLong::zero) {
+        while (exponent < VeryLong::zero) {
+            result->value *= value;
+            ++exponent;
+        }
+        return result->inv();
     }
-    return result->inv( );
-  }
 
-  // Otherwise it's a positive (or zero) exponent.
-  while( exponent > VeryLong::zero ) {
-    result->value *= value;
-    --exponent;
-  }
+    // Otherwise it's a positive (or zero) exponent.
+    while (exponent > VeryLong::zero) {
+        result->value *= value;
+        --exponent;
+    }
 
-  return result.release( );
+    return result.release();
 }
-
 
 //
 // Relational operations.
 //
 
-Entity *IntegerEntity::is_equal( const Entity *R ) const
+Entity* IntegerEntity::is_equal(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    return new IntegerEntity( value == right->value );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    return new IntegerEntity(value == right->value);
 }
 
-
-Entity *IntegerEntity::is_notequal( const Entity *R ) const
+Entity* IntegerEntity::is_notequal(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    return new IntegerEntity( value != right->value );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    return new IntegerEntity(value != right->value);
 }
 
-
-Entity *IntegerEntity::is_less( const Entity *R ) const
+Entity* IntegerEntity::is_less(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    return new IntegerEntity( value < right->value );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    return new IntegerEntity(value < right->value);
 }
 
-
-Entity *IntegerEntity::is_lessorequal( const Entity *R ) const
+Entity* IntegerEntity::is_lessorequal(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    return new IntegerEntity( value <= right->value );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    return new IntegerEntity(value <= right->value);
 }
 
-
-Entity *IntegerEntity::is_greater( const Entity *R ) const
+Entity* IntegerEntity::is_greater(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    return new IntegerEntity( value > right->value );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    return new IntegerEntity(value > right->value);
 }
 
-
-Entity *IntegerEntity::is_greaterorequal( const Entity *R ) const
+Entity* IntegerEntity::is_greaterorequal(const Entity* R) const
 {
-    const IntegerEntity *right = dynamic_cast<const IntegerEntity *>( R );
-    return new IntegerEntity( value >= right->value );
+    const IntegerEntity* right = dynamic_cast<const IntegerEntity*>(R);
+    return new IntegerEntity(value >= right->value);
 }
-
 
 //
 // Conversions from IntegerEntity
 //
 
-Entity *IntegerEntity::to_float( ) const
+Entity* IntegerEntity::to_float() const
 {
-    const VeryLong::size_type bit_count = value.number_bits( );
+    const VeryLong::size_type bit_count = value.number_bits();
     double result = 0.0;
 
-    for( VeryLong::size_type i = 0; i < bit_count; i++ ) {
+    for (VeryLong::size_type i = 0; i < bit_count; i++) {
         result *= 2.0;
-        result += value.get_bit( bit_count - i - 1 );
+        result += value.get_bit(bit_count - i - 1);
     }
-    if( value < 0 ) result = -result;
+    if (value < 0)
+        result = -result;
 
-    return new FloatEntity( result );
+    return new FloatEntity(result);
 }
 
-Entity *IntegerEntity::to_integer( ) const
+Entity* IntegerEntity::to_integer() const
 {
-    return duplicate( );
+    return duplicate();
 }

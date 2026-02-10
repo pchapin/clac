@@ -35,15 +35,15 @@
 #include <ctime>
 #include <numbers>
 
-#include "Entities.hpp"
 #include "DisplayState.hpp"
+#include "Entities.hpp"
 #include "support.hpp"
 
 using namespace std;
 
 // These two constants are fundamental.
 constexpr double pi = numbers::pi;
-constexpr double e  = numbers::e;
+constexpr double e = numbers::e;
 
 //=================================================
 //           Internally Linked Functions
@@ -57,44 +57,43 @@ namespace {
     // integer. This function is used during the display of FloatEntities (particularly in
     // engineering notation).
     //
-    double frexp10( double number, int *exp ) noexcept
+    double frexp10(double number, int* exp) noexcept
     {
-        int    int_num;  // Exponent of 2.
-        double flt_num;  // Mantissa that goes with the exponent of 2.
-        double temp;     // Raw exponent of 10.
+        int int_num;                // Exponent of 2.
+        double flt_num;             // Mantissa that goes with the exponent of 2.
+        double temp;                // Raw exponent of 10.
         double frac_part, int_part; // Parts of the raw exponent of 10.
-        double mantissa; // Mantissa that goes with the final exponent of 10.
+        double mantissa;            // Mantissa that goes with the final exponent of 10.
 
         // Compute number = flt_num * 2^(int_num). Note that some implementations have problems
         // with this when number is 0.0.
         //
-        flt_num = frexp( number, &int_num );
+        flt_num = frexp(number, &int_num);
 
-        temp      = int_num * log10( 2.0 );           // Compute raw exponet of 10.
-        frac_part = modf( temp, &int_part );          // Find parts of raw exponent.
-        mantissa  = flt_num * pow( 10.0, frac_part ); // Get the final mantissa.
+        temp = int_num * log10(2.0);               // Compute raw exponet of 10.
+        frac_part = modf(temp, &int_part);         // Find parts of raw exponent.
+        mantissa = flt_num * pow(10.0, frac_part); // Get the final mantissa.
 
         // Normalize all mantissa into the range 1.0 -> 10.0
-        if( fabs( mantissa ) < 1.0 ) {
+        if (fabs(mantissa) < 1.0) {
             mantissa *= 10.0;
             int_part -= 1.0;
         }
 
         // Return results.
-        *exp = static_cast<int>( int_part );
+        *exp = static_cast<int>(int_part);
         return mantissa;
     }
-
 
     //
     // The following function adjusts the mantissa and exponent of a number so that it is in
     // engineering notation. Normally numbers are displayed in the form: 3.141e5. But
     // engineering notation requires an exponent that is a multiple of 3. Thus: 314.1e3.
     //
-    void eng_adjust( double &mantissa, int &exponent ) noexcept
+    void eng_adjust(double& mantissa, int& exponent) noexcept
     {
         // Loop until the exponent is evenly divisable by three.
-        while( abs( exponent ) % 3 != 0 ) {
+        while (abs(exponent) % 3 != 0) {
 
             // Shift mantissa over one place and adjust exponent.
             mantissa *= 10.0;
@@ -102,19 +101,18 @@ namespace {
         }
     }
 
-}
-
+} // namespace
 
 //==========================================
 //           FloatEntity Members
 //==========================================
 
-FloatEntity::FloatEntity( double number ) noexcept
+FloatEntity::FloatEntity(double number) noexcept
 {
     value = number;
 }
 
-EntityType FloatEntity::my_type( ) const noexcept
+EntityType FloatEntity::my_type() const noexcept
 {
     return FLOAT;
 }
@@ -125,363 +123,332 @@ EntityType FloatEntity::my_type( ) const noexcept
 // as a string. This code should probably be updated to use iostreams at some point. However,
 // this basically works so I'm not going to worry about it now.
 //
-std::string FloatEntity::display( ) const
+std::string FloatEntity::display() const
 {
     static char buffer[128 + 1];
 
-    switch( DisplayState::get_display_mode( ) ) {
+    switch (DisplayState::get_display_mode()) {
     case DisplayState::FIXED:
-        snprintf( buffer, 128 + 1, "%.*f", DisplayState::get_decimal_count( ), value );
+        snprintf(buffer, 128 + 1, "%.*f", DisplayState::get_decimal_count(), value);
         break;
 
     case DisplayState::SCIENTIFIC:
-        snprintf( buffer, 128 + 1, "%.*E", DisplayState::get_decimal_count( ), value );
+        snprintf(buffer, 128 + 1, "%.*E", DisplayState::get_decimal_count(), value);
         break;
 
     case DisplayState::ENGINEERING: {
-        int    exponent;
-        double mantissa = frexp10( value, &exponent );
+        int exponent;
+        double mantissa = frexp10(value, &exponent);
         const int old_exponent = exponent;
 
-        eng_adjust( mantissa, exponent );
+        eng_adjust(mantissa, exponent);
 
-        int mantissa_decimals =
-            DisplayState::get_decimal_count( ) - ( old_exponent - exponent );
-        if( mantissa_decimals < 0 ) mantissa_decimals = 0;
+        int mantissa_decimals = DisplayState::get_decimal_count() - (old_exponent - exponent);
+        if (mantissa_decimals < 0)
+            mantissa_decimals = 0;
 
-        if( exponent < 0 )
-            snprintf( buffer, 128 + 1, "%.*fE%+02d", mantissa_decimals, mantissa, exponent );
+        if (exponent < 0)
+            snprintf(buffer, 128 + 1, "%.*fE%+02d", mantissa_decimals, mantissa, exponent);
         else
-            snprintf( buffer, 128 + 1, "%.*fE%+03d", mantissa_decimals, mantissa, exponent );
-    }
-    break;
+            snprintf(buffer, 128 + 1, "%.*fE%+03d", mantissa_decimals, mantissa, exponent);
+    } break;
 
     default:
-        snprintf( buffer, 128 + 1, "INTERNAL ERROR: Bad display mode" );
+        snprintf(buffer, 128 + 1, "INTERNAL ERROR: Bad display mode");
         break;
     }
     return buffer;
 }
 
-
-Entity *FloatEntity::duplicate( ) const
+Entity* FloatEntity::duplicate() const
 {
-    return new FloatEntity( value );
+    return new FloatEntity(value);
 }
-
 
 //
 // Unary operations
 //
 
-Entity *FloatEntity::abs( ) const
+Entity* FloatEntity::abs() const
 {
-    const double new_value = fabs( value );
-    return new FloatEntity( new_value );
+    const double new_value = fabs(value);
+    return new FloatEntity(new_value);
 }
 
-
-Entity *FloatEntity::acos( ) const
+Entity* FloatEntity::acos() const
 {
-    if( value > 1.0 ) {
-        return new ComplexEntity( std::acos( 1.0 ), -std::log( value + std::sqrt( value * value - 1.0 ) ) );
+    if (value > 1.0) {
+        return new ComplexEntity(std::acos(1.0), -std::log(value + std::sqrt(value * value - 1.0)));
     }
     else {
-        return new FloatEntity( from_radians( std::acos( value ) ) );
+        return new FloatEntity(from_radians(std::acos(value)));
     }
 }
 
-
-Entity *FloatEntity::asin( ) const
+Entity* FloatEntity::asin() const
 {
-    if( value > 1.0 ) {
-        return new ComplexEntity( std::asin( 1.0 ), std::log( value + std::sqrt( value * value - 1.0 ) ) );
+    if (value > 1.0) {
+        return new ComplexEntity(std::asin(1.0), std::log(value + std::sqrt(value * value - 1.0)));
     }
     else {
-        return new FloatEntity( from_radians( std::asin( value ) ) );
+        return new FloatEntity(from_radians(std::asin(value)));
     }
 }
 
-
-Entity *FloatEntity::atan( ) const
+Entity* FloatEntity::atan() const
 {
-    return new FloatEntity( from_radians( std::atan( value ) ) );
+    return new FloatEntity(from_radians(std::atan(value)));
 }
 
-
-Entity *FloatEntity::complex_conjugate( ) const
+Entity* FloatEntity::complex_conjugate() const
 {
-    return new FloatEntity( value );
+    return new FloatEntity(value);
 }
 
-
-Entity *FloatEntity::cos( ) const
+Entity* FloatEntity::cos() const
 {
-    return new FloatEntity( std::cos( to_radians( value ) ) );
+    return new FloatEntity(std::cos(to_radians(value)));
 }
 
-
-Entity *FloatEntity::exp( ) const
+Entity* FloatEntity::exp() const
 {
     errno = 0;
-    const double temp = std::exp( value );
-    if( errno == ERANGE ) {
-        throw Error( "Overflow: Can't compute e^x for such a large x" );
+    const double temp = std::exp(value);
+    if (errno == ERANGE) {
+        throw Error("Overflow: Can't compute e^x for such a large x");
     }
-    return new FloatEntity( temp );
+    return new FloatEntity(temp);
 }
 
-
-Entity *FloatEntity::exp10( ) const
+Entity* FloatEntity::exp10() const
 {
     errno = 0;
-    const double temp = pow( 10.0, value );
-    if( errno == ERANGE ) {
-        throw Error( "Overflow: Can't compute 10^x for such a large x" );
+    const double temp = pow(10.0, value);
+    if (errno == ERANGE) {
+        throw Error("Overflow: Can't compute 10^x for such a large x");
     }
-    return new FloatEntity( temp );
+    return new FloatEntity(temp);
 }
 
-
-Entity *FloatEntity::fractional_part( ) const
+Entity* FloatEntity::fractional_part() const
 {
-    [[maybe_unused]] double dummy;   // We don't care about the integer part.
-    return new FloatEntity( std::modf( value, &dummy ) );
+    [[maybe_unused]] double dummy; // We don't care about the integer part.
+    return new FloatEntity(std::modf(value, &dummy));
 }
 
-
-Entity *FloatEntity::imaginary_part( ) const
+Entity* FloatEntity::imaginary_part() const
 {
-    return new FloatEntity( 0.0 );
+    return new FloatEntity(0.0);
 }
 
-
-Entity *FloatEntity::integer_part( ) const
+Entity* FloatEntity::integer_part() const
 {
     double result;
-    [[maybe_unused]] double dummy;   // We don't care about the fractional part.
-    dummy = std::modf( value, &result );
-    return new FloatEntity( result );
+    [[maybe_unused]] double dummy; // We don't care about the fractional part.
+    dummy = std::modf(value, &result);
+    return new FloatEntity(result);
 }
 
-
-Entity *FloatEntity::inv( ) const
+Entity* FloatEntity::inv() const
 {
     // NOTE: this function does not worry about overflow or underflow if an attempt is made to
     // invert DBL_MAX or DBL_MIN.
 
-    if( value == 0.0 ) throw Error( "Can't invert zero" );
-    return new FloatEntity( 1.0 / value );
+    if (value == 0.0)
+        throw Error("Can't invert zero");
+    return new FloatEntity(1.0 / value);
 }
 
-
-Entity *FloatEntity::ln( ) const
+Entity* FloatEntity::ln() const
 {
-    if( value == 0.0 ) throw Error( "Can't take the natural log of zero" );
+    if (value == 0.0)
+        throw Error("Can't take the natural log of zero");
 
-    if( value < 0.0 ) {
-        return new ComplexEntity( std::log( fabs( value ) ), pi );
+    if (value < 0.0) {
+        return new ComplexEntity(std::log(fabs(value)), pi);
     }
-    return new FloatEntity( std::log( value ) );
+    return new FloatEntity(std::log(value));
 }
 
-
-Entity *FloatEntity::log( ) const
+Entity* FloatEntity::log() const
 {
-    if( value == 0.0 ) throw Error( "Can't take the log of zero" );
+    if (value == 0.0)
+        throw Error("Can't take the log of zero");
 
-    if( value < 0.0 ) {
-        return new ComplexEntity( std::log10( fabs( value ) ), pi * std::log10( e ) );
+    if (value < 0.0) {
+        return new ComplexEntity(std::log10(fabs(value)), pi * std::log10(e));
     }
-    return new FloatEntity( std::log10( value ) );
+    return new FloatEntity(std::log10(value));
 }
 
-
-Entity *FloatEntity::neg( ) const
+Entity* FloatEntity::neg() const
 {
-    return new FloatEntity( -1.0 * value );
+    return new FloatEntity(-1.0 * value);
 }
 
-
-Entity *FloatEntity::real_part( ) const
+Entity* FloatEntity::real_part() const
 {
-    return new FloatEntity( value );
+    return new FloatEntity(value);
 }
 
-
-Entity *FloatEntity::sign( ) const
+Entity* FloatEntity::sign() const
 {
-    if( value > 0.0 )
-        return new FloatEntity( 1.0 );
+    if (value > 0.0)
+        return new FloatEntity(1.0);
 
-    else if( value < 0.0 )
-        return new FloatEntity( -1.0 );
+    else if (value < 0.0)
+        return new FloatEntity(-1.0);
 
-    return new FloatEntity( value );
+    return new FloatEntity(value);
 }
 
-
-Entity *FloatEntity::sin( ) const
+Entity* FloatEntity::sin() const
 {
-    return new FloatEntity( std::sin( to_radians( value ) ) );
+    return new FloatEntity(std::sin(to_radians(value)));
 }
 
-
-Entity *FloatEntity::sq( ) const
+Entity* FloatEntity::sq() const
 {
     // Be sure the number we are squaring is positive.
-    const double temp = fabs( value );
+    const double temp = fabs(value);
 
     // Deal with the possibility of overflow.
-    if( temp > 1.0 ) {
-        if( DBL_MAX / temp < temp ) {
-            throw Error( "Can't square number with such a large magnitude" );
+    if (temp > 1.0) {
+        if (DBL_MAX / temp < temp) {
+            throw Error("Can't square number with such a large magnitude");
         }
     }
 
     // Deal with the possibility of underflow. (Or should I just return 0.0?)
     else {
-        if( temp / DBL_MIN  < 1.0 / temp ) {
-            throw Error( "Can't square a number with such a small magnitude" );
+        if (temp / DBL_MIN < 1.0 / temp) {
+            throw Error("Can't square a number with such a small magnitude");
         }
     }
-    return new FloatEntity( temp * temp );
+    return new FloatEntity(temp * temp);
 }
 
-
-Entity *FloatEntity::sqrt( ) const
+Entity* FloatEntity::sqrt() const
 {
-    if( value < 0.0 ) {
-        return  new ComplexEntity( 0.0, std::sqrt( fabs( value ) ) );
+    if (value < 0.0) {
+        return new ComplexEntity(0.0, std::sqrt(fabs(value)));
     }
     else {
-        return new FloatEntity( std::sqrt( value ) );
+        return new FloatEntity(std::sqrt(value));
     }
 }
 
-
-Entity *FloatEntity::tan( ) const
+Entity* FloatEntity::tan() const
 {
     errno = 0;
-    const double temp = ::tan( to_radians( value ) );
-    if( errno == ERANGE ) {
-        throw Error( "Can't take the tangent of pi/2 + n*pi radians" );
+    const double temp = ::tan(to_radians(value));
+    if (errno == ERANGE) {
+        throw Error("Can't take the tangent of pi/2 + n*pi radians");
     }
-    return new FloatEntity( temp );
+    return new FloatEntity(temp);
 }
-
 
 //
 // Binary operations
 //
 
-Entity *FloatEntity::divide( const Entity *R ) const
+Entity* FloatEntity::divide(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    if( right->value == 0.0 ) throw Error( "Can't divide by zero" );
-    return new FloatEntity( value / right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    if (right->value == 0.0)
+        throw Error("Can't divide by zero");
+    return new FloatEntity(value / right->value);
 }
 
-
-Entity *FloatEntity::minus( const Entity *R ) const
+Entity* FloatEntity::minus(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new FloatEntity( value - right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new FloatEntity(value - right->value);
 }
 
-
-Entity *FloatEntity::multiply( const Entity *R ) const
+Entity* FloatEntity::multiply(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new FloatEntity( value * right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new FloatEntity(value * right->value);
 }
 
-
-Entity *FloatEntity::plus( const Entity *R ) const
+Entity* FloatEntity::plus(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new FloatEntity( value + right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new FloatEntity(value + right->value);
 }
 
-
-Entity *FloatEntity::power( const Entity *R ) const
+Entity* FloatEntity::power(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new FloatEntity( pow( value, right->value ) );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new FloatEntity(pow(value, right->value));
 }
-
 
 //
 // Relational operations
 //
 
-Entity *FloatEntity::is_equal( const Entity *R ) const
+Entity* FloatEntity::is_equal(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new IntegerEntity( value == right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new IntegerEntity(value == right->value);
 }
 
-
-Entity *FloatEntity::is_notequal( const Entity *R ) const
+Entity* FloatEntity::is_notequal(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new IntegerEntity( value != right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new IntegerEntity(value != right->value);
 }
 
-
-Entity *FloatEntity::is_less( const Entity *R ) const
+Entity* FloatEntity::is_less(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new IntegerEntity( value < right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new IntegerEntity(value < right->value);
 }
 
-
-Entity *FloatEntity::is_lessorequal( const Entity *R ) const
+Entity* FloatEntity::is_lessorequal(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new IntegerEntity( value <= right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new IntegerEntity(value <= right->value);
 }
 
-
-Entity *FloatEntity::is_greater( const Entity *R ) const
+Entity* FloatEntity::is_greater(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new IntegerEntity( value > right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new IntegerEntity(value > right->value);
 }
 
-
-Entity *FloatEntity::is_greaterorequal( const Entity *R ) const
+Entity* FloatEntity::is_greaterorequal(const Entity* R) const
 {
-    const FloatEntity *right = dynamic_cast<const FloatEntity *>( R );
-    return new IntegerEntity( value >= right->value );
+    const FloatEntity* right = dynamic_cast<const FloatEntity*>(R);
+    return new IntegerEntity(value >= right->value);
 }
-
 
 //
 // Conversions from FloatEntity
 //
 
-Entity *FloatEntity::to_complex( ) const
+Entity* FloatEntity::to_complex() const
 {
-    return new ComplexEntity( value );
+    return new ComplexEntity(value);
 }
 
-
-Entity *FloatEntity::to_float( ) const
+Entity* FloatEntity::to_float() const
 {
-    return duplicate( );
+    return duplicate();
 }
 
-
-Entity *FloatEntity::to_integer( ) const
+Entity* FloatEntity::to_integer() const
 {
     double I_part;
     double fraction;
 
-    fraction = std::modf( value, &I_part );
-    if( value > 0 && fraction > 0.5 ) I_part += 1.0;
-    if( value < 0 && fraction < 0.5 ) I_part -= 1.0;
+    fraction = std::modf(value, &I_part);
+    if (value > 0 && fraction > 0.5)
+        I_part += 1.0;
+    if (value < 0 && fraction < 0.5)
+        I_part -= 1.0;
 
-    const int result = static_cast<int>( I_part );
-    return new IntegerEntity( result );
+    const int result = static_cast<int>(I_part);
+    return new IntegerEntity(result);
 }

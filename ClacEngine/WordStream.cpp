@@ -3,8 +3,8 @@
  *  \author  Peter Chapin <spicacality@kelseymountain.org>
  */
 
-#include <cstring>
 #include "WordStream.hpp"
+#include <cstring>
 
 using namespace std;
 
@@ -12,13 +12,21 @@ using namespace std;
 // Word_Stream Members
 // -------------------
 
-const char *WordStream::delimiters = " \t";
-char  WordStream::comment    = ';';
+const char* WordStream::delimiters = " \t";
+char WordStream::comment = ';';
 
-void WordStream::set_delimiters( char *D ) { delimiters = D; }
-void WordStream::set_comment( char C )     { comment    = C; }
+void WordStream::set_delimiters(char* D)
+{
+    delimiters = D;
+}
+void WordStream::set_comment(char C)
+{
+    comment = C;
+}
 
-WordStream::~WordStream( ) { }
+WordStream::~WordStream()
+{
+}
 
 /*!
  * The following function accepts a pointer which points into a string. It returns a pointer
@@ -27,16 +35,18 @@ WordStream::~WordStream( ) { }
  *
  * If a comment character is encountered, the function returns a pointer to the null character.
  */
-const char *WordStream::find_next_word( const char *string )
+const char* WordStream::find_next_word(const char* string)
 {
-    while( *string ) {
-        if( strchr( delimiters, *string ) != 0 ) string++;
-        else if( *string == comment ) string = strchr( string, '\0' );
-        else break;
+    while (*string) {
+        if (strchr(delimiters, *string) != 0)
+            string++;
+        else if (*string == comment)
+            string = strchr(string, '\0');
+        else
+            break;
     }
     return string;
 }
-
 
 /*!
  * The following function takes a pointer to a string which is pointing at a word. It returns a
@@ -51,23 +61,29 @@ const char *WordStream::find_next_word( const char *string )
  *   word;comment
  *   word1"This is another word"word2
  */
-const char *WordStream::find_next_space( const char *string )
+const char* WordStream::find_next_space(const char* string)
 {
     // If this word is a quoted string, search for the close quote mark.
-    if( *string == '\"' ) {
-        const char *end_quote = strchr( string + 1, '\"' );
+    if (*string == '\"') {
+        const char* end_quote = strchr(string + 1, '\"');
 
-        if( end_quote != 0 ) end_quote++;
-        else end_quote = strchr( string + 1, '\0' );
+        if (end_quote != 0)
+            end_quote++;
+        else
+            end_quote = strchr(string + 1, '\0');
         return end_quote;
     }
 
     // Otherwise, scan until we get to a delimiter, comment mark, or quote.
-    while( *string ) {
-        if( *string == '\"' ) break;
-        if( *string == comment ) break;
-        if( strchr( delimiters, *string ) == 0 ) string++;
-        else break;
+    while (*string) {
+        if (*string == '\"')
+            break;
+        if (*string == comment)
+            break;
+        if (strchr(delimiters, *string) == 0)
+            string++;
+        else
+            break;
     }
 
     return string;
@@ -81,26 +97,26 @@ const char *WordStream::find_next_space( const char *string )
  * Find the next word in the encapsulated string. The value of current_point marks where to
  * start the search. Note that current_point is initialized by the constructor.
  */
-string StringStream::next_word( )
+string StringStream::next_word()
 {
     string word;
 
     // Find the start of the next word.
-    current_point = find_next_word( current_point );
+    current_point = find_next_word(current_point);
 
     // If there are no more words, return an empty word.
-    if( *current_point == '\0' ) return word;
+    if (*current_point == '\0')
+        return word;
 
     // Find the point just past the end of this word.
-    const char *end_word = find_next_space( current_point );
+    const char* end_word = find_next_space(current_point);
 
     // Copy this word into the holding area.
-    word.assign( current_point, static_cast<string::size_type>( end_word - current_point) );
+    word.assign(current_point, static_cast<string::size_type>(end_word - current_point));
 
     current_point = end_word;
     return word;
-  }
-
+}
 
 // -------------------
 // File_Stream Members
@@ -115,34 +131,33 @@ string StringStream::next_word( )
  *   This is an "unmatched quoted string
  *   These words are each separate" This is inside another string!
  */
-string FileStream::next_word( )
+string FileStream::next_word()
 {
     string word;
 
     // Keep looping until we can get a word.
-    while( 1 ) {
+    while (1) {
 
         // If the line_buffer is empty, read the file.
-        if( current_point == 0 ) {
-            if( !word_source ) return word;
-            getline( word_source, line_buffer );
-            current_point = line_buffer.c_str( );
+        if (current_point == 0) {
+            if (!word_source)
+                return word;
+            getline(word_source, line_buffer);
+            current_point = line_buffer.c_str();
         }
 
         // Try to get a word out of the current line. Break out if we get one.
-        current_point = find_next_word( current_point );
-        if( *current_point != '\0' ) break;
+        current_point = find_next_word(current_point);
+        if (*current_point != '\0')
+            break;
         current_point = 0;
     }
 
     // Locate the end of the word, etc.
-    const char *end_word = find_next_space( current_point );
+    const char* end_word = find_next_space(current_point);
 
     // Copy this word into the holding area.
-    word.assign(
-        current_point,
-        static_cast<string::size_type>( end_word - current_point )
-    );
+    word.assign(current_point, static_cast<string::size_type>(end_word - current_point));
 
     current_point = end_word;
     return word;
@@ -155,15 +170,14 @@ string FileStream::next_word( )
 /*!
  * The destructor deletes all the word stream objects on the stack.
  */
-MasterStream::~MasterStream( )
+MasterStream::~MasterStream()
 {
     // Toss out all the active word streams.
-    while( !stream_stack.empty( ) ) {
-        delete stream_stack.top( );
-        stream_stack.pop( );
+    while (!stream_stack.empty()) {
+        delete stream_stack.top();
+        stream_stack.pop();
     }
 }
-
 
 /*!
  * The following function extracts the next word from a master stream. This entails getting the
@@ -171,33 +185,34 @@ MasterStream::~MasterStream( )
  * exhausted, the stack is popped and another attempt to get a word is made. This function only
  * returns an empty word if there are no more word streams to try.
  */
-string MasterStream::next_word( )
+string MasterStream::next_word()
 {
     string word;
 
     // Loop until we get a word (or bust).
-    while( 1 ) {
+    while (1) {
 
         // If there are no word streams left, then we are done.
-        if( stream_stack.empty( ) ) break;
+        if (stream_stack.empty())
+            break;
 
         // Try to get the next word out of the current word stream.
-        word = stream_stack.top( )->next_word( );
+        word = stream_stack.top()->next_word();
 
         // If it worked, return it.
-        if( word.length( ) != 0 ) break;
+        if (word.length() != 0)
+            break;
 
         // Otherwise, blow this word stream object away.
-        delete stream_stack.top( );
-        stream_stack.pop( );
+        delete stream_stack.top();
+        stream_stack.pop();
     }
 
     return word;
 }
 
-
 //! The following function puts a new word stream onto the stack.
-void MasterStream::push( WordStream *new_stream )
+void MasterStream::push(WordStream* new_stream)
 {
-    stream_stack.push( new_stream );
+    stream_stack.push(new_stream);
 }

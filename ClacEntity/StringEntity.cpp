@@ -7,36 +7,32 @@
 
 using namespace std;
 
-EntityType StringEntity::my_type( ) const noexcept
+EntityType StringEntity::my_type() const noexcept
 {
     return STRING;
 }
 
-
-string StringEntity::display( ) const
+string StringEntity::display() const
 {
     return value;
 }
 
-
-Entity *StringEntity::duplicate( ) const
+Entity* StringEntity::duplicate() const
 {
-    return new StringEntity( value );
+    return new StringEntity(value);
 }
 
-
-Entity *StringEntity::plus( const Entity *R ) const
+Entity* StringEntity::plus(const Entity* R) const
 {
-    const StringEntity *right = dynamic_cast<const StringEntity *>( R );
-    return new StringEntity( value + right->value );
+    const StringEntity* right = dynamic_cast<const StringEntity*>(R);
+    return new StringEntity(value + right->value);
 }
-
 
 //
 // Conversions from StringEntity
 //
 
-Entity *StringEntity::to_string( ) const
+Entity* StringEntity::to_string() const
 {
-    return duplicate( );
+    return duplicate();
 }

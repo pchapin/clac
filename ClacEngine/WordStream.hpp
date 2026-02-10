@@ -20,78 +20,78 @@
 #include <stdexcept>
 #include <string>
 
-
 /*!
  * This is an abstract base class that defines the interface to all word streams, no matter what
  * their true source.
  */
 class WordStream {
-public:
+  public:
     class Error : public std::runtime_error {
-    public:
-        explicit Error( const std::string &what_arg ) :
-            std::runtime_error( what_arg ) {}
+      public:
+        explicit Error(const std::string& what_arg) : std::runtime_error(what_arg)
+        {
+        }
     };
 
-    virtual ~WordStream( );
+    virtual ~WordStream();
 
     //! Returns an empty string if no words are left in this WordStream object.
-    virtual  std::string next_word( ) = 0;
+    virtual std::string next_word() = 0;
 
-    static void set_delimiters( char *D );
-    static void set_comment( char C );
+    static void set_delimiters(char* D);
+    static void set_comment(char C);
 
-protected:
+  protected:
     // By making these static I'm saying that every WordStream in the entire program wants to
     // use the same word delimiters and comment character. Is that really true?
     //
-    static const char *delimiters;
+    static const char* delimiters;
     static char comment;
 
     /*!
      * P points at start of arbitrary string. Returns pointer to start of the next word or
      * pointer to '\0' if there are no more words.
      */
-    static const char *find_next_word( const char *P );
+    static const char* find_next_word(const char* P);
 
     //! P points at start of a word.
-    static const char *find_next_space( const char *P );
+    static const char* find_next_space(const char* P);
 };
-
 
 //! A StringStream takes words out of a string.
 class StringStream : public WordStream {
 
     // Disable copying. The value of current_point would be wrong in the copy.
-    StringStream( const StringStream & ) = delete;
-    StringStream &operator=( const StringStream & ) = delete;
+    StringStream(const StringStream&) = delete;
+    StringStream& operator=(const StringStream&) = delete;
 
-public:
-    StringStream( const std::string &source ) :
-        word_source( source ), current_point( word_source.c_str( ) ) { }
+  public:
+    StringStream(const std::string& source) :
+        word_source(source), current_point(word_source.c_str())
+    {
+    }
 
-    virtual std::string next_word( );
+    virtual std::string next_word();
 
-private:
-    const std::string word_source;    // A copy of the string to scan.
-    const char       *current_point;  // Points into word_source.
+  private:
+    const std::string word_source; // A copy of the string to scan.
+    const char* current_point;     // Points into word_source.
 };
-
 
 //! A FileStream takes words out of a file.
 class FileStream : public WordStream {
-public:
-    FileStream( const char *file_name ) :
-        word_source( file_name ), current_point( 0 ) { }
+  public:
+    FileStream(const char* file_name) : word_source(file_name), current_point(0)
+    {
+    }
 
-    virtual std::string next_word( );
+    virtual std::string next_word();
 
-private:
-    std::ifstream  word_source;    // Clac program file.
-    std::string    line_buffer;    // Holds one line from the file.
-    const char    *current_point;  // Points into line_buffer.
+  private:
+    std::ifstream word_source; // Clac program file.
+    std::string line_buffer;   // Holds one line from the file.
+    const char* current_point; // Points into line_buffer.
 };
-
 
 /*!
  * A MasterStream maintains a stack of other word streams and draws words out of the "currently
@@ -102,22 +102,24 @@ private:
 class MasterStream : public WordStream {
 
     // Disable copying. The destructor of a WordStream deletes its contents.
-    MasterStream( const MasterStream & ) = delete;
-    MasterStream &operator=( const MasterStream & ) = delete;
+    MasterStream(const MasterStream&) = delete;
+    MasterStream& operator=(const MasterStream&) = delete;
 
-public:
-    MasterStream( ) : stream_stack( ) { }
-    virtual ~MasterStream( );
+  public:
+    MasterStream() : stream_stack()
+    {
+    }
+    virtual ~MasterStream();
 
-    virtual std::string next_word( );
+    virtual std::string next_word();
 
     /*!
      * WordStreams are popped automatically when they are fully consumed.
      */
-    void push( WordStream *new_stream );
+    void push(WordStream* new_stream);
 
-private:
-    std::stack<WordStream *> stream_stack; // Stack of active WordStreams.
+  private:
+    std::stack<WordStream*> stream_stack; // Stack of active WordStreams.
 };
 
 #endif

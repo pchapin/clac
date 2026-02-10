@@ -14,6 +14,6 @@
  * given word source, as necessary, to create an appropriate entity. If it encounters an error
  * it returns nullptr.
  */
-Entity *get_entity( WordStream &word_source );
+Entity* get_entity(WordStream& word_source);
 
 #endif

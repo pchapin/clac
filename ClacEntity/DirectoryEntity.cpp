@@ -7,44 +7,44 @@
 
 using namespace std;
 
-DirectoryEntity::DirectoryEntity( const map< string, Entity * > &existing )
+DirectoryEntity::DirectoryEntity(const map<string, Entity*>& existing)
 {
-    map<string, Entity *>::const_iterator p;
+    map<string, Entity*>::const_iterator p;
 
     try {
-        for( p = existing.begin( ); p != existing.end( ); ++p ) {
-            Entity *dup = p->second->duplicate( );
+        for (p = existing.begin(); p != existing.end(); ++p) {
+            Entity* dup = p->second->duplicate();
             value[p->first] = dup;
         }
     }
-    catch( ... ) {
-        for( p = value.begin( ); p != value.end( ); ++p ) {
+    catch (...) {
+        for (p = value.begin(); p != value.end(); ++p) {
             delete p->second;
         }
         throw;
     }
 }
 
-DirectoryEntity::~DirectoryEntity( )
+DirectoryEntity::~DirectoryEntity()
 {
-    map<string, Entity *>::iterator p;
-    
-    for( p = value.begin( ); p != value.end( ); ++p ) {
+    map<string, Entity*>::iterator p;
+
+    for (p = value.begin(); p != value.end(); ++p) {
         delete p->second;
     }
 }
 
-EntityType DirectoryEntity::my_type( ) const noexcept
+EntityType DirectoryEntity::my_type() const noexcept
 {
     return DIRECTORY;
 }
 
-string DirectoryEntity::display( ) const
+string DirectoryEntity::display() const
 {
     return "DirectoryEntity::display( ) not implemented!";
 }
 
-Entity *DirectoryEntity::duplicate( ) const
+Entity* DirectoryEntity::duplicate() const
 {
-    return new DirectoryEntity( value );
+    return new DirectoryEntity(value);
 }

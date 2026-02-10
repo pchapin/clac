@@ -13,10 +13,10 @@
 
 namespace Global {
 
-    void set_bit_count( const spica::VeryLong &new_bit_count );
+    void set_bit_count(const spica::VeryLong& new_bit_count);
 
-    MasterStream &word_source( );
-    ClacStack    &the_stack( );
-}
+    MasterStream& word_source();
+    ClacStack& the_stack();
+} // namespace Global
 
 #endif

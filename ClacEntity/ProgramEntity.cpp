@@ -5,18 +5,17 @@
 
 #include "Entities.hpp"
 
-EntityType ProgramEntity::my_type( ) const noexcept
+EntityType ProgramEntity::my_type() const noexcept
 {
     return PROGRAM;
 }
 
-std::string ProgramEntity::display( ) const
+std::string ProgramEntity::display() const
 {
     return "ProgramEntity::display( ) not implemented!";
 }
 
-Entity *ProgramEntity::duplicate( ) const
+Entity* ProgramEntity::duplicate() const
 {
-    return new ProgramEntity( value );
+    return new ProgramEntity(value);
 }
-

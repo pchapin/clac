@@ -11,29 +11,26 @@
 
 using namespace std;
 
-void underflow( )
+void underflow()
 {
     throw "Stack Underflow";
 }
 
-
-Entity *type_mismatch( Entity * )
+Entity* type_mismatch(Entity*)
 {
-    error_message( "Type Mismatch" );
+    error_message("Type Mismatch");
     return 0;
 }
 
-
-Entity *type_mismatch( Entity *, Entity * )
+Entity* type_mismatch(Entity*, Entity*)
 {
-    error_message( "Type Mismatch" );
+    error_message("Type Mismatch");
     return 0;
 }
 
-
-double to_radians( double number ) noexcept
+double to_radians(double number) noexcept
 {
-    switch( DisplayState::get_angle_mode( ) ) {
+    switch (DisplayState::get_angle_mode()) {
 
     case DisplayState::DEG:
         return number * numbers::pi / 180.0;
@@ -47,31 +44,31 @@ double to_radians( double number ) noexcept
     return number;
 }
 
-
-double from_radians( double number ) noexcept
+double from_radians(double number) noexcept
 {
-    switch( DisplayState::get_angle_mode( ) ) {
+    switch (DisplayState::get_angle_mode()) {
 
     case DisplayState::DEG:
-        return ( number / numbers::pi ) * 180.0;
+        return (number / numbers::pi) * 180.0;
 
     case DisplayState::RAD:
         return number;
 
     case DisplayState::GRAD:
-        return ( number / numbers::pi ) * 200.0;
+        return (number / numbers::pi) * 200.0;
     }
     return number;
 }
 
-
-int stricmp( char *A, char *B ) noexcept
+int stricmp(char* A, char* B) noexcept
 {
-    while( *A && *B ) {
-        if( toupper( *A ) != toupper( *B ) ) return 1;
+    while (*A && *B) {
+        if (toupper(*A) != toupper(*B))
+            return 1;
         A++;
         B++;
     }
-    if( *A == '\0' && *B == '\0' ) return 0;
+    if (*A == '\0' && *B == '\0')
+        return 0;
     return 1;
 }

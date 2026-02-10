@@ -9,36 +9,33 @@
 #include <sstream>
 #include <string>
 
-#include "Entities.hpp"
 #include "DisplayState.hpp"
+#include "Entities.hpp"
 #include "support.hpp"
 
 using namespace std;
 
 namespace {
 
-
     // TODO: This is currently unused. Should it be?
     // Square root of -1.
-    //const complex<double> j( 0.0, 1.0 );
+    // const complex<double> j( 0.0, 1.0 );
 
 }
 
-
-EntityType ComplexEntity::my_type( ) const noexcept
+EntityType ComplexEntity::my_type() const noexcept
 {
     return COMPLEX;
 }
 
-
-string ComplexEntity::display( ) const
+string ComplexEntity::display() const
 {
-    static char  buffer[128 + 1];    // Array to hold the resulting string.
-    const char *format_string;       // Pointer to a "printf style" format string.
+    static char buffer[128 + 1]; // Array to hold the resulting string.
+    const char* format_string;   // Pointer to a "printf style" format string.
 
     // Check the complex mode.
-    if( DisplayState::get_complex_mode( ) == DisplayState::RECTANGULAR ) {
-        switch( DisplayState::get_display_mode( ) ) {
+    if (DisplayState::get_complex_mode() == DisplayState::RECTANGULAR) {
+        switch (DisplayState::get_display_mode()) {
         case DisplayState::FIXED:
             format_string = "(%.*f, %.*f)";
             break;
@@ -51,14 +48,13 @@ string ComplexEntity::display( ) const
             format_string = "INTERNAL ERROR: Bad display mode";
             break;
         }
-        snprintf( buffer, 128 + 1, format_string,
-            DisplayState::get_decimal_count( ), value.real( ),
-            DisplayState::get_decimal_count( ), value.imag( ) );
+        snprintf(buffer, 128 + 1, format_string, DisplayState::get_decimal_count(), value.real(),
+                 DisplayState::get_decimal_count(), value.imag());
     }
 
     // The complex mode must be POLAR.
     else {
-        switch( DisplayState::get_display_mode( ) ) {
+        switch (DisplayState::get_display_mode()) {
         case DisplayState::FIXED:
             format_string = "(%.*f @ %.*f)";
             break;
@@ -71,152 +67,131 @@ string ComplexEntity::display( ) const
             format_string = "INTERNAL ERROR: Bad display mode";
             break;
         }
-        snprintf( buffer, 128 + 1, format_string,
-            DisplayState::get_decimal_count( ), std::abs( value ),
-            DisplayState::get_decimal_count( ), from_radians( std::arg( value ) ) );
+        snprintf(buffer, 128 + 1, format_string, DisplayState::get_decimal_count(), std::abs(value),
+                 DisplayState::get_decimal_count(), from_radians(std::arg(value)));
     }
     return buffer;
 }
 
-
-Entity *ComplexEntity::duplicate( ) const
+Entity* ComplexEntity::duplicate() const
 {
-    return new ComplexEntity( value );
+    return new ComplexEntity(value);
 }
-
 
 //
 // Unary operations
 //
 
-Entity *ComplexEntity::abs( ) const
+Entity* ComplexEntity::abs() const
 {
-    return new FloatEntity( std::abs( value ) );
+    return new FloatEntity(std::abs(value));
 }
 
-
-Entity *ComplexEntity::complex_conjugate( ) const
+Entity* ComplexEntity::complex_conjugate() const
 {
-    return new ComplexEntity( std::conj( value ) );
+    return new ComplexEntity(std::conj(value));
 }
 
-
-Entity *ComplexEntity::cos( ) const
+Entity* ComplexEntity::cos() const
 {
-    return new ComplexEntity( std::cos( value ) );
+    return new ComplexEntity(std::cos(value));
 }
 
-
-Entity *ComplexEntity::exp( ) const
+Entity* ComplexEntity::exp() const
 {
-    return new ComplexEntity( std::exp( value ) );
+    return new ComplexEntity(std::exp(value));
 }
 
-
-Entity *ComplexEntity::exp10( ) const
+Entity* ComplexEntity::exp10() const
 {
-    return new ComplexEntity( std::pow( 10.0, value ) );
+    return new ComplexEntity(std::pow(10.0, value));
 }
 
-
-Entity *ComplexEntity::imaginary_part( ) const
+Entity* ComplexEntity::imaginary_part() const
 {
-    return new FloatEntity( value.imag( ) );
+    return new FloatEntity(value.imag());
 }
 
-
-Entity *ComplexEntity::inv( ) const
+Entity* ComplexEntity::inv() const
 {
-    return new ComplexEntity( 1.0 / value );
+    return new ComplexEntity(1.0 / value);
 }
 
-
-Entity *ComplexEntity::ln( ) const
+Entity* ComplexEntity::ln() const
 {
     // TODO: Implement me!
     throw "ComplexEntity::ln not implemented!";
     return nullptr;
 }
 
-
-Entity *ComplexEntity::log( ) const
+Entity* ComplexEntity::log() const
 {
     // TODO: Implement me!
     throw "ComplexEntity::log not implemented!";
     return nullptr;
 }
 
-
-Entity *ComplexEntity::neg( ) const
+Entity* ComplexEntity::neg() const
 {
-    return new ComplexEntity( -value );
+    return new ComplexEntity(-value);
 }
 
-
-Entity *ComplexEntity::real_part( ) const
+Entity* ComplexEntity::real_part() const
 {
-    return new FloatEntity( value.real( ) );
+    return new FloatEntity(value.real());
 }
 
-
-Entity *ComplexEntity::sign( ) const
+Entity* ComplexEntity::sign() const
 {
     // TODO: Implement me!
     throw "ComplexEntity::sign not implemented!";
     return nullptr;
 }
 
-
-Entity *ComplexEntity::sin( ) const
+Entity* ComplexEntity::sin() const
 {
-    return new ComplexEntity( std::sin( value ) );
+    return new ComplexEntity(std::sin(value));
 }
 
-
-Entity *ComplexEntity::sqrt( ) const
+Entity* ComplexEntity::sqrt() const
 {
-    return new ComplexEntity( std::sqrt( value ) );
+    return new ComplexEntity(std::sqrt(value));
 }
 
-
-Entity *ComplexEntity::tan( ) const
+Entity* ComplexEntity::tan() const
 {
-    return new ComplexEntity( std::tan( value ) );
+    return new ComplexEntity(std::tan(value));
 }
 
 //
 // Binary operations
 //
 
-Entity *ComplexEntity::divide( const Entity *R ) const
+Entity* ComplexEntity::divide(const Entity* R) const
 {
-    const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
-    return new ComplexEntity( value / right->value );
+    const ComplexEntity* right = dynamic_cast<const ComplexEntity*>(R);
+    return new ComplexEntity(value / right->value);
 }
 
-
-Entity *ComplexEntity::minus( const Entity *R ) const
+Entity* ComplexEntity::minus(const Entity* R) const
 {
-    const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
-    return new ComplexEntity( value - right->value );
+    const ComplexEntity* right = dynamic_cast<const ComplexEntity*>(R);
+    return new ComplexEntity(value - right->value);
 }
 
-
-Entity *ComplexEntity::multiply( const Entity *R ) const
+Entity* ComplexEntity::multiply(const Entity* R) const
 {
-    const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
-    return new ComplexEntity( value * right->value );
+    const ComplexEntity* right = dynamic_cast<const ComplexEntity*>(R);
+    return new ComplexEntity(value * right->value);
 }
 
-
-Entity *ComplexEntity::plus( const Entity *R ) const
+Entity* ComplexEntity::plus(const Entity* R) const
 {
-    const ComplexEntity *right = dynamic_cast<const ComplexEntity *>( R );
-    return new ComplexEntity( value + right->value );
+    const ComplexEntity* right = dynamic_cast<const ComplexEntity*>(R);
+    return new ComplexEntity(value + right->value);
 }
 
-
-Entity *ComplexEntity::power( const Entity *R ) const
+Entity* ComplexEntity::power(const Entity* R) const
 {
     // TODO: Implement me!
     throw "ComplexEntity::power not implemented!";
@@ -227,7 +202,7 @@ Entity *ComplexEntity::power( const Entity *R ) const
 // Conversions from ComplexEntity
 //
 
-Entity *ComplexEntity::to_complex( ) const
+Entity* ComplexEntity::to_complex() const
 {
-    return duplicate( );
+    return duplicate();
 }

@@ -5,21 +5,21 @@
 
 #include "Entities.hpp"
 
-EntityType LabeledEntity::my_type( ) const noexcept
+EntityType LabeledEntity::my_type() const noexcept
 {
     return LABELED;
 }
 
-std::string LabeledEntity::display( ) const
+std::string LabeledEntity::display() const
 {
-    std::string result( label );
-    result.append( ": " );
-    result.append( object->display( ) );
+    std::string result(label);
+    result.append(": ");
+    result.append(object->display());
     return result;
 }
 
-Entity *LabeledEntity::duplicate( ) const
+Entity* LabeledEntity::duplicate() const
 {
-    Entity *new_object = object->duplicate( );
-    return new LabeledEntity( new_object, label );
+    Entity* new_object = object->duplicate();
+    return new LabeledEntity(new_object, label);
 }
