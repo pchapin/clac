@@ -1,0 +1,1 @@
+This vault contains notes about the design and implementation of Clac that are intended for use by the developer(s) of the program. The formal documentation in the `docs` folder (written in LaTeX) is intended to eventually be a more complete and stable description of the system.

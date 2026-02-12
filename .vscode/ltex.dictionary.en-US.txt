@@ -4,3 +4,6 @@ ClacEngine
 CLion
 XCode
 Chapin
+ClacConsoleUI
+SpicaCpp
+Nikoladis
