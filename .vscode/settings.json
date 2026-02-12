@@ -1,39 +1,32 @@
 {
-    "cmake.configureOnOpen": false,
-    "cSpell.words": [
-        "Chapin",
-        "Clac",
-        "CLACCOMMANDWINDOW",
-        "CLACSTACK",
-        "Cygwin",
-        "DIRECTORYWINDOW",
-        "DISPLAYSTATE",
-        "doxygen",
-        "FLOATENTITY",
-        "INTEGERENTITY",
-        "Makefiles",
-        "Nikolaidis",
-        "pdflatex",
-        "STACKWINDOW",
-        "struct",
-        "subexpression",
-        "WORDSTREAM"
-    ],
-    "C_Cpp.default.cppStandard": "c++20",
-    "C_Cpp.default.cStandard": "c99",
-    "makefile.launchConfigurations": [
-        {
-            "cwd": "/home/peter/Projects/Clac",
-            "binaryPath": "/home/peter/Projects/Clac/clac",
-            "binaryArgs": []
-        }
-    ],
-    "files.associations": {
-        "cstdarg": "cpp",
-        "string": "cpp"
-    },
-    "editor.wordWrapColumn": 96,
-    "rewrap.wholeComment": false,
-    "rewrap.wrappingColumn": 96,
-    "rewrap.reformat": false
+  "cmake.configureOnOpen": false,
+  "cmake.buildBeforeRun": true,
+  "cmake.saveBeforeBuild": true,
+  "cSpell.words": [
+    "Chapin",
+    "Clac",
+    "CLACSTACK",
+    "DISPLAYSTATE",
+    "doxygen",
+    "FLOATENTITY",
+    "INTEGERENTITY",
+    "Nikolaidis",
+    "pdflatex",
+    "STACKWINDOW",
+    "struct",
+    "subexpression",
+    "WORDSTREAM"
+  ],
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.default.cStandard": "c17",
+  "C_Cpp.clang_format_style": "file",
+  "C_Cpp.formatting": "clangFormat",
+  "files.associations": {
+    "cstdarg": "cpp",
+    "string": "cpp"
+  },
+  "editor.wordWrapColumn": 100,
+  "rewrap.wholeComment": false,
+  "rewrap.wrappingColumn": 100,
+  "rewrap.reformat": false
 }
