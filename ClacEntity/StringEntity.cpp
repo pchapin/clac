@@ -7,32 +7,34 @@
 
 using namespace std;
 
-EntityType StringEntity::my_type() const noexcept
-{
-    return STRING;
-}
+namespace clac::entity {
+    EntityType StringEntity::my_type() const noexcept
+    {
+        return STRING;
+    }
 
-string StringEntity::display() const
-{
-    return value;
-}
+    string StringEntity::display() const
+    {
+        return value;
+    }
 
-Entity* StringEntity::duplicate() const
-{
-    return new StringEntity(value);
-}
+    Entity* StringEntity::duplicate() const
+    {
+        return new StringEntity(value);
+    }
 
-Entity* StringEntity::plus(const Entity* R) const
-{
-    const StringEntity* right = dynamic_cast<const StringEntity*>(R);
-    return new StringEntity(value + right->value);
-}
+    Entity* StringEntity::plus(const Entity* R) const
+    {
+        const StringEntity* right = dynamic_cast<const StringEntity*>(R);
+        return new StringEntity(value + right->value);
+    }
 
-//
-// Conversions from StringEntity
-//
+    //
+    // Conversions from StringEntity
+    //
 
-Entity* StringEntity::to_string() const
-{
-    return duplicate();
+    Entity* StringEntity::to_string() const
+    {
+        return duplicate();
+    }
 }

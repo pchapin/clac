@@ -10,16 +10,18 @@
 #include <string>
 #include <vector>
 
-class VectorEntity : public Entity {
-  public:
-    virtual ~VectorEntity();
+namespace clac::entity {
+    class VectorEntity : public Entity {
+    public:
+        virtual ~VectorEntity();
 
-    EntityType my_type() const noexcept override;
-    std::string display() const override;
-    Entity* duplicate() const override;
+        EntityType my_type() const noexcept override;
+        std::string display() const override;
+        Entity* duplicate() const override;
 
-  private:
-    std::vector<Entity*> value;
-};
+    private:
+        std::vector<Entity*> value;
+    };
+}
 
 #endif

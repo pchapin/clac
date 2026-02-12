@@ -2,7 +2,7 @@
  *  \brief   Interface to clac's display state variables.
  *  \author  Peter Chapin <spicacality@kelseymountain.org>
  *
- * Namespace DisplayState is a wrapper around all of clac's display state variables. Such
+ * Namespace clac::display_state is a wrapper around all of clac's display state variables. Such
  * variables specify how certain objects are to be displayed. Having all the display state
  * variables in one place like this makes it easier to keep track of them.
  *
@@ -13,7 +13,7 @@
 #ifndef DISPLAYSTATE_HPP
 #define DISPLAYSTATE_HPP
 
-namespace DisplayState {
+namespace clac::display_state {
 
     // The following types define the legal values for certain objects below.
     enum AngleModeType { RAD, DEG, GRAD };
@@ -34,6 +34,6 @@ namespace DisplayState {
     void set_complex_mode(ComplexModeType new_mode) noexcept;
     void set_decimal_count(int number) noexcept;
     void set_display_mode(FloatModeType new_mode) noexcept;
-} // namespace DisplayState
+} // namespace clac::display_state
 
 #endif

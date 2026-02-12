@@ -6,12 +6,13 @@
 #include "Global.hpp"
 
 using namespace spica; // TODO: Remove this using directive.
-namespace Global {
+
+namespace clac::global {
 
     // The global variables themselves.
     VeryLong current_bit_count;
-    MasterStream current_word_source;
-    ClacStack current_stack;
+    engine::MasterStream current_word_source;
+    engine::ClacStack current_stack;
 
     // Accessor functions.
     void set_bit_count(const VeryLong& new_bit_count)
@@ -19,14 +20,14 @@ namespace Global {
         current_bit_count = new_bit_count;
     }
 
-    MasterStream& word_source()
+    engine::MasterStream& word_source()
     {
         return current_word_source;
     }
 
-    ClacStack& the_stack()
+    engine::ClacStack& the_stack()
     {
         return current_stack;
     }
 
-} // namespace Global
+} // namespace global

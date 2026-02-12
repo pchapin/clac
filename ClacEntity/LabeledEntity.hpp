@@ -9,25 +9,27 @@
 #include "Entity.hpp"
 #include <string>
 
-class LabeledEntity : public Entity {
-  public:
-    LabeledEntity(Entity* thing, const std::string& name) : object(thing), label(name)
-    {
-    }
-    LabeledEntity(const LabeledEntity&) = delete;
-    LabeledEntity& operator=(const LabeledEntity&) = delete;
-    virtual ~LabeledEntity()
-    {
-        delete object;
-    }
+namespace clac::entity {
+    class LabeledEntity : public Entity {
+    public:
+        LabeledEntity(Entity* thing, const std::string& name) : object(thing), label(name)
+        {
+        }
+        LabeledEntity(const LabeledEntity&) = delete;
+        LabeledEntity& operator=(const LabeledEntity&) = delete;
+        virtual ~LabeledEntity()
+        {
+            delete object;
+        }
 
-    EntityType my_type() const noexcept override;
-    std::string display() const override;
-    Entity* duplicate() const override;
+        EntityType my_type() const noexcept override;
+        std::string display() const override;
+        Entity* duplicate() const override;
 
-  private:
-    Entity* object;
-    std::string label;
-};
+    private:
+        Entity* object;
+        std::string label;
+    };
+}
 
 #endif

@@ -8,15 +8,15 @@
 namespace {
 
     // Definitions of display state variables, with initial defaults.
-    DisplayState::AngleModeType angle_mode = DisplayState::DEG;
-    DisplayState::BaseType bit_base = DisplayState::HEX;
-    DisplayState::ComplexModeType complex_mode = DisplayState::RECTANGULAR;
+    clac::display_state::AngleModeType angle_mode = clac::display_state::DEG;
+    clac::display_state::BaseType bit_base = clac::display_state::HEX;
+    clac::display_state::ComplexModeType complex_mode = clac::display_state::RECTANGULAR;
     int decimal_count = 3;
-    DisplayState::FloatModeType display_mode = DisplayState::FIXED;
+    clac::display_state::FloatModeType display_mode = clac::display_state::FIXED;
 
 } // namespace
 
-namespace DisplayState {
+namespace clac::display_state {
 
     // Setters
     // -------
@@ -66,4 +66,4 @@ namespace DisplayState {
         return display_mode;
     }
 
-} // namespace DisplayState
+} // namespace clac::display_state

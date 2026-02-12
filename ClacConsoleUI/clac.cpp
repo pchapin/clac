@@ -34,76 +34,82 @@ using namespace std;
 //           Message Handling
 //=====================================
 
-//! Displays an error message.
-/*!
- * This function is the master error message handler for all components of Clac. It is actually
- * declared in a low level header (support.hpp) in the Clac entity library. Any code that uses
- * Clac entities must provide an implementation of this function that is application specific.
- */
-void error_message(const char* message, ...)
-{
-    va_list ap;
+namespace clac::entity {
+    //! Displays an error message.
+    /*!
+     * This function is the master error message handler for all components of Clac. It is actually
+     * declared in a low-level header (support.hpp) in the Clac entity library. Any code that uses
+     * Clac entities must provide an implementation of this function that is application specific.
+     */
+    void error_message(const char* message, ...)
+    {
+        va_list ap;
 
-    va_start(ap, message);
-    char message_buffer[128 + 1];
-    vsprintf(message_buffer, message, ap);
-    cout << message_buffer << endl;
-}
+        va_start(ap, message);
+        char message_buffer[128 + 1];
+        vsprintf(message_buffer, message, ap);
+        cout << message_buffer << endl;
+    }
 
-/*!
- * This function is used to print information messages to the UI. Unlike the error message
- * function, it assumes the caller constructs the entire message. This choice was made on the
- * assumption that informational messages wouldn't normally need to print data values. That
- * assumption may need to be revisited at some point.
- *
- * As with error_message, any code that makes use of Clac entities must provide an
- * implementation of this function that is application-specific.
- */
-void info_message(const string& message)
-{
-    cout << message << endl;
+    /*!
+     * This function is used to print information messages to the UI. Unlike the error message
+     * function, it assumes the caller constructs the entire message. This choice was made on the
+     * assumption that informational messages wouldn't normally need to print data values. That
+     * assumption may need to be revisited at some point.
+     *
+     * As with error_message, any code that makes use of Clac entities must provide an
+     * implementation of this function that is application-specific.
+     */
+    void info_message(const string& message)
+    {
+        cout << message << endl;
+    }
 }
 
 //===========================================
 //           Program Initialization
 //===========================================
 
-class SetUp {
-  public:
-    SetUp(bool use_debugger);
-    ~SetUp();
+namespace clac {
+    class SetUp {
+    public:
+        SetUp(bool use_debugger);
+        ~SetUp();
 
-  private:
-    bool debugging_on;
-};
+    private:
+        bool debugging_on;
+    };
 
-SetUp::SetUp(bool use_debugger) : debugging_on(false)
-{
-    // TODO: Do other program-wide initializations as required.
+    SetUp::SetUp(bool use_debugger) : debugging_on(false)
+    {
+        // TODO: Do other program-wide initializations as required.
 
-    // The value of 'use_debugger' is intended to select if the runtime debugging environment is
-    // active. The Scr library had such a facility that used Scr. It might be a nice project to
-    // build a similar facility that is 100% command line.
+        // The value of 'use_debugger' is intended to select if the runtime debugging environment is
+        // active. The Scr library had such a facility that used Scr. It might be a nice project to
+        // build a similar facility that is 100% command line.
 
-    if (use_debugger) {
-        debugging_on = true;
+        if (use_debugger) {
+            debugging_on = true;
+        }
+        // TODO: Reload the calculator state (if there's a saved one to be found).
     }
-    // TODO: Reload the calculator state (if there's a saved one to be found).
-}
 
-SetUp::~SetUp()
-{
-    // TODO: Save the calculator state.
-    if (debugging_on) {
-        // Do something?
+    SetUp::~SetUp()
+    {
+        // TODO: Save the calculator state.
+        if (debugging_on) {
+            // Do something?
+        }
+        // TODO: Program-wide clean-up actions.
     }
-    // TODO: Program-wide clean-up actions.
 }
 
 //=================================================
 //           Generic Operation Functions
 //=================================================
 
+using namespace clac::entity;   // TODO: Remove this using directive.
+using namespace clac::engine;   // TODO: Remove this using directive.
 namespace {
 
     void do_unary(ClacStack& the_stack, Entity* (Entity::*unary_operation)() const)
@@ -312,109 +318,111 @@ namespace {
 
 } // namespace
 
-//! Process the words on the master stream, executing them one at a time.
-/*!
- * This function continues working until the master stream is completely empty. Note that some
- * words cause new WordStream objects to be pushed onto the master stream. This function
- * continues until all of those streams are exhausted as well.
- *
- * \return true if the program should continue; false if the "quit" word was encountered.
- */
-bool process_words()
-{
-    while (true) {
-        try {
-            string new_word(Global::word_source().next_word());
+namespace clac {
+    //! Process the words on the master stream, executing them one at a time.
+    /*!
+     * This function continues working until the master stream is completely empty. Note that some
+     * words cause new WordStream objects to be pushed onto the master stream. This function
+     * continues until all of those streams are exhausted as well.
+     *
+     * \return true if the program should continue; false if the "quit" word was encountered.
+     */
+    bool process_words()
+    {
+        while (true) {
+            try {
+                string new_word(clac::global::word_source().next_word());
 
-            // The master stream is exhausted.
-            if (new_word.length() == 0)
-                return true;
+                // The master stream is exhausted.
+                if (new_word.length() == 0)
+                    return true;
 
-            // See if we got the null word. [Can this ever happen?]
-            if (new_word[0] == '\0') {
-                do_dup(Global::the_stack());
-                continue;
+                // See if we got the null word. [Can this ever happen?]
+                if (new_word[0] == '\0') {
+                    do_dup(clac::global::the_stack());
+                    continue;
+                }
+
+                // Should we quit?
+                if (new_word == "quit")
+                    return false;
+
+                // See if it is a built-in word.
+                if (process_binary(clac::global::the_stack(), new_word))
+                    continue;
+                if (process_unary(clac::global::the_stack(), new_word))
+                    continue;
+                if (process_action(clac::global::the_stack(), new_word))
+                    continue;
+
+                StringStream stream(new_word);
+                Entity* new_object = get_entity(stream);
+                if (new_object != nullptr)
+                    clac::global::the_stack().push(new_object);
             }
-
-            // Should we quit?
-            if (new_word == "quit")
-                return false;
-
-            // See if it is a built in word.
-            if (process_binary(Global::the_stack(), new_word))
-                continue;
-            if (process_unary(Global::the_stack(), new_word))
-                continue;
-            if (process_action(Global::the_stack(), new_word))
-                continue;
-
-            StringStream stream(new_word);
-            Entity* new_object = get_entity(stream);
-            if (new_object != nullptr)
-                Global::the_stack().push(new_object);
-        }
-        catch (const char* the_message) {
-            error_message("Exception: %s", the_message);
-        }
-        catch (const exception& e) {
-            error_message("Exception: %s", e.what());
-        }
-    }
-}
-
-//==================================
-//           Main Program
-//==================================
-
-int Main(int argc, char** argv)
-{
-    bool use_debugger = false;
-
-    // Map entity types to names for the UI.
-    map<EntityType, string> type_abbreviation = {
-        {BINARY, "BIN"},  {COMPLEX, "CPX"},  {DIRECTORY, "DIR"}, {FLOAT, "FLT"},
-        {INTEGER, "INT"}, {LABELED, "LBL"},  {LIST, "LST"},      {MATRIX, "MAT"},
-        {PROGRAM, "PGM"}, {RATIONAL, "RAT"}, {STRING, "STR"},    {VECTOR, "VEC"}};
-
-    // Command line analysis.
-    // TODO: Improve and generalize the handling of the command line.
-    for (int i = 1; i < argc; ++i) {
-        if (strcmp(argv[i], "-d") == 0)
-            use_debugger = true;
-    }
-
-    SetUp the_program(use_debugger);
-    string command_text;
-
-    bool done = false;
-    while (!done) {
-        // Display the top eight items on the stack.
-        // TODO: The number of stack levels displayed here should be configurable.
-        for (int i = 7; i >= 0; i--) {
-            cout << setw(2) << i + 1 << ": ";
-            Entity* stack_item = Global::the_stack().get(i);
-            if (stack_item == nullptr) {
-                cout << "--- : " << endl;
+            catch (const char* the_message) {
+                error_message("Exception: %s", the_message);
             }
-            else {
-                EntityType stack_item_type = stack_item->my_type();
-                cout << type_abbreviation[stack_item_type] << " : " << stack_item->display()
-                     << endl;
+            catch (const exception& e) {
+                error_message("Exception: %s", e.what());
             }
-        }
-        cout << "=> ";
-        getline(cin, command_text);
-
-        // Push the command text onto the master stream as a string of Clac command words.
-        StringStream* words = new StringStream(command_text);
-        Global::word_source().push(words);
-        if (process_words() == false) {
-            done = true;
         }
     }
 
-    // Clac always "succeeds" unless there is an unhandled exception (see below).
-    return EXIT_SUCCESS;
+    //==================================
+    //           Main Program
+    //==================================
+
+    int Main(int argc, char** argv)
+    {
+        bool use_debugger = false;
+
+        // Map entity types to names for the UI.
+        map<EntityType, string> type_abbreviation = {
+            {BINARY, "BIN"},  {COMPLEX, "CPX"},  {DIRECTORY, "DIR"}, {FLOAT, "FLT"},
+            {INTEGER, "INT"}, {LABELED, "LBL"},  {LIST, "LST"},      {MATRIX, "MAT"},
+            {PROGRAM, "PGM"}, {RATIONAL, "RAT"}, {STRING, "STR"},    {VECTOR, "VEC"}};
+
+        // Command line analysis.
+        // TODO: Improve and generalize the handling of the command line.
+        for (int i = 1; i < argc; ++i) {
+            if (strcmp(argv[i], "-d") == 0)
+                use_debugger = true;
+        }
+
+        SetUp the_program(use_debugger);
+        string command_text;
+
+        bool done = false;
+        while (!done) {
+            // Display the top eight items on the stack.
+            // TODO: The number of stack levels displayed here should be configurable.
+            for (int i = 7; i >= 0; i--) {
+                cout << setw(2) << i + 1 << ": ";
+                Entity* stack_item = clac::global::the_stack().get(i);
+                if (stack_item == nullptr) {
+                    cout << "--- : " << endl;
+                }
+                else {
+                    EntityType stack_item_type = stack_item->my_type();
+                    cout << type_abbreviation[stack_item_type] << " : " << stack_item->display()
+                         << endl;
+                }
+            }
+            cout << "=> ";
+            getline(cin, command_text);
+
+            // Push the command text onto the master stream as a string of Clac command words.
+            StringStream* words = new StringStream(command_text);
+            clac::global::word_source().push(words);
+            if (process_words() == false) {
+                done = true;
+            }
+        }
+
+        // Clac always "succeeds" unless there is an unhandled exception (see below).
+        return EXIT_SUCCESS;
+    }
 }
 
 //===================================
@@ -427,7 +435,7 @@ int main(int argc, char** argv)
     int return_value = EXIT_FAILURE;
 
     try {
-        return_value = Main(argc, argv);
+        return_value = clac::Main(argc, argv);
     }
     catch (...) {
         cerr << "Panic! Unhandled exception propagated through main()" << endl;

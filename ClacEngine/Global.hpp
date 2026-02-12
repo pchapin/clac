@@ -11,12 +11,12 @@
 #include "ClacStack.hpp"
 #include "WordStream.hpp"
 
-namespace Global {
+namespace clac::global {
 
     void set_bit_count(const spica::VeryLong& new_bit_count);
 
-    MasterStream& word_source();
-    ClacStack& the_stack();
-} // namespace Global
+    engine::MasterStream& word_source();
+    engine::ClacStack& the_stack();
+} // namespace clac::global
 
 #endif

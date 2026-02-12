@@ -23,53 +23,55 @@ namespace {
     bool separator(const char*&);
 } // namespace
 
-bool is_complex(const char* word)
-{
-    if (complex_number(word) == false)
-        return false;
-    if (*word != '\0')
-        return false;
-    return true;
-}
-
-bool is_integer(const char* word)
-{
-    if (*word == '+' || *word == '-')
-        word++;
-    while (*word) {
-        if (!isdigit(*word))
+namespace clac::engine {
+    bool is_complex(const char* word)
+    {
+        if (complex_number(word) == false)
             return false;
-        word++;
+        if (*word != '\0')
+            return false;
+        return true;
     }
-    return true;
-}
 
-bool is_float(const char* word)
-{
-    if (float_number(word) == false)
-        return false;
-    if (*word != '\0')
-        return false;
-    return true;
-}
+    bool is_integer(const char* word)
+    {
+        if (*word == '+' || *word == '-')
+            word++;
+        while (*word) {
+            if (!isdigit(*word))
+                return false;
+            word++;
+        }
+        return true;
+    }
 
-bool is_rational(const char* word)
-{
-    if (*word == '-')
-        word++;
-    do {
-        if (!isdigit(*word))
+    bool is_float(const char* word)
+    {
+        if (float_number(word) == false)
             return false;
-        word++;
-    } while (*word != '/');
-
-    word++;
-    do {
-        if (!isdigit(*word))
+        if (*word != '\0')
             return false;
+        return true;
+    }
+
+    bool is_rational(const char* word)
+    {
+        if (*word == '-')
+            word++;
+        do {
+            if (!isdigit(*word))
+                return false;
+            word++;
+        } while (*word != '/');
+
         word++;
-    } while (*word != '\0');
-    return true;
+        do {
+            if (!isdigit(*word))
+                return false;
+            word++;
+        } while (*word != '\0');
+        return true;
+    }
 }
 
 namespace {

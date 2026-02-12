@@ -5,17 +5,19 @@
 
 #include "Entities.hpp"
 
-EntityType ProgramEntity::my_type() const noexcept
-{
-    return PROGRAM;
-}
+namespace clac::entity {
+    EntityType ProgramEntity::my_type() const noexcept
+    {
+        return PROGRAM;
+    }
 
-std::string ProgramEntity::display() const
-{
-    return "ProgramEntity::display( ) not implemented!";
-}
+    std::string ProgramEntity::display() const
+    {
+        return "ProgramEntity::display( ) not implemented!";
+    }
 
-Entity* ProgramEntity::duplicate() const
-{
-    return new ProgramEntity(value);
+    Entity* ProgramEntity::duplicate() const
+    {
+        return new ProgramEntity(value);
+    }
 }

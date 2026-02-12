@@ -30,9 +30,11 @@
 #include "words.hpp"
 
 using namespace std;
-using namespace spica; // TODO: Remove this using directive.
+using namespace spica;        // TODO: Remove this using directive.
+using namespace clac::entity; // TODO: Remove this using directive.
 
 namespace {
+    using namespace clac;
 
     //
     // Each of the following helper functions knows how to read the given entity type.
@@ -87,27 +89,27 @@ namespace {
 
         workspace = workspace.substr(1); // Skip the '#'.
         if (workspace.length() == 0) {
-            word_buffer = Global::word_source().next_word();
+            word_buffer = global::word_source().next_word();
         }
         else
             word_buffer = workspace;
 
-        DisplayState::BaseType input_base = DisplayState::get_base();
+        display_state::BaseType input_base = display_state::get_base();
 
         string::size_type trailing = word_buffer.length() - 1;
         switch (word_buffer[trailing]) {
         case 'h':
-            input_base = DisplayState::HEX;
+            input_base = display_state::HEX;
             break;
         case 'b':
-            input_base = DisplayState::BINARY;
+            input_base = display_state::BINARY;
             break;
         case 'd':
-            input_base = DisplayState::DECIMAL;
+            input_base = display_state::DECIMAL;
             break;
         case 'o':
         case 'q':
-            input_base = DisplayState::OCTAL;
+            input_base = display_state::OCTAL;
             break;
         }
         unsigned long value = 0UL;
@@ -117,7 +119,7 @@ namespace {
         bool error = false;
         while (*pointer && !error) {
             switch (input_base) {
-            case DisplayState::DECIMAL:
+            case display_state::DECIMAL:
                 if (!isdigit(*pointer))
                     error = true;
                 else {
@@ -126,7 +128,7 @@ namespace {
                 }
                 break;
 
-            case DisplayState::BINARY:
+            case display_state::BINARY:
                 if (!(*pointer == '0' || *pointer == '1'))
                     error = true;
                 else {
@@ -135,7 +137,7 @@ namespace {
                 }
                 break;
 
-            case DisplayState::OCTAL:
+            case display_state::OCTAL:
                 if (!isdigit(*pointer) || *pointer == '8' || *pointer == '9')
                     error = true;
                 else {
@@ -144,7 +146,7 @@ namespace {
                 }
                 break;
 
-            case DisplayState::HEX:
+            case display_state::HEX:
                 if (!(isdigit(*pointer) || (*pointer >= 'A' && *pointer <= 'F')))
                     error = true;
                 else {
@@ -179,11 +181,11 @@ namespace {
         while (strchr(working_buffer, ')') == nullptr) {
             string word_buffer;
 
-            word_buffer = Global::word_source().next_word();
+            word_buffer = global::word_source().next_word();
             strcat(working_buffer, " ");
             strcat(working_buffer, word_buffer.c_str());
         }
-        if (!is_complex(working_buffer)) {
+        if (!engine::is_complex(working_buffer)) {
             error_message("%s is an invalid complex number", working_buffer);
             return nullptr;
         }
@@ -256,16 +258,16 @@ namespace {
 
         workspace = workspace.substr(1);
         if (workspace.length() == 0)
-            word_buffer = Global::word_source().next_word();
+            word_buffer = global::word_source().next_word();
         else
             word_buffer = workspace;
 
         while (word_buffer[0] != '}') {
-            StringStream stream(word_buffer);
+            engine::StringStream stream(word_buffer);
             Entity* list_element = get_entity(stream);
             if (list_element != nullptr)
                 new_object->plus(list_element);
-            word_buffer = Global::word_source().next_word();
+            word_buffer = global::word_source().next_word();
         }
         return new_object;
     }
@@ -286,7 +288,7 @@ namespace {
 
         workspace = workspace.substr(1);
         if (workspace.length() == 0)
-            word_buffer = Global::word_source().next_word();
+            word_buffer = global::word_source().next_word();
         else
             word_buffer = workspace;
 
@@ -313,7 +315,7 @@ namespace {
                 //    if( matrix_element != nullptr )
                 //        new_object->install( matrix_element, row_count, column_count++ );
             }
-            word_buffer = Global::word_source().next_word();
+            word_buffer = global::word_source().next_word();
         }
         return new_object;
     }
@@ -374,70 +376,72 @@ namespace {
 
 } // namespace
 
-/*!
- * The following function returns a pointer to a newly constructed Entity formed by the given
- * word. Since some entities require several words to be read from the input stream, this
- * function will read additional words as needed. It returns nullptr if it can't form a valid
- * Entity.
- */
-Entity* get_entity(WordStream& word_source)
-{
-    Entity* return_value = nullptr;
-    string word = word_source.next_word();
+namespace clac::engine {
+    /*!
+     * The following function returns a pointer to a newly constructed Entity formed by the given
+     * word. Since some entities require several words to be read from the input stream, this
+     * function will read additional words as needed. It returns nullptr if it can't form a valid
+     * Entity.
+     */
+    Entity* get_entity(WordStream& word_source)
+    {
+        Entity* return_value = nullptr;
+        string word = word_source.next_word();
 
-    switch (word[0]) {
+        switch (word[0]) {
 
-    case '{':
-        return_value = get_list(word);
-        break;
+        case '{':
+            return_value = get_list(word);
+            break;
 
-    case '#':
-        return_value = get_binary(word);
-        break;
+        case '#':
+            return_value = get_binary(word);
+            break;
 
-    case '(':
-        return_value = get_complex(word);
-        break;
+        case '(':
+            return_value = get_complex(word);
+            break;
 
-    case '"':
-        return_value = get_string(word);
-        break;
+        case '"':
+            return_value = get_string(word);
+            break;
 
-    case '[':
-        return_value = get_matrix(word);
-        break;
+        case '[':
+            return_value = get_matrix(word);
+            break;
 
-    default:
+        default:
 
-        // The other Entities are harder to recognize...
-        if (is_rational(word.c_str()))
-            return_value = get_rational(word);
+            // The other Entities are harder to recognize...
+            if (is_rational(word.c_str()))
+                return_value = get_rational(word);
 
-        else if (is_integer(word.c_str()))
-            return_value = get_integer(word);
+            else if (is_integer(word.c_str()))
+                return_value = get_integer(word);
 
-        else if (is_float(word.c_str()))
-            return_value = get_float(word);
+            else if (is_float(word.c_str()))
+                return_value = get_float(word);
 
-        else {
-            //            LabeledEntity *item;
-            if (word[0] == '\'') {
-                word = word.substr(1);
-                return_value = get_string(word);
-            }
-            // [This code pertains to the handling of directory entries... currently not
-            // implemented]
-            //            else if( ( item = global::get_root( ).lookup( word ) ) != nullptr ) {
-            //                Entity *directory_element = *item;
-            //                return_value = directory_element->duplicate( );
-            //            }
-            else if (is_special_word(word.c_str())) {
-                return_value = get_special_word(word);
-            }
             else {
-                return_value = get_string(word);
+                //            LabeledEntity *item;
+                if (word[0] == '\'') {
+                    word = word.substr(1);
+                    return_value = get_string(word);
+                }
+                // [This code pertains to the handling of directory entries... currently not
+                // implemented]
+                //            else if( ( item = global::get_root( ).lookup( word ) ) != nullptr ) {
+                //                Entity *directory_element = *item;
+                //                return_value = directory_element->duplicate( );
+                //            }
+                else if (is_special_word(word.c_str())) {
+                    return_value = get_special_word(word);
+                }
+                else {
+                    return_value = get_string(word);
+                }
             }
         }
+        return return_value;
     }
-    return return_value;
 }
